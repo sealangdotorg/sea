@@ -1,0 +1,9 @@
+[submodule "web"]
+	path = web
+	url = git@github.com:casm-lang/casm-lang.github.io.git
+[submodule "casmi"]
+	path = casmi
+	url = git@github.com:ppaulweber/casmi.git
+[submodule "casmc"]
+	path = casmc
+	url = git@github.com:ppaulweber/casmc.git

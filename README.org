@@ -1,7 +1,8 @@
 
-* casm
+* casm -- CASM Project
 
-TBD
+This repository contains sub-module references to the root projects/applications of the CASM project.
+Besides referring to the other projects, the full documentation will be made available here in the near future.
 
 
 ** Copyright and License
