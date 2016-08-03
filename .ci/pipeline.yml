@@ -35,51 +35,42 @@ resource_types:
     repository: mrsixw/concourse-rsync-resource
     tag: latest
 
-groups: []
-# groups:
-# - name: all
-#   jobs:
-#     - libcasm-fe@master
-#     - libcasm-fe@ci
-#     # - libcasm-fe@ppaulweber-ci
-#     # - libcasm-fe@ppaulweber-ast
-#     # - libcasm-fe@emmanuel099-ci
-#     # - libcasm-fe@emmanuel099-numericSymbolicExecSplitting
+#groups: []
+groups:
+- name: all
+  jobs:
+    - gtest@master
+    - libstdhl@master
+    - libpass@master
+    - libcasm-tc@master
+    - libcasm-fe@master
+    - libcasm-fe@ppaulweber-ast
+    - libcasm-fe@emmanuel099-numericSymbolicExecSplitting
+    - libcasm-fe@emmanuel099-memoryManagement
+    - libcasm-ir@master
+    - casmi@master
+    - casmi$upstream
+
+- name: casmi
+  jobs:
+    - casmi@master
+    - casmi$upstream
     
-#     - libcasm-ir@master
-#     - libcasm-ir@ci
-#     # - libcasm-ir@ppaulweber-ci
-#     # - libcasm-ir@emmanuel099-ci
-#     # - libcasm-ir$upstream
-    
-#     - casmi@master
-#     - casmi@ci
-#     # - casmi@ppaulweber-ci
-#     # - casmi@emmanuel099-ci
+- name: casm-fe
+  jobs:
+    - libcasm-fe@ppaulweber-ast
+    - libcasm-fe@emmanuel099-numericSymbolicExecSplitting
+    - libcasm-fe@emmanuel099-memoryManagement
 
-# - name: libcasm-fe
-#   jobs:
-#     - libcasm-fe@master
-#     - libcasm-fe@ci
-#     - libcasm-fe@ppaulweber-ci
-#     - libcasm-fe@ppaulweber-ast
-#     - libcasm-fe@emmanuel099-ci
-#     - libcasm-fe@emmanuel099-numericSymbolicExecSplitting
+- name: casm-ir
+  jobs:
+    - libcasm-ir@master
 
-# - name: libcasm-ir
-#   jobs:
-#     - libcasm-ir@master
-#     - libcasm-ir@ci
-#     - libcasm-ir@ppaulweber-ci
-#     - libcasm-ir@emmanuel099-ci
-# #    - libcasm-ir$upstream
-
-# - name: casmi
-#   jobs:
-#     - casmi@master
-#     - casmi@ci
-#     - casmi@ppaulweber-ci
-#     - casmi@emmanuel099-ci
+- name: deps
+  jobs:
+    - gtest@master
+    - libstdhl@master
+    - libpass@master
 
 
 resources:
@@ -165,6 +156,14 @@ resources:
     private_key: {{github-auth}}
     uri: git@github.com:ppaulweber/libcasm-fe
 
+- name: $libcasm-fe@emmanuel099-memoryManagement
+  type: git
+  source:
+    branch: emmanuel099/memoryManagement
+    disable_ci_skip: true
+    private_key: {{github-auth}}
+    uri: git@github.com:ppaulweber/libcasm-fe
+    
  
 - name: $libcasm-ir@master
   type: git
@@ -188,14 +187,151 @@ resources:
 
     
 jobs:
-- name: libcasm-fe@master
+- name: gtest@master
   plan:
   - aggregate:
     - get: $gtest@master
       trigger: true
+  - task: build-and-test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ppaulweber/container-cpp-clang
+      inputs:
+        - name: $gtest@master
+          path: in/gtest
+      outputs:
+        - name: out
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
+            date
+            uname -a
+            ( cd in/gtest; \
+              GTEST_TARGET=googletest SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
+            )
+            ( cd in/gtest; \
+              GTEST_TARGET=googlemock SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
+            )          
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building/testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+          
+- name: libstdhl@master
+  plan:
+  - aggregate:
+    - get: $gtest@master
+      passed: [ gtest@master ]
+      trigger: true
     - get: $libstdhl@master
       trigger: true
+  - task: build
+    file: $libstdhl@master/.ci/build.yml
+    input_mapping:
+      gtest:      $gtest@master
+      libstdhl:   $libstdhl@master
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: test
+    file: $libstdhl@master/.ci/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        text: |
+          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+          
+- name: libpass@master
+  plan:
+  - aggregate:
+    - get: $gtest@master
+      passed: [ gtest@master ]
+      trigger: true
+    - get: $libstdhl@master
+      passed: [ libstdhl@master ]
+      trigger: true
     - get: $libpass@master
+      trigger: true
+  - task: build
+    file: $libpass@master/.ci/build.yml
+    input_mapping:
+      gtest:      $gtest@master
+      libstdhl:   $libstdhl@master
+      libpass:    $libpass@master
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: test
+    file: $libpass@master/.ci/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        text: |
+          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+          
+- name: libcasm-tc@master
+  plan:
+  - aggregate:
+    - get: $gtest@master
+      passed: [ gtest@master ]
+      trigger: true
+    - get: $libstdhl@master
+      passed: [ libstdhl@master ]
+      trigger: true
+    - get: $libcasm-tc@master
+      trigger: true
+  - task: build
+    file: $libcasm-tc@master/.ci/build.yml
+    input_mapping:
+      gtest:      $gtest@master
+      libstdhl:   $libstdhl@master
+      libcasm-tc: $libcasm-tc@master
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: test
+    file: $libcasm-tc@master/.ci/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        text: |
+          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+
+- name: libcasm-fe@master
+  plan:
+  - aggregate:
+    - get: $gtest@master
+      passed: [ gtest@master ]
+      trigger: true
+    - get: $libstdhl@master
+      passed: [ libstdhl@master ]
+      trigger: true
+    - get: $libpass@master
+      passed: [ libpass@master ]
       trigger: true
     - get: $libcasm-fe@master
       trigger: true
@@ -226,10 +362,13 @@ jobs:
   plan:
   - aggregate:
     - get: $gtest@master
+      passed: [ gtest@master ]
       trigger: true
     - get: $libstdhl@master
+      passed: [ libstdhl@master ]
       trigger: true
     - get: $libpass@master
+      passed: [ libpass@master ]
       trigger: true
     - get: $libcasm-fe@ppaulweber-ast
       trigger: true
@@ -260,10 +399,13 @@ jobs:
   plan:
   - aggregate:
     - get: $gtest@master
+      passed: [ gtest@master ]
       trigger: true
     - get: $libstdhl@master
+      passed: [ libstdhl@master ]
       trigger: true
     - get: $libpass@master
+      passed: [ libpass@master ]
       trigger: true
     - get: $libcasm-fe@emmanuel099-numericSymbolicExecSplitting
       trigger: true
@@ -289,15 +431,55 @@ jobs:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
+          
+- name: libcasm-fe@emmanuel099-memoryManagement
+  plan:
+  - aggregate:
+    - get: $gtest@master
+      passed: [ gtest@master ]
+      trigger: true
+    - get: $libstdhl@master
+      passed: [ libstdhl@master ]
+      trigger: true
+    - get: $libpass@master
+      passed: [ libpass@master ]
+      trigger: true
+    - get: $libcasm-fe@emmanuel099-memoryManagement
+      trigger: true
+  - task: build
+    file: $libcasm-fe@emmanuel099-memoryManagement/.ci/build.yml
+    input_mapping:
+      gtest:      $gtest@master
+      libstdhl:   $libstdhl@master
+      libpass:    $libpass@master
+      libcasm-fe: $libcasm-fe@emmanuel099-memoryManagement
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: test
+    file: $libcasm-fe@emmanuel099-memoryManagement/.ci/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        text: |
+          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
+          
 - name: libcasm-ir@master
   plan:
   - aggregate:
     - get: $gtest@master
+      passed: [ gtest@master ]
       trigger: true
     - get: $libstdhl@master
+      passed: [ libstdhl@master ]
       trigger: true
     - get: $libpass@master
+      passed: [ libpass@master ]
       trigger: true
     - get: $libcasm-fe@master
       passed: [ libcasm-fe@master ]
@@ -328,43 +510,26 @@ jobs:
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
           
-- name: casmi@master
-  plan:
-  - get: $casmi@master
-    trigger: true
-  - task: build
-    file: $casmi@master/.ci/build.yml
-    input_mapping:
-      casmi: $casmi@master
-    on_failure:
-      put: notify
-      params:
-        text: |
-          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-  - task: test
-    file: $casmi@master/.ci/test.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        text: |
-          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-
 - name: casmi$upstream
   plan:
   - aggregate:
     - get: $gtest@master
+      passed: [ gtest@master ]
       trigger: true
     - get: $libstdhl@master
+      passed: [ libstdhl@master ]
       trigger: true
     - get: $libpass@master
+      passed: [ libpass@master ]
       trigger: true
     - get: $libcasm-fe@master
+      passed: [ libcasm-fe@master ]
       trigger: true
     - get: $libcasm-ir@master
+      passed: [ libcasm-ir@master ]
       trigger: true
     - get: $libcasm-tc@master
+      passed: [ libcasm-tc@master ]
       trigger: true
     - get: $casmi@master
       params:
@@ -395,7 +560,32 @@ jobs:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
-      
+- name: casmi@master
+  plan:
+  - get: $casmi@master
+    trigger: true
+  - task: build
+    file: $casmi@master/.ci/build.yml
+    input_mapping:
+      casmi: $casmi@master
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: test
+    file: $casmi@master/.ci/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        text: |
+          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+
+
+## PPA: this could be a config for artifact oriented job styles           
 # - name: build@libcasm-fe@master
 #   plan:
 #   - aggregate:
@@ -423,29 +613,4 @@ jobs:
 #     file: libcasm-fe/casm-fe/.ci/test.yml
 #     input_mapping:
 #       in: libcasm-fe
-
-# - name: EXAMPLE
-#   plan:
-#   - aggregate:
-#     - get: libcasm-fe@master
-#       trigger: true
-#       passed: [build@libcasm-fe@master]
-#     - get: libcasm-ir@master
-#       trigger: true
-#       passed: [build@libcasm-ir@master]
-
-# - name: ANOTHER-EXAMPLE
-#   plan:
-#   - get: libcasm-fe
-#     trigger: true
-#     passed: [build@libcasm-fe@master]  
-#   - aggregate:
-#     - task: test
-#       file: libcasm-fe/casm-fe/.ci/test.yml
-#       input_mapping:
-#         in: libcasm-fe
-#     - task: test
-#       file: libcasm-fe/casm-fe/.ci/test.yml
-#       input_mapping:
-#         in: libcasm-fe
 
