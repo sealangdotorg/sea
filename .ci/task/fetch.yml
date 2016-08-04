@@ -31,12 +31,14 @@ image_resource:
   source:
     repository: ppaulweber/container-cpp-clang
 inputs:
-  - name: casm
-  - name: casmi
-    path: in/casmi
+  - name: config
+  - name: repo
+    path: in/repo
 outputs:
   - name: out
 params:
-  REPO: casmi
+  IN:   in
+  out:  out
+  REPO: repo
 run:
-  path: casm/.ci/script/build
+  path: config/.ci/script/fetch

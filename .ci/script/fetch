@@ -1,12 +1,10 @@
-#
+#!/bin/bash
 #   
 #   Copyright (c) 2014-2016 CASM Organization
 #   All rights reserved.
 #   
-#   Developed by: Florian Hahn
-#                 Philipp Paulweber
-#                 Emmanuel Pescosta
-#                 https://github.com/ppaulweber/casm
+#   Developed by: Philipp Paulweber
+#                 https://github.com/casm-lang/casm
 #   
 #   This file is part of casm.
 #   
@@ -24,20 +22,27 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
----
-platform: linux
-image_resource:
-  type: docker-image
-  source:
-    repository: ppaulweber/container-cpp-clang
-inputs:
-  - name: config
-  - name: in
-outputs:
-  - name: out
-params:
-  IN:   in
-  out:  out
-  REPO: repo
-run:
-  path: config/.ci/script/test
+if [ -z "$IN" ]; then
+    echo "error: environment variable 'IN' is not set!"
+    exit -1
+fi
+if [ -z "$OUT" ]; then
+    echo "error: environment variable 'OUT' is not set!"
+    exit -1
+fi
+if [ -z "$REPO" ]; then
+    echo "error: environment variable 'REPO' is not set!"
+    exit -1
+fi
+
+set -e -x
+
+date
+
+uname -a
+
+CWD=`pwd`
+
+ls -lA $IN
+
+cp -rf $IN/* $OUT/

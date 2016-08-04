@@ -22,15 +22,25 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-set -e -x
-
+if [ -z "$IN" ]; then
+    echo "error: environment variable 'IN' is not set!"
+    exit -1
+fi
+if [ -z "$OUT" ]; then
+    echo "error: environment variable 'OUT' is not set!"
+    exit -1
+fi
 if [ -z "$REPO" ]; then
     echo "error: environment variable 'REPO' is not set!"
     exit -1
 fi
 
+set -e -x
+
 date
 
 uname -a
 
-make -C in/$REPO test
+make -C $IN/$REPO test
+
+cp -rf $IN/* $OUT/

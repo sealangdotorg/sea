@@ -148,6 +148,14 @@ resources:
     uri: git@github.com:ppaulweber/casmi
 
     
+- name: config
+  type: git
+  source:
+    branch: master
+    disable_ci_skip: true
+    private_key: {{github-auth}}
+    uri: git@github.com:ppaulweber/casm
+    
 - name: casm
   type: git
   source:
@@ -156,28 +164,65 @@ resources:
     private_key: {{github-auth}}
     uri: git@github.com:ppaulweber/casm
 
+    
 
 
     
 jobs:
+# - name: casmi
+#   plan:
+#   - get: casm
+#     trigger: true
+#   - task: build
+#     file: casm/.ci/task/build-casmi.yml
+#     input_mapping:
+#       casmi: casm
+#     params:
+#       REPO: casmi/casmi
+#     # on_failure:
+#     #   put: notify
+#     #   params:
+#     #     text: |
+#     #       building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+#   - task: test
+#     file: casm/.ci/task/test.yml
+#     params:
+#       REPO: casmi
+#     input_mapping:
+#       in: out
+#     # on_failure:
+#     #   put: notify
+#     #   params:
+#     #     text: |
+#     #       testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  
 - name: casmi@master
   plan:
-  - get: casm
-    params: { submodules: none }
+  - get: config
     trigger: true
+    params: { submodules: none }
   - get: $casmi@master
     trigger: true
-  - task: build
-    file: casm/.ci/task/build-casmi.yml
+  - task: fetch
+    file: config/.ci/task/fetch.yml
     input_mapping:
-      casmi: $casmi@master
+      repo: $casmi@master
+    on_failure:
+      put: notify
+      params:
+        text: |
+          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: build
+    file: config/.ci/task/build.yml
+    input_mapping:
+      in: out
     on_failure:
       put: notify
       params:
         text: |
           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
   - task: test
-    file: casm/.ci/task/test.yml
+    file: config/.ci/task/test.yml
     params:
       REPO: casmi
     input_mapping:
@@ -189,6 +234,79 @@ jobs:
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
 
+# - name: casmi-latest
+#   plan:
+#   - aggregate:
+#     - get: $gtest@master
+#       #passed: [ gtest@master ]
+#       trigger: true
+#     - get: $libstdhl@master
+#       #passed: [ libstdhl@master ]
+#       trigger: true
+#     - get: $libpass@master
+#       #passed: [ libpass@master ]
+#       trigger: true
+#     - get: $libcasm-fe@master
+#       #passed: [ libcasm-fe@master ]
+#       trigger: true
+#     - get: $libcasm-ir@master
+#       #passed: [ libcasm-ir@master ]
+#       trigger: true
+#     - get: $libcasm-tc@master
+#       #passed: [ libcasm-tc@master ]
+#       trigger: true
+#     - get: $casmi@master
+#       params:
+#         submodules: none
+#       trigger: true
+#     file: casm/.ci/task/build-casmi.yml
+#     input_mapping:
+#       casmi: $casmi@master
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+#   - task: test
+#     file: casm/.ci/task/test.yml
+#     params:
+#       REPO: casmi
+#     input_mapping:
+#       in: out
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+
+      
+#   - task: build
+#     file: $casmi@master/.ci/build-upstream.yml
+#     input_mapping:
+#       casmi:      $casmi@master
+#       gtest:      $gtest@master
+#       libstdhl:   $libstdhl@master
+#       libpass:    $libpass@master
+#       libcasm-fe: $libcasm-fe@master
+#       libcasm-ir: $libcasm-ir@master
+#       libcasm-tc: $libcasm-tc@master
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+#   - task: test
+#     file: $casmi@master/.ci/test.yml
+#     input_mapping:
+#       in: out
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+          
 
           
 
