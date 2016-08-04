@@ -30,13 +30,10 @@ image_resource:
   type: docker-image
   source:
     repository: ppaulweber/container-cpp-clang
-inputs:
-  - name: casm
-  - name: casmi
-    path: in/casmi
-outputs:
-  - name: out
-params:
-  REPO: casmi
 run:
-  path: casm/.ci/sh/build
+  path: sh
+  args:
+    - -exc
+    - |
+      date
+      uname -a

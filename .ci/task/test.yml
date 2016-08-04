@@ -38,4 +38,4 @@ outputs:
 params:
   REPO:
 run:
-  path: casm/.ci/sh/test
+  path: casm/.ci/script/test
