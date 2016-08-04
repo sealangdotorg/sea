@@ -32,8 +32,7 @@ image_resource:
     repository: ppaulweber/container-cpp-clang
 inputs:
   - name: config
-  - name: repo
-    path: in/repo
+  - name: in
 outputs:
   - name: out
 params:

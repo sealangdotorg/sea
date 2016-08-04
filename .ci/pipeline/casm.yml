@@ -216,6 +216,8 @@ jobs:
     file: config/.ci/task/build.yml
     input_mapping:
       in: out
+    params:
+      REPO: casmi
     on_failure:
       put: notify
       params:
@@ -223,10 +225,10 @@ jobs:
           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
   - task: test
     file: config/.ci/task/test.yml
-    params:
-      REPO: casmi
     input_mapping:
       in: out
+    params:
+      REPO: casmi
     on_failure:
       put: notify
       params:
