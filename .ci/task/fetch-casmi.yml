@@ -43,6 +43,6 @@ inputs:
 outputs:
   - name: out
 params:
-  REPO: casmi
+  REPO: repo
 run:
   path: config/.ci/script/fetch-casmi
