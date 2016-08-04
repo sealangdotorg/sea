@@ -1,10 +1,12 @@
-#!/bin/bash
+#
 #   
 #   Copyright (c) 2014-2016 CASM Organization
 #   All rights reserved.
 #   
-#   Developed by: Philipp Paulweber
-#                 https://github.com/casm-lang/casm
+#   Developed by: Florian Hahn
+#                 Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 https://github.com/ppaulweber/casm
 #   
 #   This file is part of casm.
 #   
@@ -22,20 +24,31 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-if [ -z "$REPO" ]; then
-    echo "error: environment variable 'REPO' is not set!"
-    exit -1
-fi
-
-IN=in
-OUT=out
-
-set -e -x
-
-date
-
-uname -a
-
-ls -lA $IN
-
-cp -rf $IN/* $OUT/
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: ppaulweber/container-cpp-clang
+inputs:
+  - name: config
+  - name: repo
+    path: in/repo
+  - name: gtest
+    path: in/gtest
+  - name: libstdhl
+    path: in/stdhl
+  - name: libpass
+    path: in/pass
+  - name: libcasm-fe
+    path: in/casm-fe
+  - name: libcasm-ir
+    path: in/casm-ir
+  - name: libcasm-tc
+    path: in/casm-tc
+outputs:
+  - name: out
+params:
+  REPO: repo
+run:
+  path: config/.ci/script/fetch

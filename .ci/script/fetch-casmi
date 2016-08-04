@@ -36,6 +36,16 @@ date
 
 uname -a
 
-ls -lA $IN
+LIB=$IN/$REPO/lib
 
-cp -rf $IN/* $OUT/
+rm -rf $LIB
+mkdir -p $LIB
+
+cp -r gtest      $LIB/gtest
+cp -r libstdhl   $LIB/stdhl
+cp -r libpass    $LIB/pass
+cp -r libcasm-fe $LIB/casm-fe
+cp -r libcasm-ir $LIB/casm-ir
+cp -r libcasm-tc $LIB/casm-tc
+
+cp -rf $IN/$REPO $OUT/
