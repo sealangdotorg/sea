@@ -33,6 +33,4 @@ date
 
 uname -a
 
-cd in/$REPO
-
-make test
+make -C in/$REPO test

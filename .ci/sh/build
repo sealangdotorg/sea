@@ -33,8 +33,6 @@ date
 
 uname -a
 
-cd in/$REPO
-
-make
+make -C in/$REPO
 
 cp -rf in/* out/
