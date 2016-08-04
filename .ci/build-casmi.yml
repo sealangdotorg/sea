@@ -37,6 +37,6 @@ inputs:
 outputs:
   - name: out
 params:
-  REPO:
+  REPO: casmi
 run:
   path: casm/.ci/sh/build

@@ -180,6 +180,8 @@ jobs:
     file: casm/.ci/task/test.yml
     input_mapping:
       in: out
+    params:
+      REPO: casmi
     on_failure:
       put: notify
       params:
