@@ -37,8 +37,6 @@ inputs:
 outputs:
   - name: out
 params:
-  IN:   in
-  out:  out
   REPO: repo
 run:
   path: config/.ci/script/build
