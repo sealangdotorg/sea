@@ -156,7 +156,7 @@ resources:
     private_key: {{github-auth}}
     uri: git@github.com:ppaulweber/casm
     
-- name: casm
+- name: casm@master
   type: git
   source:
     branch: master
@@ -169,33 +169,115 @@ resources:
 
     
 jobs:
-# - name: casmi
-#   plan:
-#   - get: casm
-#     trigger: true
-#   - task: build
-#     file: casm/.ci/task/build-casmi.yml
-#     input_mapping:
-#       casmi: casm
-#     params:
-#       REPO: casmi/casmi
-#     # on_failure:
-#     #   put: notify
-#     #   params:
-#     #     text: |
-#     #       building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-#   - task: test
-#     file: casm/.ci/task/test.yml
-#     params:
-#       REPO: casmi
-#     input_mapping:
-#       in: out
-#     # on_failure:
-#     #   put: notify
-#     #   params:
-#     #     text: |
-#     #       testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-  
+- name: gtest-master
+  plan:
+  - aggregate:
+    - get: gtest@master
+      trigger: true
+  - task: fetch-and-build-and-test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ppaulweber/container-cpp-clang
+      inputs:
+        - name: gtest@master
+          path: in/gtest
+      outputs:
+        - name: out
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
+            date
+            uname -a
+            ( cd in/gtest; \
+              GTEST_TARGET=googletest SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
+            )
+            ( cd in/gtest; \
+              GTEST_TARGET=googlemock SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
+            )          
+    on_failure:
+      put: notify
+      params:
+        text: |
+          fetching/building/testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+
+
+
+
+- name: casm-master
+  plan:
+  - aggregate:
+    - get: config
+      params: { submodules: none }
+    - get: casm@master
+      trigger: true
+  - task: fetch
+    file: config/.ci/task/fetch.yml
+    input_mapping:
+      repo: casm@master
+    output_mapping:
+      out: src
+    on_failure:
+      put: notify
+      params:
+        text: |
+          fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - aggregate:
+    - do:
+      - task: build-casmi
+        file: config/.ci/task/build.yml
+        input_mapping:
+          in: src
+        params:
+          REPO: repo/casmi
+        on_failure:
+          put: notify
+          params:
+            text: |
+              building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+      - task: test-casmi
+        file: config/.ci/task/test.yml
+        params:
+          REPO: repo/casmi
+        input_mapping:
+          in: out
+        on_failure:
+          put: notify
+          params:
+            text: |
+              testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    # - do:
+    #   - task: build-casmc
+    #     file: casm/.ci/task/build.yml
+    #     input_mapping:
+    #       in: src
+    #     params:
+    #       REPO: repo/casmc
+    #     on_failure:
+    #       put: notify
+    #       params:
+    #         text: |
+    #           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    #   - task: test-casmi
+    #     file: casm/.ci/task/test.yml
+    #     params:
+    #       REPO: repo/casmc
+    #     input_mapping:
+    #       in: out
+    #     on_failure:
+    #       put: notify
+    #       params:
+    #         text: |
+    #           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+    
 - name: casmi-master
   plan:
   - aggregate:
@@ -211,7 +293,7 @@ jobs:
       put: notify
       params:
         text: |
-          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
@@ -232,13 +314,13 @@ jobs:
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
           
-- name: casmi-latest
+- name: casmi.latest
   plan:
   - aggregate:
     - get: config
       params: { submodules: none }
     - get: gtest@master
-      #passed: [ gtest@master ]
+      passed: [ gtest-master ]
       trigger: true
     - get: libstdhl@master
       #passed: [ libstdhl@master ]
