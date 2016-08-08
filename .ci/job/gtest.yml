@@ -39,7 +39,7 @@
           repository: ppaulweber/container-cpp-clang
       inputs:
         - name: {{NAME}}@master
-          path: in/gtest
+          path: in/{{NAME}}
       outputs:
         - name: out
       run:
