@@ -53,7 +53,7 @@
       lib2: libpass@master
       lib3: libcasm-fe@master
     params:
-      LIBS: gtest libstdhl libpass libcasm-fe
+      LIBS: gtest stdhl pass casm-fe
     on_failure:
       put: notify
       params:

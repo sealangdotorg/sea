@@ -69,19 +69,19 @@
       passed: [ gtest-master ]
       trigger: true
     - get: libstdhl@master
-      #passed: [ libstdhl@master ]
+      passed: [ libstdhl-master ]
       trigger: true
     - get: libpass@master
-      #passed: [ libpass@master ]
+      passed: [ libpass-master ]
       trigger: true
     - get: libcasm-fe@master
-      #passed: [ libcasm-fe@master ]
+      passed: [ libcasm-fe-master ]
       trigger: true
     - get: libcasm-ir@master
-      #passed: [ libcasm-ir@master ]
+      passed: [ libcasm-ir-master ]
       trigger: true
     - get: libcasm-tc@master
-      #passed: [ libcasm-tc@master ]
+      passed: [ libcasm-tc-master ]
       trigger: true
     - get: {{NAME}}@master
       trigger: true

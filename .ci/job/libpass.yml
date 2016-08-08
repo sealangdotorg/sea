@@ -35,13 +35,17 @@
     - get: gtest@master
       passed: [ gtest-master ]
       trigger: true
+    - get: libstdhl@master
+      passed: [ libstdhl-master ]
+      trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs0.yml
+    file: config/.ci/task/fetch/libs1.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master
+      lib1: libstdhl@master
     params:
-      LIBS: gtest
+      LIBS: gtest stdhl
     on_failure:
       put: notify
       params:
