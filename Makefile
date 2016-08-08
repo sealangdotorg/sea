@@ -79,4 +79,4 @@ ci: $(ATTIC)
 		echo "" >> $(CI_PL_CFG); \
 	done )
 
-	fly -t ci sp -p zzz -c $(CI_PL_CFG) -l ~/.ci.yml
+	fly -t ci sp -p casm -c $(CI_PL_CFG) -l ~/.ci.yml
