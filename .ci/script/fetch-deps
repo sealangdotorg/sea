@@ -40,7 +40,7 @@ rm -rf $LIB
 mkdir -p $LIB
 
 cnt=0
-for i in $OBJ; do
+for i in $DEPS; do
     cp -r  dep$cnt  $LIB/$i
     cnt=$((cnt + 1))
 done

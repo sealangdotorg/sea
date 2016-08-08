@@ -40,6 +40,8 @@
     input_mapping:
       repo: {{NAME}}@master
       dep0: gtest@master
+    params:
+      DEPS: gtest
     on_failure:
       put: notify
       params:
