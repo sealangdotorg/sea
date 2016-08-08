@@ -1,0 +1,92 @@
+#
+#   
+#   Copyright (c) 2014-2016 CASM Organization
+#   All rights reserved.
+#   
+#   Developed by: Florian Hahn
+#                 Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 https://github.com/ppaulweber/casm
+#   
+#   This file is part of casm.
+#   
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#   
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#   
+
+# jobs:
+- name: {{NAME}}
+  plan:
+  - aggregate:
+    - get: config
+      params: { submodules: none }
+    - get: casm@master
+      trigger: true
+  - task: fetch
+    file: config/.ci/task/fetch.yml
+    input_mapping:
+      repo: casm@master
+    output_mapping:
+      out: src
+    on_failure:
+      put: notify
+      params:
+        text: |
+          fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - aggregate:
+    - do:
+      - task: casmi-build
+        file: config/.ci/task/build.yml
+        input_mapping:
+          in: src
+        params:
+          REPO: repo/casmi
+        on_failure:
+          put: notify
+          params:
+            text: |
+              building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+      - task: casmi-test
+        file: config/.ci/task/test.yml
+        params:
+          REPO: repo/casmi
+        input_mapping:
+          in: out
+        on_failure:
+          put: notify
+          params:
+            text: |
+              testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    # - do:
+    #   - task: casmc-build
+    #     file: config/.ci/task/build.yml
+    #     input_mapping:
+    #       in: src
+    #     params:
+    #       REPO: repo/casmc
+    #     on_failure:
+    #       put: notify
+    #       params:
+    #         text: |
+    #           $REPO building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    #   - task: casmc-test
+    #     file: config/.ci/task/test.yml
+    #     params:
+    #       REPO: repo/casmc
+    #     input_mapping:
+    #       in: out
+    #     on_failure:
+    #       put: notify
+    #       params:
+    #         text: |
+    #           $REPO testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID

@@ -1,0 +1,33 @@
+#
+#   
+#   Copyright (c) 2014-2016 CASM Organization
+#   All rights reserved.
+#   
+#   Developed by: Florian Hahn
+#                 Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 https://github.com/ppaulweber/casm
+#   
+#   This file is part of casm.
+#   
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#   
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#   
+        
+- name: {{NAME}}
+  type: git
+  source:
+    branch: master
+    disable_ci_skip: true
+    private_key: {{github-auth}}
+    uri: git@github.com:ppaulweber/casm

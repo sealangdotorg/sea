@@ -1,10 +1,12 @@
-#!/bin/bash
+#
 #   
 #   Copyright (c) 2014-2016 CASM Organization
 #   All rights reserved.
 #   
-#   Developed by: Philipp Paulweber
-#                 https://github.com/casm-lang/casm
+#   Developed by: Florian Hahn
+#                 Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 https://github.com/ppaulweber/casm
 #   
 #   This file is part of casm.
 #   
@@ -22,30 +24,9 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-if [ -z "$REPO" ]; then
-    echo "error: environment variable 'REPO' is not set!"
-    exit -1
-fi
-
-IN=in
-OUT=out
-
-set -e -x
-
-date
-
-uname -a
-
-LIB=$IN/$REPO/lib
-
-rm -rf $LIB
-mkdir -p $LIB
-
-cp -r gtest      $LIB/gtest
-cp -r libstdhl   $LIB/stdhl
-cp -r libpass    $LIB/pass
-cp -r libcasm-fe $LIB/casm-fe
-cp -r libcasm-ir $LIB/casm-ir
-cp -r libcasm-tc $LIB/casm-tc
-
-cp -rf $IN/$REPO $OUT/
+- name: {{NAME}}
+  type: matrix-notification-resource
+  source:
+    matrix_server_url: {{matrix-addr}}
+    token: {{matrix-auth}}
+    room_id: {{matrix-room}}

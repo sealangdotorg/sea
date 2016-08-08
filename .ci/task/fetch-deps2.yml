@@ -34,15 +34,14 @@ inputs:
   - name: config
   - name: repo
     path: in/repo
-  - name: gtest
-  - name: libstdhl
-  - name: libpass
-  - name: libcasm-fe
-  - name: libcasm-ir
-  - name: libcasm-tc
+  - name: dep0
+  - name: dep1
+  - name: dep2
 outputs:
   - name: out
 params:
   REPO: repo
+  LIB: in/repo/lib
+  DEPS: 
 run:
-  path: config/.ci/script/fetch-casmi
+  path: config/.ci/script/fetch-deps
