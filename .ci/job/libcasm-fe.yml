@@ -42,14 +42,14 @@
       passed: [ libpass-master ]
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch-dep2.yml
+    file: config/.ci/task/fetch/libs2.yml
     input_mapping:
       repo: {{NAME}}@master
-      dep0: gtest@master
-      dep1: libstdhl@master
-      dep2: libpass@master
+      lib0: gtest@master
+      lib1: libstdhl@master
+      lib2: libpass@master
     params:
-      DEPS: gtest libstdhl libpass
+      LIBS: gtest libstdhl libpass
     on_failure:
       put: notify
       params:

@@ -45,15 +45,15 @@
       passed: [ libcasm-fe-master ]
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch-dep3.yml
+    file: config/.ci/task/fetch/libs3.yml
     input_mapping:
       repo: {{NAME}}@master
-      dep0: gtest@master
-      dep1: libstdhl@master
-      dep2: libpass@master
-      dep3: libcasm-fe@master
+      lib0: gtest@master
+      lib1: libstdhl@master
+      lib2: libpass@master
+      lib3: libcasm-fe@master
     params:
-      DEPS: gtest libstdhl libpass libcasm-fe
+      LIBS: gtest libstdhl libpass libcasm-fe
     on_failure:
       put: notify
       params:

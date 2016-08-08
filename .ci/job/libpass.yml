@@ -36,12 +36,12 @@
       passed: [ gtest-master ]
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch-deps0.yml
+    file: config/.ci/task/fetch/libs0.yml
     input_mapping:
       repo: {{NAME}}@master
-      dep0: gtest@master
+      lib0: gtest@master
     params:
-      DEPS: gtest
+      LIBS: gtest
     on_failure:
       put: notify
       params:

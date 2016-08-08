@@ -87,15 +87,17 @@
       trigger: true
       params: { submodules: none }
   - task: fetch
-    file: config/.ci/task/fetch-{{NAME}}.yml
+    file: config/.ci/task/fetch/deps5.yml
     input_mapping:
-      repo:       {{NAME}}@master
-      gtest:      gtest@master
-      libstdhl:   libstdhl@master
-      libpass:    libpass@master
-      libcasm-fe: libcasm-fe@master
-      libcasm-ir: libcasm-ir@master
-      libcasm-tc: libcasm-tc@master
+      repo: {{NAME}}@master
+      dep0: gtest@master
+      dep1: libstdhl@master
+      dep2: libpass@master
+      dep3: libcasm-fe@master
+      dep4: libcasm-ir@master
+      dep5: libcasm-tc@master
+    params:
+      DEPS: gtest libstdhl libpass libcasm-fe libcasm-ir libcasm-tc
     on_failure:
       put: notify
       params:
