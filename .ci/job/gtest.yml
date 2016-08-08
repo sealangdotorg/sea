@@ -39,7 +39,7 @@
           repository: ppaulweber/container-cpp-clang
       inputs:
         - name: {{NAME}}@master
-          path: in/{{NAME}}
+          path: in/gtest
       outputs:
         - name: out
       run:
@@ -50,11 +50,11 @@
             date
             uname -a
             ( cd in/{{NAME}}; \
-              {{NAME}}_TARGET=googletest SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              GTEST_TARGET=googletest SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
               BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
             )
             ( cd in/{{NAME}}; \
-              {{NAME}}_TARGET=googlemock SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
+              GTEST_TARGET=googlemock SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
               BUILD_TYPE=debug VERBOSE_MAKE=true ./travis.sh \
             )          
     on_failure:
