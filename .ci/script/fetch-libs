@@ -38,8 +38,8 @@ uname -a
 
 cnt=0
 for i in $LIBS; do
-    cp -r lib$cnt $OUT/$i
+    cp -rf lib$cnt $OUT/$i
     cnt=$((cnt + 1))
 done
 
-cp -rf $IN/$REPO $OUT/
+cp -rf $IN/repo $OUT/$REPO

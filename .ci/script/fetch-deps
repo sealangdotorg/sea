@@ -45,4 +45,4 @@ for i in $DEPS; do
     cnt=$((cnt + 1))
 done
 
-cp -rf $IN/$REPO $OUT/
+cp -rf $IN/repo $OUT/$REPO

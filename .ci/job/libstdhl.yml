@@ -41,6 +41,7 @@
       repo: {{NAME}}@master
       lib0: gtest@master
     params:
+      REPO: stdhl
       LIBS: gtest
     on_failure:
       put: notify
@@ -51,6 +52,8 @@
     file: config/.ci/task/build.yml
     input_mapping:
       in: out
+    params:
+      REPO: stdhl
     on_failure:
       put: notify
       params:
@@ -60,6 +63,8 @@
     file: config/.ci/task/test.yml
     input_mapping:
       in: out
+    params:
+      REPO: stdhl
     on_failure:
       put: notify
       params:
