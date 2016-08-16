@@ -77,3 +77,57 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+
+# - name: {{NAME}}.cfg0
+#   plan:
+#   - aggregate:
+#     - get: config
+#       params: { submodules: none }
+#     - get: {{NAME}}@master
+#       trigger: true
+#     - get: gtest@master
+#       passed: [ gtest-master ]
+#       trigger: true
+#     - get: libstdhl@master
+#       trigger: true
+#       passed: [ libstdhl-master ]
+#     - get: libpass@master
+#       passed: [ libpass-master ]
+#       trigger: true
+#     - get: libcasm-fe@ppaulweber-ast
+#       passed: [ libcasm-fe-ppaulweber-ast ]
+#       trigger: true
+#   - task: fetch
+#     file: config/.ci/task/fetch/libs3.yml
+#     input_mapping:
+#       repo: {{NAME}}@master
+#       lib0: gtest@master
+#       lib1: libstdhl@master
+#       lib2: libpass@master
+#       lib3: libcasm-fe@ppaulweber-ast
+#     params:
+#       LIBS: gtest stdhl pass casm-fe
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+#   - task: build
+#     file: config/.ci/task/build.yml
+#     input_mapping:
+#       in: out
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+#   - task: test
+#     file: config/.ci/task/test.yml
+#     input_mapping:
+#       in: out
+#     on_failure:
+#       put: notify
+#       params:
+#         text: |
+#           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID

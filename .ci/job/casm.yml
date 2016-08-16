@@ -31,42 +31,43 @@
     - get: config
       params: { submodules: none }
     - get: casm@master
+      passed: [ casmi ]
       trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch.yml
-    input_mapping:
-      repo: casm@master
-    output_mapping:
-      out: src
-    on_failure:
-      put: notify
-      params:
-        text: |
-          fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-  - aggregate:
-    - do:
-      - task: casmi-build
-        file: config/.ci/task/build.yml
-        input_mapping:
-          in: src
-        params:
-          REPO: repo/casmi
-        on_failure:
-          put: notify
-          params:
-            text: |
-              building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-      - task: casmi-test
-        file: config/.ci/task/test.yml
-        params:
-          REPO: repo/casmi
-        input_mapping:
-          in: out
-        on_failure:
-          put: notify
-          params:
-            text: |
-              testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  # - task: fetch
+  #   file: config/.ci/task/fetch.yml
+  #   input_mapping:
+  #     repo: casm@master
+  #   output_mapping:
+  #     out: src
+  #   on_failure:
+  #     put: notify
+  #     params:
+  #       text: |
+  #         fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  # - aggregate:
+  #   - do:
+  #     - task: casmi-build
+  #       file: config/.ci/task/build.yml
+  #       input_mapping:
+  #         in: src
+  #       params:
+  #         REPO: repo/casmi
+  #       on_failure:
+  #         put: notify
+  #         params:
+  #           text: |
+  #             building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  #     - task: casmi-test
+  #       file: config/.ci/task/test.yml
+  #       params:
+  #         REPO: repo/casmi
+  #       input_mapping:
+  #         in: out
+  #       on_failure:
+  #         put: notify
+  #         params:
+  #           text: |
+  #             testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
     # - do:
     #   - task: casmc-build
     #     file: config/.ci/task/build.yml
