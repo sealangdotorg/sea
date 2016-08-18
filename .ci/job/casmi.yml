@@ -59,6 +59,23 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: run
+    file: config/.ci/task/test-run.yml
+    input_mapping:
+      in: out
+    params:
+      REPO: repo/lib/casm-tc
+      CASM: ../../casmi
+    on_failure:
+      put: notify
+      params:
+        text: |
+          running $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_success:
+      put: notify
+      params:
+        text: |
+          $BUILD_JOB_NAME build/test/run was successful, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
   # - put: blob
   #   params:
@@ -133,16 +150,16 @@
     params:
       REPO: repo/lib/casm-tc
       CASM: ../../casmi
-    on_success:
-      put: notify
-      params:
-        text: |
-          test runner $BUILD_JOB_NAME succeeded, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
     on_failure:
       put: notify
       params:
         text: |
-          test runner $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          running $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_success:
+      put: notify
+      params:
+        text: |
+          $BUILD_JOB_NAME build/test/run was successful, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
   # - put: blob
   #   params:
@@ -210,69 +227,23 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-
-
-- name: {{NAME}}.cfg1
-  plan:
-  - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: gtest@master
-      passed: [ gtest-master ]
-      trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl-master ]
-      trigger: true
-    - get: libpass@master
-      passed: [ libpass-master ]
-      trigger: true
-    - get: libcasm-fe@emmanuel099-numericSymbolicExecSplitting
-      passed: [ libcasm-fe-emmanuel099-numericSymbolicExecSplitting ]
-      trigger: true
-    - get: libcasm-ir@master
-      passed: [ libcasm-ir-master ]
-      trigger: true
-    - get: libcasm-tc@master
-      passed: [ libcasm-tc-master ]
-      trigger: true
-    - get: {{NAME}}@master
-      trigger: true
-      params: { submodules: none }
-  - task: fetch
-    file: config/.ci/task/fetch/deps5.yml
+  - task: run
+    file: config/.ci/task/test-run.yml
     input_mapping:
-      repo: {{NAME}}@master
-      dep0: gtest@master
-      dep1: libstdhl@master
-      dep2: libpass@master
-      dep3: libcasm-fe@emmanuel099-numericSymbolicExecSplitting
-      dep4: libcasm-ir@master
-      dep5: libcasm-tc@master
+      in: out
     params:
-      DEPS: gtest stdhl pass casm-fe casm-ir casm-tc
+      REPO: repo/lib/casm-tc
+      CASM: ../../casmi
     on_failure:
       put: notify
       params:
         text: |
-          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-  - task: build
-    file: config/.ci/task/build.yml
-    input_mapping:
-      in: out
-    on_failure:
+          running $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_success:
       put: notify
       params:
         text: |
-          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
-  - task: test
-    file: config/.ci/task/test.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        text: |
-          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          $BUILD_JOB_NAME build/test/run was successful, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
 
 - name: {{NAME}}.cfg2
@@ -336,6 +307,23 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: run
+    file: config/.ci/task/test-run.yml
+    input_mapping:
+      in: out
+    params:
+      REPO: repo/lib/casm-tc
+      CASM: ../../casmi
+    on_failure:
+      put: notify
+      params:
+        text: |
+          running $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_success:
+      put: notify
+      params:
+        text: |
+          $BUILD_JOB_NAME build/test/run was successful, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
           
           
 - name: {{NAME}}
@@ -378,3 +366,20 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: run
+    file: config/.ci/task/test-run.yml
+    input_mapping:
+      in: out
+    params:
+      REPO: repo/casmi/lib/casm-tc
+      CASM: ../../casmi
+    on_failure:
+      put: notify
+      params:
+        text: |
+          running $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_success:
+      put: notify
+      params:
+        text: |
+          $BUILD_JOB_NAME build/test/run was successful, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
