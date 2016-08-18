@@ -24,20 +24,19 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-- name: {{NAME}}@master
-  type: git
+---
+platform: linux
+image_resource:
+  type: docker-image
   source:
-    branch: master
-    disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:ppaulweber/{{NAME}}
-
-
-- name: blob
-  type: rsync-resource
-  source:
-    base_dir:    /opt/sync/blob
-    server:      {{sync-addr}}
-    port:        {{sync-port}}
-    user:        {{sync-user}}
-    private_key: {{sync-auth}}
+    repository: ppaulweber/container-cpp-clang
+inputs:
+  - name: config
+  - name: in
+outputs:
+  - name: out
+params:
+  REPO: repo
+  CASM:
+run:
+  path: config/.ci/script/test-run

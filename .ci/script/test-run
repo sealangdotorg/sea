@@ -1,12 +1,10 @@
-#
+#!/bin/bash
 #   
 #   Copyright (c) 2014-2016 CASM Organization
 #   All rights reserved.
 #   
-#   Developed by: Florian Hahn
-#                 Philipp Paulweber
-#                 Emmanuel Pescosta
-#                 https://github.com/ppaulweber/casm
+#   Developed by: Philipp Paulweber
+#                 https://github.com/casm-lang/casm
 #   
 #   This file is part of casm.
 #   
@@ -24,20 +22,20 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-- name: {{NAME}}@master
-  type: git
-  source:
-    branch: master
-    disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:ppaulweber/{{NAME}}
+if [ -z "$REPO" ]; then
+    echo "error: environment variable 'REPO' is not set!"
+    exit -1
+fi
 
+IN=in
+OUT=out
 
-- name: blob
-  type: rsync-resource
-  source:
-    base_dir:    /opt/sync/blob
-    server:      {{sync-addr}}
-    port:        {{sync-port}}
-    user:        {{sync-user}}
-    private_key: {{sync-auth}}
+set -e -x
+
+date
+
+uname -a
+
+make -C $IN/$REPO test-run
+
+cp -rf $IN/* $OUT/

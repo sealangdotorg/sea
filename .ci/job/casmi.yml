@@ -60,6 +60,11 @@
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
 
+  # - put: blob
+  #   params:
+  #     "sync_dir" : "out"
+
+
 - name: {{NAME}}.latest
   plan:
   - aggregate:
@@ -121,6 +126,27 @@
       params:
         text: |
           testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  - task: run
+    file: config/.ci/task/test-run.yml
+    input_mapping:
+      in: out
+    params:
+      REPO: repo/lib/casm-tc
+      CASM: ../../casmi
+    on_success:
+      put: notify
+      params:
+        text: |
+          test runner $BUILD_JOB_NAME succeeded, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    on_failure:
+      put: notify
+      params:
+        text: |
+          test runner $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+
+  # - put: blob
+  #   params:
+  #     "sync_dir" : "out/repo"
 
 
 - name: {{NAME}}.cfg0
