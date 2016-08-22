@@ -43,7 +43,7 @@
   #     put: notify
   #     params:
   #       text: |
-  #         fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  #         ci.casm-lang.org/builds/$BUILD_ID fetching $BUILD_JOB_NAME failed
   # - aggregate:
   #   - do:
   #     - task: casmi-build
@@ -56,7 +56,7 @@
   #         put: notify
   #         params:
   #           text: |
-  #             building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  #             ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
   #     - task: casmi-test
   #       file: config/.ci/task/test.yml
   #       params:
@@ -67,7 +67,7 @@
   #         put: notify
   #         params:
   #           text: |
-  #             testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+  #             ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
     # - do:
     #   - task: casmc-build
     #     file: config/.ci/task/build.yml
@@ -79,7 +79,7 @@
     #       put: notify
     #       params:
     #         text: |
-    #           $REPO building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    #           ci.casm-lang.org/builds/$BUILD_ID $REPO building $BUILD_JOB_NAME failed
     #   - task: casmc-test
     #     file: config/.ci/task/test.yml
     #     params:
@@ -90,4 +90,4 @@
     #       put: notify
     #       params:
     #         text: |
-    #           $REPO testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+    #           ci.casm-lang.org/builds/$BUILD_ID $REPO testing $BUILD_JOB_NAME failed

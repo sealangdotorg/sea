@@ -50,7 +50,7 @@
       put: notify
       params:
         text: |
-          fetching $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          ci.casm-lang.org/builds/$BUILD_ID fetching $BUILD_JOB_NAME failed
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
@@ -59,7 +59,7 @@
       put: notify
       params:
         text: |
-          building $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
   - task: test
     file: config/.ci/task/test.yml
     input_mapping:
@@ -68,4 +68,4 @@
       put: notify
       params:
         text: |
-          testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed

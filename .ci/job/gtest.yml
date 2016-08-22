@@ -61,4 +61,4 @@
       put: notify
       params:
         text: |
-          fetching/building/testing $BUILD_JOB_NAME failed, see $ATC_EXTERNAL_URL/builds/$BUILD_ID
+          ci.casm-lang.org/builds/$BUILD_ID fetching/building/testing $BUILD_JOB_NAME failed
