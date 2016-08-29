@@ -3,7 +3,7 @@
 	url = git@github.com:casm-lang/casm-lang.github.io.git
 [submodule "casmi"]
 	path = casmi
-	url = git@github.com:ppaulweber/casmi.git
+	url = git@github.com:casm-lang/casmi.git
 [submodule "casmc"]
 	path = casmc
-	url = git@github.com:ppaulweber/casmc.git
+	url = git@github.com:casm-lang/casmc.git
