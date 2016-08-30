@@ -30,7 +30,7 @@
     branch: master
     disable_ci_skip: true
     private_key: {{github-auth}}
-    uri: git@github.com:ppaulweber/{{NAME}}
+    uri: git@github.com:casm-lang/{{NAME}}
 
 
 - name: blob
