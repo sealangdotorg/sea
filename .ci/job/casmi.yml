@@ -39,8 +39,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID fetching $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME fetch failed
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
@@ -48,8 +49,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME build failed
   - task: test
     file: config/.ci/task/test.yml
     input_mapping:
@@ -57,29 +59,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
-  # - task: run
-  #   file: config/.ci/task/test-run.yml
-  #   input_mapping:
-  #     in: out
-  #   params:
-  #     REPO: repo/lib/casm-tc
-  #     CASM: ../../casmi
-  #   on_failure:
-  #     put: notify
-  #     params:
-  #       text: |
-  #         ci.casm-lang.org/builds/$BUILD_ID running $BUILD_JOB_NAME failed
-  #   # on_success:
-  #   #   put: notify
-  #   #   params:
-  #   #     text: |
-  #   #       ci.casm-lang.org/builds/$BUILD_ID $BUILD_JOB_NAME build/test/run was successful
-
-  # - put: blob
-  #   params:
-  #     "sync_dir" : "out"
+          $BUILD_JOB_NAME test failed
 
 
 - name: {{NAME}}.latest
@@ -123,8 +105,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME fetch failed
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
@@ -132,8 +115,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME build failed
   - task: test
     file: config/.ci/task/test.yml
     input_mapping:
@@ -141,109 +125,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
-  # - task: run
-  #   file: config/.ci/task/test-run.yml
-  #   input_mapping:
-  #     in: out
-  #   params:
-  #     REPO: repo/lib/casm-tc
-  #     CASM: ../../casmi
-  #   on_failure:
-  #     put: notify
-  #     params:
-  #       text: |
-  #         ci.casm-lang.org/builds/$BUILD_ID running $BUILD_JOB_NAME failed
-  #   # on_success:
-  #   #   put: notify
-  #   #   params:
-  #   #     text: |
-  #   #       ci.casm-lang.org/builds/$BUILD_ID $BUILD_JOB_NAME build/test/run was successful
-
-  # - put: blob
-  #   params:
-  #     "sync_dir" : "out/repo"
-
-
-# - name: {{NAME}}.cfg0
-#   plan:
-#   - aggregate:
-#     - get: config
-#       params: { submodules: none }
-#     - get: gtest@master
-#       passed: [ gtest-master ]
-#       trigger: true
-#     - get: libstdhl@master
-#       passed: [ libstdhl-master ]
-#       trigger: true
-#     - get: libpass@master
-#       passed: [ libpass-master ]
-#       trigger: true
-#     - get: libcasm-fe@ppaulweber-ast
-#       passed: [ libcasm-fe-ppaulweber-ast ]
-#       trigger: true
-#     - get: libcasm-ir@master
-#       passed: [ libcasm-ir-master ]
-#       trigger: true
-#     - get: libcasm-tc@master
-#       passed: [ libcasm-tc-master ]
-#       trigger: true
-#     - get: {{NAME}}@master
-#       trigger: true
-#       params: { submodules: none }
-#   - task: fetch
-#     file: config/.ci/task/fetch/deps5.yml
-#     input_mapping:
-#       repo: {{NAME}}@master
-#       dep0: gtest@master
-#       dep1: libstdhl@master
-#       dep2: libpass@master
-#       dep3: libcasm-fe@ppaulweber-ast
-#       dep4: libcasm-ir@master
-#       dep5: libcasm-tc@master
-#     params:
-#       DEPS: gtest stdhl pass casm-fe casm-ir casm-tc
-#     on_failure:
-#       put: notify
-#       params:
-#         text: |
-#           ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
-#   - task: build
-#     file: config/.ci/task/build.yml
-#     input_mapping:
-#       in: out
-#     on_failure:
-#       put: notify
-#       params:
-#         text: |
-#           ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
-#   - task: test
-#     file: config/.ci/task/test.yml
-#     input_mapping:
-#       in: out
-#     on_failure:
-#       put: notify
-#       params:
-#         text: |
-#           ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
-# #   - task: run
-# #     file: config/.ci/task/test-run.yml
-# #     input_mapping:
-# #       in: out
-# #     params:
-# #       REPO: repo/lib/casm-tc
-# #       CASM: ../../casmi
-# #     on_failure:
-# #       put: notify
-# #       params:
-# #         text: |
-# #           ci.casm-lang.org/builds/$BUILD_ID running $BUILD_JOB_NAME failed
-# #     on_success:
-# #       put: notify
-# #       params:
-# #         text: |
-# #           ci.casm-lang.org/builds/$BUILD_ID $BUILD_JOB_NAME build/test/run was successful
+          $BUILD_JOB_NAME test failed
 
 
 - name: {{NAME}}
@@ -262,8 +146,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID fetching $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME fetch failed
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
@@ -273,8 +158,9 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID building $BUILD_JOB_NAME failed
+          $BUILD_JOB_NAME build failed
   - task: test
     file: config/.ci/task/test.yml
     input_mapping:
@@ -284,22 +170,6 @@
     on_failure:
       put: notify
       params:
+        link: true
         text: |
-          ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
-  # - task: run
-  #   file: config/.ci/task/test-run.yml
-  #   input_mapping:
-  #     in: out
-  #   params:
-  #     REPO: repo/casmi/lib/casm-tc
-  #     CASM: ../../casmi
-  #   on_failure:
-  #     put: notify
-  #     params:
-  #       text: |
-  #         ci.casm-lang.org/builds/$BUILD_ID running $BUILD_JOB_NAME failed
-  #   # on_success:
-  #   #   put: notify
-  #   #   params:
-  #   #     text: |
-  #   #       ci.casm-lang.org/builds/$BUILD_ID $BUILD_JOB_NAME build/test/run was successful
+          $BUILD_JOB_NAME test failed
