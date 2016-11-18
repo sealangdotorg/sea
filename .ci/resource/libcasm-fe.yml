@@ -31,27 +31,3 @@
     disable_ci_skip: true
     private_key: {{github-auth}}
     uri: git@github.com:casm-lang/{{NAME}}
-
-- name: {{NAME}}@ppaulweber-ast
-  type: git
-  source:
-    branch: ppaulweber/ast
-    disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:casm-lang/{{NAME}}
-
-- name: {{NAME}}@emmanuel099-numericSymbolicExecSplitting
-  type: git
-  source:
-    branch: emmanuel099/numericSymbolicExecSplitting
-    disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:casm-lang/{{NAME}}
-
-- name: {{NAME}}@emmanuel099-memoryManagement
-  type: git
-  source:
-    branch: emmanuel099/memoryManagement
-    disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:casm-lang/{{NAME}}

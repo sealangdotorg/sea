@@ -36,6 +36,6 @@ date
 
 uname -a
 
-make -C $IN/$REPO
+make -C $IN/$REPO $ARGS
 
 cp -rf $IN/* $OUT/
