@@ -31,24 +31,33 @@
       params: { submodules: none }
     - get: {{NAME}}@master
       trigger: true
+      params: { submodules: none }
     - get: gtest@master
       passed: [ gtest-master ]
       trigger: true
+      params: { submodules: none }
     - get: libstdhl@master
-      trigger: true
       passed: [ libstdhl-master ]
+      trigger: true
+      params: { submodules: none }
     - get: libpass@master
       passed: [ libpass-master ]
       trigger: true
+      params: { submodules: none }
+    - get: libcasm-ir@master
+      passed: [ libcasm-ir-master ]
+      trigger: true
+      params: { submodules: none }
   - task: fetch
-    file: config/.ci/task/fetch/libs2.yml
+    file: config/.ci/task/fetch/libs3.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master
       lib1: libstdhl@master
       lib2: libpass@master
+      lib3: libcasm-ir@master
     params:
-      LIBS: gtest stdhl pass
+      LIBS: gtest stdhl pass casm-ir
     on_failure:
       put: notify
       params:
