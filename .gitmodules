@@ -7,3 +7,6 @@
 [submodule "casmc"]
 	path = casmc
 	url = git@github.com:casm-lang/casmc.git
+[submodule "casmf"]
+	path = casmf
+	url = git@github.com:casm-lang/casmf
