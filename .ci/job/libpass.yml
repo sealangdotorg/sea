@@ -34,17 +34,22 @@
     - get: gtest@master
       passed: [ gtest-master ]
       trigger: true
+    - get: hayai@master
+      passed: [ hayai-master ]
+      trigger: true
     - get: libstdhl@master
       passed: [ libstdhl-master ]
+      params: { submodules: none }
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs1.yml
+    file: config/.ci/task/fetch/libs2.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master
-      lib1: libstdhl@master
+      lib1: hayai@master
+      lib2: libstdhl@master
     params:
-      LIBS: gtest stdhl
+      LIBS: gtest hayai stdhl
     on_failure:
       put: notify
       params:

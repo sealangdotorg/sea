@@ -27,52 +27,35 @@
 - name: {{NAME}}-master
   plan:
   - aggregate:
-    - get: config
-      params: { submodules: none }
     - get: {{NAME}}@master
       trigger: true
-    - get: gtest@master
-      passed: [ gtest-master ]
-      trigger: true
-    - get: hayai@master
-      passed: [ hayai-master ]
-      trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl-master ]
-      params: { submodules: none }
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch/libs2.yml
-    input_mapping:
-      repo: {{NAME}}@master
-      lib0: gtest@master
-      lib1: hayai@master
-      lib2: libstdhl@master
-    params:
-      LIBS: gtest hayai stdhl
+  - task: fetch-and-build-and-test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ppaulweber/container-cpp-clang
+      inputs:
+        - name: {{NAME}}@master
+          path: in/{{NAME}}
+      outputs:
+        - name: out
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
+            date
+            uname -a
+            ( cd in/{{NAME}}; \
+              cmake -DTEST=true .; \
+              make; \
+              make test \
+            )
     on_failure:
       put: notify
       params:
         link: true
         text: |
-          $BUILD_JOB_NAME fetch failed
-  - task: build
-    file: config/.ci/task/build.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        link: true
-        text: |
-          $BUILD_JOB_NAME build failed
-  - task: test
-    file: config/.ci/task/test.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        link: true
-        text: |
-          $BUILD_JOB_NAME test failed
+          $BUILD_JOB_NAME fetch/build/test failed

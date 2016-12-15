@@ -68,39 +68,44 @@
   - aggregate:
     - get: config
       params: { submodules: none }
-    - get: gtest@master
-      passed: [ gtest-master ]
-      trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl-master ]
-      trigger: true
-    - get: libpass@master
-      passed: [ libpass-master ]
-      trigger: true
-    - get: libcasm-fe@master
-      passed: [ libcasm-fe-master ]
-      trigger: true
-    - get: libcasm-ir@master
-      passed: [ libcasm-ir-master ]
-      trigger: true
-    - get: libcasm-tc@master
-      passed: [ libcasm-tc-master ]
-      trigger: true
     - get: {{NAME}}@master
       trigger: true
       params: { submodules: none }
+    - get: gtest@master
+      passed: [ gtest-master ]
+      trigger: true
+    - get: hayai@master
+      passed: [ hayai-master ]
+      trigger: true
+    - get: libstdhl@master
+      passed: [ libstdhl-master ]
+      params: { submodules: none }
+      trigger: true
+    - get: libpass@master
+      passed: [ libpass-master ]
+      params: { submodules: none }
+      trigger: true
+    - get: libcasm-ir@master
+      passed: [ libcasm-ir-master ]
+      params: { submodules: none }
+      trigger: true
+    - get: libcasm-tc@master
+      passed: [ libcasm-tc-master ]
+      params: { submodules: none }
+      trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/deps5.yml
+    file: config/.ci/task/fetch/deps6.yml
     input_mapping:
       repo: {{NAME}}@master
       dep0: gtest@master
-      dep1: libstdhl@master
-      dep2: libpass@master
-      dep3: libcasm-fe@master
-      dep4: libcasm-ir@master
-      dep5: libcasm-tc@master
+      dep1: hayai@master      
+      dep2: libstdhl@master
+      dep3: libpass@master
+      dep4: libcasm-fe@master
+      dep5: libcasm-ir@master
+      dep6: libcasm-tc@master
     params:
-      DEPS: gtest stdhl pass casm-fe casm-ir casm-tc
+      DEPS: gtest hayai stdhl pass casm-fe casm-ir casm-tc
     on_failure:
       put: notify
       params:

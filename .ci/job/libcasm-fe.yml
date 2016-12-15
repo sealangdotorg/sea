@@ -35,29 +35,32 @@
     - get: gtest@master
       passed: [ gtest-master ]
       trigger: true
-      params: { submodules: none }
+    - get: hayai@master
+      passed: [ hayai-master ]
+      trigger: true
     - get: libstdhl@master
       passed: [ libstdhl-master ]
-      trigger: true
       params: { submodules: none }
+      trigger: true
     - get: libpass@master
       passed: [ libpass-master ]
-      trigger: true
       params: { submodules: none }
+      trigger: true
     - get: libcasm-ir@master
       passed: [ libcasm-ir-master ]
-      trigger: true
       params: { submodules: none }
+      trigger: true
   - task: fetch
     file: config/.ci/task/fetch/libs3.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master
-      lib1: libstdhl@master
-      lib2: libpass@master
-      lib3: libcasm-ir@master
+      lib1: hayai@master
+      lib2: libstdhl@master
+      lib3: libpass@master
+      lib4: libcasm-ir@master
     params:
-      LIBS: gtest stdhl pass casm-ir
+      LIBS: gtest hayai stdhl pass casm-ir
     on_failure:
       put: notify
       params:
