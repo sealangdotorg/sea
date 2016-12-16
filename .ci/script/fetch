@@ -34,10 +34,6 @@ set -e -x
 
 date
 uname -a
-$(CC) --version
-$(CXX) --version
-make --version
-cmake --version
 
 ls -lA $IN
 
