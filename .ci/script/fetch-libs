@@ -32,7 +32,12 @@ OUT=out
 
 set -e -x
 
-./info
+date
+uname -a
+$(CC) --version
+$(CXX) --version
+make --version
+cmake --version
 
 cnt=0
 for i in $LIBS; do
