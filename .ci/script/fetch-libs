@@ -32,9 +32,7 @@ OUT=out
 
 set -e -x
 
-date
-
-uname -a
+./info
 
 cnt=0
 for i in $LIBS; do

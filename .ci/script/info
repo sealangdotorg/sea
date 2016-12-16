@@ -22,18 +22,14 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #   
 
-if [ -z "$REPO" ]; then
-    echo "error: environment variable 'REPO' is not set!"
-    exit -1
-fi
+date
 
-IN=in
-OUT=out
+uname -a
 
-set -e -x
+$(CC) --version
 
-./info
+$(CXX) --version
 
-ls -lA $IN
+make --version
 
-cp -rf $IN/* $OUT/
+cmake --version

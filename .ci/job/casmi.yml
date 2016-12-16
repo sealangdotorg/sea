@@ -89,6 +89,10 @@
       passed: [ libcasm-ir-master ]
       params: { submodules: none }
       trigger: true
+    - get: libcasm-fe@master
+      passed: [ libcasm-fe-master ]
+      params: { submodules: none }
+      trigger: true
     - get: libcasm-tc@master
       passed: [ libcasm-tc-master ]
       params: { submodules: none }
@@ -101,11 +105,11 @@
       dep1: hayai@master      
       dep2: libstdhl@master
       dep3: libpass@master
-      dep4: libcasm-fe@master
-      dep5: libcasm-ir@master
+      dep4: libcasm-ir@master
+      dep5: libcasm-fe@master
       dep6: libcasm-tc@master
     params:
-      DEPS: gtest hayai stdhl pass casm-fe casm-ir casm-tc
+      DEPS: gtest hayai stdhl pass casm-ir casm-fe casm-tc
     on_failure:
       put: notify
       params:
@@ -174,6 +178,8 @@
     on_failure:
       put: notify
       params:
+        team: casm
         link: true
+        always_notify: true
         text: |
           $BUILD_JOB_NAME test failed

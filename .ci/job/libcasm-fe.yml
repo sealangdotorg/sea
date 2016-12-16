@@ -51,7 +51,7 @@
       params: { submodules: none }
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs3.yml
+    file: config/.ci/task/fetch/libs4.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master

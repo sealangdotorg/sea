@@ -32,9 +32,7 @@ OUT=out
 
 set -e -x
 
-date
-
-uname -a
+./info
 
 rm -rf $LIB
 mkdir -p $LIB
