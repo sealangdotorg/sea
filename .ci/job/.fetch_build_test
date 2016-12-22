@@ -1,0 +1,32 @@
+    on_failure:
+      put: notify
+      params:
+        team: casm
+        link: true
+        always_notify: true
+        text: |
+          Failed: {{ BUILD_PIPELINE_NAME }}/{{ BUILD_JOB_NAME }}#{{ BUILD_NAME }} (fetch)
+  - task: build
+    file: config/.ci/task/build.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        team: casm
+        link: true
+        always_notify: true
+        text: |
+          Failed: {{ BUILD_PIPELINE_NAME }}/{{ BUILD_JOB_NAME }}#{{ BUILD_NAME }} (build)
+  - task: test
+    file: config/.ci/task/test.yml
+    input_mapping:
+      in: out
+    on_failure:
+      put: notify
+      params:
+        team: casm
+        link: true
+        always_notify: true
+        text: |
+          Failed: {{ BUILD_PIPELINE_NAME }}/{{ BUILD_JOB_NAME }}#{{ BUILD_NAME }} (test)

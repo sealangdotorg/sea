@@ -59,6 +59,8 @@
     on_failure:
       put: notify
       params:
+        team: casm
         link: true
+        always_notify: true
         text: |
-          $BUILD_JOB_NAME fetch/build/test failed
+          Failed: {{ BUILD_PIPELINE_NAME }}/{{ BUILD_JOB_NAME }}#{{ BUILD_NAME }} (fetch/build/test)

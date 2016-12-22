@@ -75,7 +75,11 @@ ci: $(ATTIC)
 		echo "$@: processing '$$i'"; \
 		export FILENAME=`basename $$i $(CI_EXT)`; \
 		echo "#### $$i" >> $(CI_PL_CFG); \
-		cat $$i | sed -e "s/{{NAME}}/$$FILENAME/g" | sed -e "/#   /d" >> $(CI_PL_CFG); \
+		cat $$i | \
+			sed -e "s/{{NAME}}/$$FILENAME/g" | \
+			sed "/{{fetch_build_test}}/ r .ci/job/.fetch_build_test" | \
+			sed "/{{fetch_build_test}}/d" | \
+			sed -e "/#   /d" >> $(CI_PL_CFG); \
 		echo "" >> $(CI_PL_CFG); \
 	done )
 

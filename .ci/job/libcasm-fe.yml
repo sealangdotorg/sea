@@ -61,30 +61,4 @@
       lib4: libcasm-ir@master
     params:
       LIBS: gtest hayai stdhl pass casm-ir
-    on_failure:
-      put: notify
-      params:
-        link: true
-        text: |
-          $BUILD_JOB_NAME fetch failed
-  - task: build
-    file: config/.ci/task/build.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        link: true
-        text: |
-          $BUILD_JOB_NAME build failed
-  - task: test
-    file: config/.ci/task/test.yml
-    input_mapping:
-      in: out
-    on_failure:
-      put: notify
-      params:
-        link: true
-        text: |
-          $BUILD_JOB_NAME test failed
-
+    {{fetch_build_test}}

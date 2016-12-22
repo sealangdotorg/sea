@@ -23,28 +23,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# jobs:
-- name: {{NAME}}-master
-  plan:
-  - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: {{NAME}}@master
-      params: { submodules: none }
-      trigger: true
-    - get: gtest@master
-      passed: [ gtest-master ]
-      trigger: true
-    - get: hayai@master
-      passed: [ hayai-master ]
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch/libs1.yml
-    input_mapping:
-      repo: {{NAME}}@master
-      lib0: gtest@master
-      lib1: hayai@master
-    params:
-      REPO: stdhl
-      LIBS: gtest hayai
-    {{fetch_build_test}}
+- name: {{NAME}}
+  type: {{NAME}}-resource
+  source:
+    from: ci@casm-lang.org
