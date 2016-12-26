@@ -24,7 +24,7 @@
 #
 
 # jobs:
-- name: {{NAME}}@linux@clang
+- name: {{NAME}}.linux64-clang-debug
   plan:
   - aggregate:
     - get: config
@@ -33,29 +33,29 @@
       trigger: true
       params: { submodules: none }
     - get: gtest@master
-      passed: [ gtest-master ]
+      passed: [ gtest.linux64-clang-debug ]
       trigger: true
     - get: hayai@master
-      passed: [ hayai-master ]
+      passed: [ hayai.linux64-clang-debug ]
       trigger: true
     - get: libstdhl@master 
-      passed: [ libstdhl-master ]
+      passed: [ libstdhl.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
     - get: libpass@master
-      passed: [ libpass-master ]
+      passed: [ libpass.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
     - get: libcasm-ir@master
-      passed: [ libcasm-ir-master ]
+      passed: [ libcasm-ir.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
     - get: libcasm-fe@master
-      passed: [ libcasm-fe-master ]
+      passed: [ libcasm-fe.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
     - get: libcasm-tc@master
-      passed: [ libcasm-tc-master ]
+      passed: [ libcasm-tc.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
   - task: fetch
@@ -74,7 +74,7 @@
     {{fetch_build_test}}
 
 
-- name: {{NAME}}-master
+- name: {{NAME}}@master.linux64-clang-debug
   plan:
   - aggregate:
     - get: config
@@ -87,18 +87,56 @@
       repo: {{NAME}}@master
     {{fetch_build_test}}
 
-          
-- name: {{NAME}}
-  plan:
-  - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: casm@master
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch.yml
-    input_mapping:
-      repo: casm@master
-    params:
-      REPO: repo/casmi
-    {{fetch_build_test}}
+
+    
+# - name: {{NAME}}
+#   plan:
+#   - aggregate:
+#     - get: config
+#       params: { submodules: none }
+#     - get: casm@master
+#       trigger: true
+#   - task: fetch
+#     file: config/.ci/task/fetch.yml
+#     input_mapping:
+#       repo: casm@master
+#     params:
+#       REPO: repo/casmi
+#     on_failure:
+#       put: notify
+#       params:
+#         team: casm
+#         link: true
+#         always_notify: true
+#         text: |
+#           Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (fetch)
+#   - task: build
+#     file: config/.ci/task/build.yml
+#     input_mapping:
+#       in: out
+#     params:
+#       REPO: repo/casmi
+#     on_failure:
+#       put: notify
+#       params:
+#         team: casm
+#         link: true
+#         always_notify: true
+#         text: |
+#           Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (build)
+#   - task: test
+#     file: config/.ci/task/test.yml
+#     input_mapping:
+#       in: out
+#     params:
+#       REPO: repo/casmi
+#     on_failure:
+#       put: notify
+#       params:
+#         team: casm
+#         link: true
+#         always_notify: true
+#         text: |
+#           Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (test)
+
+    

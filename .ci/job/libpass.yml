@@ -24,7 +24,7 @@
 #
 
 # jobs:
-- name: {{NAME}}-master
+- name: {{NAME}}.linux64-clang-debug
   plan:
   - aggregate:
     - get: config
@@ -32,13 +32,13 @@
     - get: {{NAME}}@master
       trigger: true
     - get: gtest@master
-      passed: [ gtest-master ]
+      passed: [ gtest.linux64-clang-debug ]
       trigger: true
     - get: hayai@master
-      passed: [ hayai-master ]
+      passed: [ hayai.linux64-clang-debug ]
       trigger: true
     - get: libstdhl@master
-      passed: [ libstdhl-master ]
+      passed: [ libstdhl.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
   - task: fetch

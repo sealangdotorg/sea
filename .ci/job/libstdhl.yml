@@ -24,7 +24,7 @@
 #
 
 # jobs:
-- name: {{NAME}}-master
+- name: {{NAME}}.linux64-clang-debug
   plan:
   - aggregate:
     - get: config
@@ -33,10 +33,10 @@
       params: { submodules: none }
       trigger: true
     - get: gtest@master
-      passed: [ gtest-master ]
+      passed: [ gtest.linux64-clang-debug ]
       trigger: true
     - get: hayai@master
-      passed: [ hayai-master ]
+      passed: [ hayai.linux64-clang-debug ]
       trigger: true
   - task: fetch
     file: config/.ci/task/fetch/libs1.yml
@@ -45,6 +45,5 @@
       lib0: gtest@master
       lib1: hayai@master
     params:
-      REPO: stdhl
       LIBS: gtest hayai
     {{fetch_build_test}}

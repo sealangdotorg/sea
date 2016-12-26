@@ -24,14 +24,14 @@
 #
 
 # jobs:
-- name: {{NAME}}
-  plan:
-  - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: casm@master
-      passed: [ casmi ]
-      trigger: true
+# - name: {{NAME}}
+#   plan:
+#   - aggregate:
+#     - get: config
+#       params: { submodules: none }
+#     - get: casm@master
+#       passed: [ casmi ]
+#       trigger: true
   # - task: fetch
   #   file: config/.ci/task/fetch.yml
   #   input_mapping:

@@ -24,7 +24,7 @@
 #
 
 # jobs:
-- name: {{NAME}}-master
+- name: {{NAME}}.linux64-clang-debug
   plan:
   - aggregate:
     - get: {{NAME}}@master
@@ -63,4 +63,4 @@
         link: true
         always_notify: true
         text: |
-          Failed: {{ BUILD_PIPELINE_NAME }}/{{ BUILD_JOB_NAME }}#{{ BUILD_NAME }} (fetch/build/test)
+          Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (fetch/build/test)
