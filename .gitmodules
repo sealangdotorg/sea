@@ -37,3 +37,6 @@
 [submodule "lib/pass"]
 	path = lib/pass
 	url = git@github.com:ppaulweber/libpass.git
+[submodule "var/logo"]
+	path = var/logo
+	url = git@github.com:casm-lang/casm-lang.logo.git

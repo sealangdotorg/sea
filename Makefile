@@ -35,14 +35,15 @@ CI_EXT=.yml
 default:
 	@echo "casm"
 
+doxy:
+	@mkdir -p obj
+	@doxygen
 
-
+clean:
+	@rm -rf obj
 
 $(ATTIC):
 	@mkdir -p $@
-
-
-
 
 
 
