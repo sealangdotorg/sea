@@ -10,3 +10,30 @@
 [submodule "casmf"]
 	path = casmf
 	url = git@github.com:casm-lang/casmf
+[submodule "lib/casm-fe"]
+	path = lib/casm-fe
+	url = git@github.com:casm-lang/libcasm-fe.git
+[submodule "lib/casm-ir"]
+	path = lib/casm-ir
+	url = git@github.com:casm-lang/libcasm-ir.git
+[submodule "lib/casm-tc"]
+	path = lib/casm-tc
+	url = git@github.com:casm-lang/libcasm-tc.git
+[submodule "lib/casm-rt"]
+	path = lib/casm-rt
+	url = git@github.com:casm-lang/libcasm-rt.git
+[submodule "lib/casm-be"]
+	path = lib/casm-be
+	url = git@github.com:casm-lang/libcasm-be.git
+[submodule "lib/csel-ir"]
+	path = lib/csel-ir
+	url = git@github.com:casm-lang/libcsel-ir.git
+[submodule "lib/csel-be"]
+	path = lib/csel-be
+	url = git@github.com:casm-lang/libcsel-be.git
+[submodule "lib/stdhl"]
+	path = lib/stdhl
+	url = git@github.com:ppaulweber/libstdhl.git
+[submodule "lib/pass"]
+	path = lib/pass
+	url = git@github.com:ppaulweber/libpass.git
