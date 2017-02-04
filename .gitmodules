@@ -1,5 +1,5 @@
 [submodule "web"]
-	path = web
+	path = var/web
 	url = git@github.com:casm-lang/casm-lang.github.io.git
 [submodule "casmi"]
 	path = casmi
@@ -40,3 +40,6 @@
 [submodule "var/logo"]
 	path = var/logo
 	url = git@github.com:casm-lang/casm-lang.logo.git
+[submodule "lib/csel-rt"]
+	path = lib/csel-rt
+	url = git@github.com:casm-lang/libcsel-rt.git
