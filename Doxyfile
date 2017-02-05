@@ -793,16 +793,17 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./casmi/lib/casm-fe/src \
-                         ./casmc/lib/casm-ir/src \
-                         ./casmc/lib/casm-rt/src \
-                         ./casmc/lib/casm-be/src \
-                         ./casmc/lib/csel-ir/src \
-                         ./casmc/lib/csel-rt/src \
-                         ./casmc/lib/csel-be/src \
-			 ./casmc/lib/stdhl/c \
-                         ./casmc/lib/stdhl/cpp \
-                         ./casmc/lib/pass/src \
+INPUT                  = ./lib/casm-fe/src \
+                         ./lib/casm-ir/src \
+                         ./lib/casm-rt/src \
+                         ./lib/casm-tc/src \
+                         ./lib/casm-be/src \
+                         ./lib/csel-ir/src \
+                         ./lib/csel-rt/src \
+                         ./lib/csel-be/src \
+                         ./lib/pass/src \
+			 ./lib/stdhl/c \
+                         ./lib/stdhl/cpp \
                          ./casmi/src \
                          ./casmc/src \
                          ./casmf/src
@@ -2350,7 +2351,7 @@ DOT_IMAGE_FORMAT       = svg
 # The default value is: NO.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
-INTERACTIVE_SVG        = YES
+INTERACTIVE_SVG        = NO
 
 # The DOT_PATH tag can be used to specify the path where the dot tool can be
 # found. If left blank, it is assumed the dot tool can be found in the path.
