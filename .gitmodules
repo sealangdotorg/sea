@@ -2,13 +2,13 @@
 	path = var/web
 	url = git@github.com:casm-lang/casm-lang.github.io.git
 [submodule "casmi"]
-	path = casmi
+	path = app/casmi
 	url = git@github.com:casm-lang/casmi.git
 [submodule "casmc"]
-	path = casmc
+	path = app/casmc
 	url = git@github.com:casm-lang/casmc.git
 [submodule "casmf"]
-	path = casmf
+	path = app/casmf
 	url = git@github.com:casm-lang/casmf
 [submodule "lib/casm-fe"]
 	path = lib/casm-fe
