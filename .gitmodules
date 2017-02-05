@@ -46,3 +46,6 @@
 [submodule "var/plugin/tmbundle"]
 	path = var/plugin/tmbundle
 	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
+[submodule "var/plugin/emacs"]
+	path = var/plugin/emacs
+	url = git@github.com:casm-lang/casm-lang.plugin.emacs.git
