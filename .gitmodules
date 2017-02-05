@@ -43,3 +43,6 @@
 [submodule "var/web"]
 	path = var/web
 	url = git@github.com:casm-lang/casm-lang.github.io.git
+[submodule "var/plugin/tmbundle"]
+	path = var/plugin/tmbundle
+	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
