@@ -1,13 +1,10 @@
-[submodule "web"]
-	path = var/web
-	url = git@github.com:casm-lang/casm-lang.github.io.git
-[submodule "casmi"]
+[submodule "app/casmi"]
 	path = app/casmi
 	url = git@github.com:casm-lang/casmi.git
-[submodule "casmc"]
+[submodule "app/casmc"]
 	path = app/casmc
 	url = git@github.com:casm-lang/casmc.git
-[submodule "casmf"]
+[submodule "app/casmf"]
 	path = app/casmf
 	url = git@github.com:casm-lang/casmf
 [submodule "lib/casm-fe"]
@@ -37,9 +34,12 @@
 [submodule "lib/pass"]
 	path = lib/pass
 	url = git@github.com:ppaulweber/libpass.git
-[submodule "var/logo"]
-	path = var/logo
-	url = git@github.com:casm-lang/casm-lang.logo.git
 [submodule "lib/csel-rt"]
 	path = lib/csel-rt
 	url = git@github.com:casm-lang/libcsel-rt.git
+[submodule "var/logo"]
+	path = var/logo
+	url = git@github.com:casm-lang/casm-lang.logo.git
+[submodule "var/web"]
+	path = var/web
+	url = git@github.com:casm-lang/casm-lang.github.io.git
