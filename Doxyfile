@@ -793,7 +793,8 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./lib/casm-fe/src \
+INPUT                  = ./var/doc \
+                         ./lib/casm-fe/src \
                          ./lib/casm-ir/src \
                          ./lib/casm-rt/src \
                          ./lib/casm-tc/src \
@@ -1917,7 +1918,7 @@ MAN_LINKS              = NO
 # captures the structure of the code including all documentation.
 # The default value is: NO.
 
-GENERATE_XML           = NO
+GENERATE_XML           = YES
 
 # The XML_OUTPUT tag is used to specify where the XML pages will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
