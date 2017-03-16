@@ -4,7 +4,6 @@
 #
 #   Developed by: Philipp Paulweber
 #                 Emmanuel Pescosta
-#                 Florian Hahn
 #                 https://github.com/casm-lang/casm
 #
 #   This file is part of casm.
