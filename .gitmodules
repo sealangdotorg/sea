@@ -52,6 +52,6 @@
 [submodule "var/plugin/kate"]
 	path = var/plugin/kate
 	url = git@github.com:casm-lang/casm-lang.plugin.kate.git
-[submodule "app/casms"]
-	path = app/casms
+[submodule "app/casmd"]
+	path = app/casmd
 	url = git@github.com:casm-lang/casms
