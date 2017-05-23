@@ -55,3 +55,27 @@
 [submodule "app/casmd"]
 	path = app/casmd
 	url = git@github.com:casm-lang/casms
+[submodule "doc/infuehr2013bsc"]
+	path = doc/infuehr2013bsc
+	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc
+[submodule "doc/pescosta2013bsc"]
+	path = doc/pescosta2013bsc
+	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc
+[submodule "doc/hahn2014bsc"]
+	path = doc/hahn2014bsc
+	url = git@github.com:casm-lang/casm-lang.doc.hahn2014bsc
+[submodule "doc/paulweber2014msc"]
+	path = doc/paulweber2014msc
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2014msc
+[submodule "doc/lezuo2014phd"]
+	path = doc/lezuo2014phd
+	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd
+[submodule "doc/nguyen2017bsc"]
+	path = doc/nguyen2017bsc
+	url = git@github.com:casm-lang/casm-lang.doc.nguyen2017bsc
+[submodule "doc/paulweber2016abz"]
+	path = doc/paulweber2016abz
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2016abz
+[submodule "doc/paulweber2019phd"]
+	path = doc/paulweber2019phd
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd
