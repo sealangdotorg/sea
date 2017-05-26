@@ -79,3 +79,6 @@
 [submodule "doc/paulweber2019phd"]
 	path = doc/paulweber2019phd
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd
+[submodule "var/plugin/monaco"]
+	path = var/plugin/monaco
+	url = git@github.com:casm-lang/casm-lang.plugin.monaco
