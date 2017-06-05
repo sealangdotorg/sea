@@ -82,3 +82,6 @@
 [submodule "var/plugin/monaco"]
 	path = var/plugin/monaco
 	url = git@github.com:casm-lang/casm-lang.plugin.monaco
+[submodule "var/plugin/vscode"]
+	path = var/plugin/vscode
+	url = git@github.com:casm-lang/casm-lang.plugin.vscode
