@@ -25,10 +25,10 @@
 - name: {{NAME}}@master
   type: git
   source:
+    uri: git@github.com:casm-lang/{{NAME}}.git
+    private_key: {{github-auth}}
     branch: master
     disable_ci_skip: true
-    private_key: {{github-auth}}
-    uri: git@github.com:casm-lang/{{NAME}}
 
 
 # - name: blob

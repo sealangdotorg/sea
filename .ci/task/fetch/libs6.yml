@@ -21,11 +21,28 @@
 #   You should have received a copy of the GNU General Public License
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
-    
-- name: {{NAME}}@master
-  type: git
+
+---
+platform: linux
+image_resource:
+  type: docker-image
   source:
-    uri: git@github.com:nickbruun/{{NAME}}.git
-    private_key: {{github-auth}}
-    branch: master
-    disable_ci_skip: true
+    repository: ppaulweber/container-cpp-clang
+inputs:
+  - name: config
+  - name: repo
+    path: in/repo
+  - name: lib0
+  - name: lib1
+  - name: lib2
+  - name: lib3
+  - name: lib4
+  - name: lib5
+  - name: lib6
+outputs:
+  - name: out
+params:
+  REPO: repo
+  LIBS: 
+run:
+  path: config/.ci/script/fetch-libs

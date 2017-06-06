@@ -49,12 +49,8 @@
       passed: [ libcasm-ir.linux64-clang-debug ]
       params: { submodules: none }
       trigger: true
-    - get: libcasm-rt@master
-      passed: [ libcasm-rt.linux64-clang-debug ]
-      params: { submodules: none }
-      trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs5.yml
+    file: config/.ci/task/fetch/libs4.yml
     input_mapping:
       repo: {{NAME}}@master
       lib0: gtest@master
@@ -62,7 +58,6 @@
       lib2: libstdhl@master
       lib3: libpass@master
       lib4: libcasm-ir@master
-      lib5: libcasm-rt@master
     params:
-      LIBS: gtest hayai stdhl pass casm-ir casm-rt
+      LIBS: gtest hayai stdhl pass casm-ir
     {{fetch_build_test}}
