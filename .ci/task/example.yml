@@ -27,7 +27,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: ppaulweber/container-cpp-clang
+    repository: ppaulweber/container-cpp
 run:
   path: sh
   args:
