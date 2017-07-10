@@ -58,8 +58,8 @@
 [submodule "doc/infuehr2013bsc"]
 	path = doc/infuehr2013bsc
 	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc
-[submodule "doc/pescosta2013bsc"]
-	path = doc/pescosta2013bsc
+[submodule "doc/pescosta2017bsc"]
+	path = doc/pescosta2017bsc
 	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc
 [submodule "doc/hahn2014bsc"]
 	path = doc/hahn2014bsc
