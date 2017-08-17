@@ -35,5 +35,6 @@ outputs:
   - name: out
 params:
   REPO: repo
+  ARGS:
 run:
   path: config/.ci/script/build
