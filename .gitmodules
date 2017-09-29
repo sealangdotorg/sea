@@ -1,93 +1,134 @@
-[submodule "app/casmi"]
-	path = app/casmi
-	url = git@github.com:casm-lang/casmi.git
+
+#
+# Applications
+#
+
 [submodule "app/casmc"]
 	path = app/casmc
 	url = git@github.com:casm-lang/casmc.git
 [submodule "app/casmf"]
 	path = app/casmf
-	url = git@github.com:casm-lang/casmf
-[submodule "lib/casm-fe"]
-	path = lib/casm-fe
-	url = git@github.com:casm-lang/libcasm-fe.git
-[submodule "lib/casm-ir"]
-	path = lib/casm-ir
-	url = git@github.com:casm-lang/libcasm-ir.git
-[submodule "lib/casm-tc"]
-	path = lib/casm-tc
-	url = git@github.com:casm-lang/libcasm-tc.git
-[submodule "lib/casm-rt"]
-	path = lib/casm-rt
-	url = git@github.com:casm-lang/libcasm-rt.git
-[submodule "lib/casm-be"]
-	path = lib/casm-be
-	url = git@github.com:casm-lang/libcasm-be.git
-[submodule "lib/cjel-ir"]
-	path = lib/cjel-ir
-	url = git@github.com:casm-lang/libcjel-ir.git
-[submodule "lib/cjel-be"]
-	path = lib/cjel-be
-	url = git@github.com:casm-lang/libcjel-be.git
+	url = git@github.com:casm-lang/casmf.git
+[submodule "app/casmd"]
+	path = app/casmd
+	url = git@github.com:casm-lang/casmd.git
+[submodule "app/casmi"]
+	path = app/casmi
+	url = git@github.com:casm-lang/casmi.git
+
+
+#
+# Documentation
+#
+
+[submodule "doc/hahn2014bsc"]
+	path = doc/hahn2014bsc
+	url = git@github.com:casm-lang/casm-lang.doc.hahn2014bsc.git
+[submodule "doc/infuehr2013bsc"]
+	path = doc/infuehr2013bsc
+	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc.git
+[submodule "doc/lezuo2014phd"]
+	path = doc/lezuo2014phd
+	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd.git
+[submodule "doc/nguyen2017bsc"]
+	path = doc/nguyen2017bsc
+	url = git@github.com:casm-lang/casm-lang.doc.nguyen2017bsc.git
+[submodule "doc/paulweber2014msc"]
+	path = doc/paulweber2014msc
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2014msc.git
+[submodule "doc/paulweber2016abz"]
+	path = doc/paulweber2016abz
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2016abz.git
+[submodule "doc/paulweber2019phd"]
+	path = doc/paulweber2019phd
+	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd.git
+[submodule "doc/pescosta2017bsc"]
+	path = doc/pescosta2017bsc
+	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc.git
+
+
+#
+# Libraries (General)
+#
+
+[submodule "lib/gtest"]
+	path = lib/gtest
+	url = https://github.com/google/googletest.git
+[submodule "lib/hayai"]
+	path = lib/hayai
+	url = https://github.com/nickbruun/hayai.git
 [submodule "lib/stdhl"]
 	path = lib/stdhl
 	url = git@github.com:ppaulweber/libstdhl.git
 [submodule "lib/pass"]
 	path = lib/pass
 	url = git@github.com:ppaulweber/libpass.git
+
+
+#
+# Libraries (CASM)
+#
+
+[submodule "lib/casm-ir"]
+	path = lib/casm-ir
+	url = git@github.com:casm-lang/libcasm-ir.git
+[submodule "lib/casm-rt"]
+	path = lib/casm-rt
+	url = git@github.com:casm-lang/libcasm-rt.git
+[submodule "lib/casm-fe"]
+	path = lib/casm-fe
+	url = git@github.com:casm-lang/libcasm-fe.git
+[submodule "lib/casm-be"]
+	path = lib/casm-be
+	url = git@github.com:casm-lang/libcasm-be.git
+[submodule "lib/casm-tc"]
+	path = lib/casm-tc
+	url = git@github.com:casm-lang/libcasm-tc.git
+
+
+#
+# Libraries (CJEL)
+#
+
+[submodule "lib/cjel-ir"]
+	path = lib/cjel-ir
+	url = git@github.com:casm-lang/libcjel-ir.git
 [submodule "lib/cjel-rt"]
 	path = lib/cjel-rt
 	url = git@github.com:casm-lang/libcjel-rt.git
-[submodule "var/logo"]
-	path = var/logo
-	url = git@github.com:casm-lang/casm-lang.logo.git
-[submodule "var/web"]
-	path = var/web
-	url = git@github.com:casm-lang/casm-lang.github.io.git
-[submodule "var/plugin/tmbundle"]
-	path = var/plugin/tmbundle
-	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
+[submodule "lib/cjel-be"]
+	path = lib/cjel-be
+	url = git@github.com:casm-lang/libcjel-be.git
+
+
+#
+# Plug-ins
+#
+
 [submodule "var/plugin/emacs"]
 	path = var/plugin/emacs
 	url = git@github.com:casm-lang/casm-lang.plugin.emacs.git
 [submodule "var/plugin/kate"]
 	path = var/plugin/kate
 	url = git@github.com:casm-lang/casm-lang.plugin.kate.git
-[submodule "app/casmd"]
-	path = app/casmd
-	url = git@github.com:casm-lang/casms
-[submodule "doc/infuehr2013bsc"]
-	path = doc/infuehr2013bsc
-	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc
-[submodule "doc/pescosta2017bsc"]
-	path = doc/pescosta2017bsc
-	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc
-[submodule "doc/hahn2014bsc"]
-	path = doc/hahn2014bsc
-	url = git@github.com:casm-lang/casm-lang.doc.hahn2014bsc
-[submodule "doc/paulweber2014msc"]
-	path = doc/paulweber2014msc
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2014msc
-[submodule "doc/lezuo2014phd"]
-	path = doc/lezuo2014phd
-	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd
-[submodule "doc/nguyen2017bsc"]
-	path = doc/nguyen2017bsc
-	url = git@github.com:casm-lang/casm-lang.doc.nguyen2017bsc
-[submodule "doc/paulweber2016abz"]
-	path = doc/paulweber2016abz
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2016abz
-[submodule "doc/paulweber2019phd"]
-	path = doc/paulweber2019phd
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd
 [submodule "var/plugin/monaco"]
 	path = var/plugin/monaco
-	url = git@github.com:casm-lang/casm-lang.plugin.monaco
+	url = git@github.com:casm-lang/casm-lang.plugin.monaco.git
+[submodule "var/plugin/tmbundle"]
+	path = var/plugin/tmbundle
+	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
 [submodule "var/plugin/vscode"]
 	path = var/plugin/vscode
-	url = git@github.com:casm-lang/casm-lang.plugin.vscode
-[submodule "lib/gtest"]
-	path = lib/gtest
-	url = https://github.com/google/googletest
-[submodule "lib/hayai"]
-	path = lib/hayai
-	url = https://github.com/nickbruun/hayai
+	url = git@github.com:casm-lang/casm-lang.plugin.vscode.git
+
+
+#
+# Various
+#
+
+[submodule "var/logo"]
+	path = var/logo
+	url = git@github.com:casm-lang/casm-lang.logo.git
+[submodule "var/web"]
+	path = var/web
+	url = git@github.com:casm-lang/casm-lang.github.io.git
