@@ -85,3 +85,9 @@
 [submodule "var/plugin/vscode"]
 	path = var/plugin/vscode
 	url = git@github.com:casm-lang/casm-lang.plugin.vscode
+[submodule "lib/gtest"]
+	path = lib/gtest
+	url = https://github.com/google/googletest
+[submodule "lib/hayai"]
+	path = lib/hayai
+	url = https://github.com/nickbruun/hayai
