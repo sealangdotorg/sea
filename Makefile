@@ -22,6 +22,12 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
+TARGET = casm
+
+include .cmake/config.mk
+
+
+
 DATETIME=$(shell date)
 ATTIC=.attic
 CI_PL_CFG=$(ATTIC)/ci_pipeline_config.yml
@@ -31,15 +37,9 @@ CI_TYPE=$(CI_PATH)/type
 CI_JOBS=$(CI_PATH)/job
 CI_EXT=.yml
 
-default:
-	@echo "casm"
-
 doxy:
 	@mkdir -p obj
 	@doxygen
-
-clean:
-	@rm -rf obj
 
 $(ATTIC):
 	@mkdir -p $@
@@ -84,3 +84,19 @@ ci: $(ATTIC)
 	done )
 
 	fly -t casm sp -p casm -c $(CI_PL_CFG) -l ~/.ci.yml
+
+
+
+
+
+
+update-LibPackage: lib/stdhl/.cmake/LibPackage.cmake
+	cp -v $^ .cmake/
+	cp -v $^ lib/pass/.cmake/
+	cp -v $^ lib/casm-ir/.cmake/
+	cp -v $^ lib/casm-rt/.cmake/
+	cp -v $^ lib/casm-fe/.cmake/
+	cp -v $^ lib/casm-tc/.cmake/
+	cp -v $^ app/casmd/.cmake/
+	cp -v $^ app/casmf/.cmake/
+	cp -v $^ app/casmi/.cmake/
