@@ -8,7 +8,9 @@ TODO
 
 *** Code of Conduct
 
-We use in this project the /Contributor Covenant code of conduct/ TODO:link, and by participating to this project you shall uphold to this code.
+We use in this project the
+[[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant code of conduct]]
+, and by participating to this project you shall uphold to this code.
 
 *** Applications, Libraries and Plugins
 
@@ -47,7 +49,17 @@ HEADER
 
 *** Issues and Pull Requests
 
-The following table contains the definition of the CASM project and organizational issue (=I=) and pull request (=PR=) labels, which are used in the overall project https://github.com/casm-lang/casm, and a sub-set is used in all other CASM sub-project repositories (https://github.com/casm-lang/casmi, https://github.com/casm-lang/libcasm-fe etc.). The =search= link provides a quick lookup to the defined labels and does show all references of such label in the full =casm-lang= namespace. Please keep in mind that some issue and/or pull request labels are defined only for the overall project =casm= and/or the sub-repositories =*casm*= (e.g. =casmi=, =libcasm-fe= etc.).
+The following table contains the definition of the CASM project and
+organizational issue (=I=) and pull request (=PR=) labels, which are
+used in the overall project https://github.com/casm-lang/casm, and
+a sub-set is used in all other CASM sub-project repositories
+(https://github.com/casm-lang/casmi,
+https://github.com/casm-lang/libcasm-fe etc.). 
+The =search= link provides a quick lookup to the defined labels and 
+does show all references of such label in the full =casm-lang= namespace.
+Please keep in mind that some issue and/or pull request labels are defined
+only for the overall project =casm= and/or the sub-repositories =*casm*= 
+(e.g. =casmi=, =libcasm-fe= etc.).
 
 # base URL for organization wide LABEL searches
 # https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22LABEL%22
