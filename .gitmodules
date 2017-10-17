@@ -63,6 +63,9 @@
 [submodule "lib/pass"]
 	path = lib/pass
 	url = git@github.com:ppaulweber/libpass.git
+[submodule "lib/tptp"]
+	path = lib/tptp
+	url = git@github.com:casm-lang/libtptp.git
 
 
 #
