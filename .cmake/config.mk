@@ -114,8 +114,8 @@ test-all: $(TYPES:%=%-test)
 $(TESTS):%-test: %
 	@$(MAKE) $(MFLAGS) --no-print-directory \
 	-C $(OBJ) $(TARGET)-check
-#	@echo "-- Running unit test"
-#	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
+	@echo "-- Running unit test"
+	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
 
 
 benchmark: debug-benchmark
@@ -125,8 +125,8 @@ benchmark-all: $(TYPES:%=%-benchmark)
 $(BENCH):%-benchmark: %
 	@$(MAKE) $(MFLAGS) --no-print-directory \
 	-C $(OBJ) $(TARGET)-run
-#	@echo "-- Running benchmark"
-#	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
+	@echo "-- Running benchmark"
+	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
 
 
 install: debug-install
@@ -135,6 +135,37 @@ install-all: $(TYPES:%=%-install)
 
 $(INSTA):%-install: %
 	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ) install
+
+
+format: $(FORMAT:%=%-format-cpp)
+
+%-format-cpp:
+	@echo "-- Formatting Code C++: $(patsubst %-format-cpp,%,$@)"
+	@clang-format -i \
+	`ls $(patsubst %-format-cpp,%,$@)/*.h 2> /dev/null | grep -e .h` 2> /dev/null
+	@clang-format -i \
+	`ls $(patsubst %-format-cpp,%,$@)/*.cpp 2> /dev/null | grep -e .cpp` 2> /dev/null
+
+
+update: $(UPDATE_FILE:%=%-update)
+
+%-update:
+	@echo "-- Updating: $(patsubst %-update,%,$@)"
+	@for i in $(UPDATE_PATH); \
+	  do \
+	    cp -v \
+	    $(UPDATE_ROOT)/$(patsubst %-update,%,$@) \
+	    $$i/$(patsubst %-update,%,$@); \
+	  done
+
+
+license: $(UPDATE_ROOT:%=%-license) $(UPDATE_PATH:%=%-license)
+
+%-license:
+	@echo "-- License: $(patsubst %-update,%,$@)"
+	@(cd $(patsubst %-update,%,$@); \
+	  python2 $(UPDATE_ROOT)/src/py/Licenser.py \
+	)
 
 
 analyze: debug-analyze

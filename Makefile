@@ -24,8 +24,23 @@
 
 TARGET = casm
 
-include .cmake/config.mk
+UPDATE_ROOT  = lib/stdhl
+UPDATE_PATH  = .
+UPDATE_PATH += lib/pass
+UPDATE_PATH += lib/casm-ir
+UPDATE_PATH += lib/casm-rt
+UPDATE_PATH += lib/casm-fe
+UPDATE_PATH += lib/casm-tc
+UPDATE_PATH += app/casmd
+UPDATE_PATH += app/casmf
+UPDATE_PATH += app/casmi
 
+UPDATE_FILE  = .clang-format
+UPDATE_FILE += .cmake/config.mk
+UPDATE_FILE += .cmake/LibPackage.cmake
+UPDATE_FILE += .travis.yml
+
+include .cmake/config.mk
 
 
 DATETIME=$(shell date)
@@ -43,7 +58,6 @@ doxy:
 
 $(ATTIC):
 	@mkdir -p $@
-
 
 
 ci: $(ATTIC)
@@ -84,19 +98,3 @@ ci: $(ATTIC)
 	done )
 
 	fly -t casm sp -p casm -c $(CI_PL_CFG) -l ~/.ci.yml
-
-
-
-
-
-
-update-LibPackage: lib/stdhl/.cmake/LibPackage.cmake
-	cp -v $^ .cmake/
-	cp -v $^ lib/pass/.cmake/
-	cp -v $^ lib/casm-ir/.cmake/
-	cp -v $^ lib/casm-rt/.cmake/
-	cp -v $^ lib/casm-fe/.cmake/
-	cp -v $^ lib/casm-tc/.cmake/
-	cp -v $^ app/casmd/.cmake/
-	cp -v $^ app/casmf/.cmake/
-	cp -v $^ app/casmi/.cmake/
