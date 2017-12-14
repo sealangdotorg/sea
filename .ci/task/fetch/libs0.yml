@@ -39,4 +39,4 @@ params:
   REPO: repo
   LIBS: 
 run:
-  path: config/.ci/script/fetch-libs
+  path: config/.ci/script/fetch-libs.sh

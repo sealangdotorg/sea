@@ -37,4 +37,4 @@ outputs:
 params:
   REPO: repo
 run:
-  path: config/.ci/script/fetch
+  path: config/.ci/script/fetch.sh

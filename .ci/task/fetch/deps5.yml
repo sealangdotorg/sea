@@ -45,4 +45,4 @@ params:
   LIB: in/repo/lib
   DEPS: 
 run:
-  path: config/.ci/script/fetch-deps
+  path: config/.ci/script/fetch-deps.sh

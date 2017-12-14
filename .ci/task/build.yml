@@ -37,4 +37,4 @@ params:
   REPO: repo
   ARGS:
 run:
-  path: config/.ci/script/build
+  path: config/.ci/script/build.sh

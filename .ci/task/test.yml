@@ -36,4 +36,4 @@ outputs:
 params:
   REPO: repo
 run:
-  path: config/.ci/script/test
+  path: config/.ci/script/test.sh

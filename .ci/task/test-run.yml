@@ -37,4 +37,4 @@ params:
   REPO: repo
   CASM:
 run:
-  path: config/.ci/script/test-run
+  path: config/.ci/script/test-run.sh
