@@ -34,7 +34,7 @@
       image_resource:
         type: docker-image
         source:
-          repository: ppaulweber/container-cpp
+          repository: ppaulweber/docker-cpp
       inputs:
         - name: {{NAME}}@master
           path: in/{{NAME}}
