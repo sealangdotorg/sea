@@ -58,7 +58,7 @@
 
 
 #
-# Libraries (General)
+# Libraries (External Forks)
 #
 
 [submodule "lib/gtest"]
@@ -68,6 +68,11 @@
 [submodule "lib/hayai"]
 	path = lib/hayai
 	url = git@github.com:casm-lang/libhayai.git
+
+
+#
+# Libraries (General)
+#
 
 [submodule "lib/stdhl"]
 	path = lib/stdhl
