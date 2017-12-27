@@ -61,6 +61,10 @@
 # Libraries (External Forks)
 #
 
+[submodule "lib/asmjit"]
+	path = lib/asmjit
+	url = git@github.com:casm-lang/libasmjit.git
+
 [submodule "lib/gtest"]
 	path = lib/gtest
 	url = git@github.com:casm-lang/libgtest.git
@@ -68,6 +72,10 @@
 [submodule "lib/hayai"]
 	path = lib/hayai
 	url = git@github.com:casm-lang/libhayai.git
+
+[submodule "lib/z3"]
+	path = lib/z3
+	url = git@github.com:casm-lang/libz3.git
 
 
 #
