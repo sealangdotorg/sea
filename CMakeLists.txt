@@ -32,6 +32,11 @@ set( CMAKE_VERSION 3.2 )
 set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_MODULE_PATH ${${PROJECT}_SOURCE_DIR}/.cmake )
 
+
+#
+# packages
+#
+
 include( LibPackage )
 
 package_git( ${PROJECT} )
@@ -44,15 +49,22 @@ package_git_submodule( libcasm-rt master REQUIRED obj   lib/casm-rt )
 package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
 #package_git_submodule( libcasm-be master REQUIRED obj   lib/casm-be )
 package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
+
 #package_git_submodule( libcjel-ir master REQUIRED obj   lib/cjel-ir )
 #package_git_submodule( libcjel-rt master REQUIRED obj   lib/cjel-rt )
 #package_git_submodule( libcjel-fe master REQUIRED obj   lib/cjel-fe )
 #package_git_submodule( libcjel-be master REQUIRED obj   lib/cjel-be )
 #package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
+
 #package_git_submodule( casmc      master REQUIRED obj   app/casmc   )
 package_git_submodule( casmd      master REQUIRED obj   app/casmd   )
-package_git_submodule( casmf      master REQUIRED obj   app/casmf   )
+#package_git_submodule( casmf      master REQUIRED obj   app/casmf   )
 package_git_submodule( casmi      master REQUIRED obj   app/casmi   )
+
+
+#
+# includes
+#
 
 include( FeatureSummary )
 include( CPack )
