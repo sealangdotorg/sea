@@ -44,18 +44,16 @@ package_git_submodule( libstdhl   master REQUIRED obj   lib/stdhl   )
 package_git_submodule( libgtest   master REQUIRED build lib/gtest   )
 package_git_submodule( libhayai   master REQUIRED build lib/hayai   )
 package_git_submodule( libpass    master REQUIRED obj   lib/pass    )
+package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
+package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
 package_git_submodule( libcasm-ir master REQUIRED obj   lib/casm-ir )
 package_git_submodule( libcasm-rt master REQUIRED obj   lib/casm-rt )
-package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
 #package_git_submodule( libcasm-be master REQUIRED obj   lib/casm-be )
-package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
-
+#package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
+#package_git_submodule( libcjel-fe master REQUIRED obj   lib/cjel-fe )
 #package_git_submodule( libcjel-ir master REQUIRED obj   lib/cjel-ir )
 #package_git_submodule( libcjel-rt master REQUIRED obj   lib/cjel-rt )
-#package_git_submodule( libcjel-fe master REQUIRED obj   lib/cjel-fe )
 #package_git_submodule( libcjel-be master REQUIRED obj   lib/cjel-be )
-#package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
-
 #package_git_submodule( casmc      master REQUIRED obj   app/casmc   )
 package_git_submodule( casmd      master REQUIRED obj   app/casmd   )
 #package_git_submodule( casmf      master REQUIRED obj   app/casmf   )
@@ -77,35 +75,48 @@ include( CPack )
 add_custom_target( ${PROJECT}
   COMMAND make --no-print-directory -C lib/stdhl
   COMMAND make --no-print-directory -C lib/pass
-  COMMAND make --no-print-directory -C lib/casm-ir
-  COMMAND make --no-print-directory -C lib/casm-rt
-  COMMAND make --no-print-directory -C lib/casm-fe
   COMMAND make --no-print-directory -C lib/casm-tc
+  COMMAND make --no-print-directory -C lib/casm-fe
+  COMMAND make --no-print-directory -C lib/casm-ir
+#  COMMAND make --no-print-directory -C lib/casm-rt
+#  COMMAND make --no-print-directory -C lib/casm-be
+#  COMMAND make --no-print-directory -C lib/cjel-tc
+#  COMMAND make --no-print-directory -C lib/cjel-fe
+#  COMMAND make --no-print-directory -C lib/cjel-ir
+#  COMMAND make --no-print-directory -C lib/cjel-rt
+#  COMMAND make --no-print-directory -C lib/cjel-be
+#  COMMAND make --no-print-directory -C app/casmc
   COMMAND make --no-print-directory -C app/casmd
-  COMMAND make --no-print-directory -C app/casmf
+#  COMMAND make --no-print-directory -C app/casmf
   COMMAND make --no-print-directory -C app/casmi
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
-  )
-
+)
 
 #
 # test
 #
 
 add_custom_target( ${PROJECT}-check
-  COMMAND make --no-print-directory -C lib/stdhl   test
-  COMMAND make --no-print-directory -C lib/pass    test
-  COMMAND make --no-print-directory -C lib/casm-ir test
-  COMMAND make --no-print-directory -C lib/casm-rt test
-  COMMAND make --no-print-directory -C lib/casm-fe test
+  COMMAND make --no-print-directory -C lib/stdhl test
+  COMMAND make --no-print-directory -C lib/pass test
   COMMAND make --no-print-directory -C lib/casm-tc test
-  COMMAND make --no-print-directory -C app/casmd   test
-  COMMAND make --no-print-directory -C app/casmf   test
-  COMMAND make --no-print-directory -C app/casmi   test
+  COMMAND make --no-print-directory -C lib/casm-fe test
+  COMMAND make --no-print-directory -C lib/casm-ir test
+#  COMMAND make --no-print-directory -C lib/casm-rt test
+#  COMMAND make --no-print-directory -C lib/casm-be test
+#  COMMAND make --no-print-directory -C lib/cjel-tc test
+#  COMMAND make --no-print-directory -C lib/cjel-fe test
+#  COMMAND make --no-print-directory -C lib/cjel-ir test
+#  COMMAND make --no-print-directory -C lib/cjel-rt test
+#  COMMAND make --no-print-directory -C lib/cjel-be test
+#  COMMAND make --no-print-directory -C app/casmc test
+  COMMAND make --no-print-directory -C app/casmd test
+#  COMMAND make --no-print-directory -C app/casmf test
+  COMMAND make --no-print-directory -C app/casmi test
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
-  )
+)
 
 
 #
@@ -113,18 +124,25 @@ add_custom_target( ${PROJECT}-check
 #
 
 add_custom_target( ${PROJECT}-run
-  COMMAND make --no-print-directory -C lib/stdhl   benchmark
-  COMMAND make --no-print-directory -C lib/pass    benchmark
-  COMMAND make --no-print-directory -C lib/casm-ir benchmark
-  COMMAND make --no-print-directory -C lib/casm-rt benchmark
-  COMMAND make --no-print-directory -C lib/casm-fe benchmark
+  COMMAND make --no-print-directory -C lib/stdhl benchmark
+  COMMAND make --no-print-directory -C lib/pass benchmark
   COMMAND make --no-print-directory -C lib/casm-tc benchmark
-  COMMAND make --no-print-directory -C app/casmd   benchmark
-  COMMAND make --no-print-directory -C app/casmf   benchmark
-  COMMAND make --no-print-directory -C app/casmi   benchmark
+  COMMAND make --no-print-directory -C lib/casm-fe benchmark
+  COMMAND make --no-print-directory -C lib/casm-ir benchmark
+#  COMMAND make --no-print-directory -C lib/casm-rt benchmark
+#  COMMAND make --no-print-directory -C lib/casm-be benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-tc benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-fe benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-ir benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-rt benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-be benchmark
+#  COMMAND make --no-print-directory -C app/casmc benchmark
+  COMMAND make --no-print-directory -C app/casmd benchmark
+#  COMMAND make --no-print-directory -C app/casmf benchmark
+  COMMAND make --no-print-directory -C app/casmi benchmark
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
-  )
+)
 
 
 #
@@ -138,7 +156,7 @@ install(
   ARCHIVE  DESTINATION lib
   RUNTIME  DESTINATION bin
   INCLUDES DESTINATION include
-  )
+)
 
 
 #
@@ -160,4 +178,4 @@ install(
 feature_summary( WHAT
   PACKAGES_NOT_FOUND
   DISABLED_FEATURES
-  )
+)
