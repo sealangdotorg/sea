@@ -510,13 +510,14 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
       # message( "            bin: ${MAKE_DIFF_HASH}" )
 
       if( NOT "${MAKE_DIFF_HASH}" STREQUAL "${REPO_DIFF_HASH}" )
-	message( "         rebuild required!" )
+	message( "         found changes!" )
 
 	ExternalProject_Add_Step(${PREFIX} force-build
-      	  COMMAND             ${CMAKE_COMMAND} -E remove ${MAKE_DIFF_PATH}
+	  COMMAND             ${MAKE}
       	  COMMENT             "Forcing build step for '${PREFIX}'"
       	  DEPENDEES           configure
-      	  DEPENDERS           build
+	  DEPENDERS           build
+	  WORKING_DIRECTORY   ${${PREFIX}_REPO_DIR}
 	  ALWAYS              1
       	  )
       endif()
