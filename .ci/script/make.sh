@@ -29,11 +29,6 @@ if [ -z "$REPO" ]; then
     exit -1
 fi
 
-if [ -z "$ARGS" ]; then
-    echo "error: environment variable 'ARGS' is not set!"
-    exit -1
-fi
-
 IN=in
 OUT=out
 
