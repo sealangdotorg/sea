@@ -35,6 +35,6 @@ outputs:
   - name: out
 params:
   REPO: repo
-  ARGS: 
+  ARGS: default
 run:
   path: config/.ci/script/make.sh
