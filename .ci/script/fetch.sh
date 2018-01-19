@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 #   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
 #   All rights reserved.
