@@ -40,6 +40,6 @@ uname -a
 
 ln -s `pwd` /build
 
-make -C /build/$IN/$REPO $ARGS
+(cd /build/$IN/$REPO; make $ARGS)
 
 cp -rf $IN/* $OUT/
