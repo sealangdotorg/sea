@@ -34,7 +34,7 @@ Besides referring to the other projects, the full documentation will be made ava
 The copyright holder of 
 =casm= is the [[https://casm-lang.org][CASM organization]] ([[https://github.com/casm-lang][@casm-lang]]) 
 and the used license of 
-=casm= is the [[https://www.gnu.org/licenses/gpl-3.0.html][GNU GPLv3+]].
+=casm= is the [[https://www.gnu.org/licenses/gpl-3.0.html][GNU GPLv3]].
 
 *** Notice
 
