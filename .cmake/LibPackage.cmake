@@ -320,6 +320,8 @@ function( package_git NAME )
     OUTPUT_VARIABLE     GIT_REVTAG
     OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+  set( GIT_REVTAG  ${GIT_REVTAG}  PARENT_SCOPE )
+  add_definitions( "-DGIT_REVTAG=${GIT_REVTAG}" )
 
   execute_process(
     COMMAND             git log -1 --format=%h
@@ -327,6 +329,8 @@ function( package_git NAME )
     OUTPUT_VARIABLE     GIT_COMMIT
     OUTPUT_STRIP_TRAILING_WHITESPACE
     )
+  set( GIT_COMMIT  ${GIT_COMMIT}  PARENT_SCOPE )
+  add_definitions( "-DGIT_COMMIT=${GIT_COMMIT}" )
 
   execute_process(
     COMMAND             git rev-parse --abbrev-ref HEAD
@@ -334,17 +338,26 @@ function( package_git NAME )
     OUTPUT_VARIABLE     GIT_BRANCH
     OUTPUT_STRIP_TRAILING_WHITESPACE
     )
-
-  add_definitions( "-DGIT_REVTAG=${GIT_REVTAG}" )
-  add_definitions( "-DGIT_COMMIT=${GIT_COMMIT}" )
+  set( GIT_BRANCH  ${GIT_BRANCH}  PARENT_SCOPE )
   add_definitions( "-DGIT_BRANCH=${GIT_BRANCH}" )
 
+  execute_process(
+    COMMAND             make --no-print-directory license-info
+    WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE     GIT_LICENSE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+  set( GIT_LICENSE ${GIT_LICENSE} PARENT_SCOPE )
+
+  execute_process(
+    COMMAND             cat notice
+    WORKING_DIRECTORY   ${CMAKE_BINARY_DIR}
+    OUTPUT_VARIABLE     GIT_NOTICE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+  set( GIT_NOTICE  ${GIT_NOTICE} PARENT_SCOPE )
+
   message( "-- ${NAME}: ${GIT_REVTAG} at ${GIT_COMMIT} of ${GIT_BRANCH}" )
-
-  set( GIT_REVTAG ${GIT_REVTAG} PARENT_SCOPE )
-  set( GIT_COMMIT ${GIT_COMMIT} PARENT_SCOPE )
-  set( GIT_BRANCH ${GIT_BRANCH} PARENT_SCOPE )
-
 endfunction()
 
 
@@ -371,7 +384,7 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
   string( TOUPPER ${PREFIX} PREFIX_NAME )
   string( REPLACE "-" "_"   PREFIX_NAME ${PREFIX_NAME} )
 
-  #message( "-- ${PREFIX} Module @ ${VERSION} ${MODE} '${TMP}' [${ARGN}] [${PREFIX_NAME}]" )
+  # message( "-- ${PREFIX} Module @ ${VERSION} ${MODE} '${TMP}' [${ARGN}] [${PREFIX_NAME}]" )
   
   set( PREFIX_LIBRARY ${PREFIX_NAME}_LIBRARY )
   set( PREFIX_INCLUDE ${PREFIX_NAME}_INCLUDE_DIR )
@@ -395,7 +408,6 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
     set( ${PREFIX}_REPO_DIR ${PROJECT_SOURCE_DIR}/${PREFIX_PATH} )
     set( ${PREFIX}_MAKE_DIR ${${PREFIX}_REPO_DIR}/${TMP} )
     set( ${PREFIX}_ROOT_DIR ${${PREFIX}_MAKE_DIR}/install )
-    #set( ${PREFIX}_STAM_DIR ${${PREFIX}_MAKE_DIR}/stamp )
 
     if( EXISTS ${${PREFIX}_REPO_DIR} )
       if( NOT EXISTS ${${PREFIX}_REPO_DIR}/.git )
@@ -445,12 +457,6 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
 	-DCMAKE_CXX_COMPILER:FILEPATH=${CMAKE_CXX_COMPILER}
 	-DCMAKE_CXX_FLAGS_INIT:STRING=${CMAKE_CXX_FLAGS_INIT}
 	)
-      # -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
-      # LOG_BUILD       1
-      # LOG_INSTALL     1
-      # UPDATE_COMMAND  ""
-      # BUILD_ALWAYS    1
-      # STAMP_DIR       ${${PREFIX}_STAM_DIR}
 
       set( CMAKE_PREFIX_PATH ${${PREFIX}_ROOT_DIR} )
 
@@ -498,22 +504,11 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
       endif()
       string( SHA512 REPO_DIFF_HASH "${REPO_DIFF}" )
 
-      # message( ">>> MAKE_DIFF" )
-      # message( "${MAKE_DIFF}" )
-      # message( "<<< MAKE_DIFF" )
-
-      # message( ">>> REPO_DIFF" )
-      # message( "${REPO_DIFF}" )
-      # message( "<<< REPO_DIFF" )
-
-      # message( "            src: ${REPO_DIFF_HASH}" )
-      # message( "            bin: ${MAKE_DIFF_HASH}" )
-
       if( NOT "${MAKE_DIFF_HASH}" STREQUAL "${REPO_DIFF_HASH}" )
 	message( "         found changes!" )
 
 	ExternalProject_Add_Step(${PREFIX} force-build
-	  COMMAND             ${MAKE}
+	  COMMAND             make ${CMAKE_BUILD_TYPE}
       	  COMMENT             "Forcing build step for '${PREFIX}'"
       	  DEPENDEES           configure
 	  DEPENDERS           build
@@ -532,11 +527,6 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
       else()
       	set( ${PREFIX_NAME}_FOUND TRUE )
       	set( ${PREFIX_NAME}_FOUND TRUE PARENT_SCOPE )
-
-	# find_package(
-	#   ${PREFIX}
-	#   ${MODE}
-	#   )
       endif()
 
       # message( "         ${PREFIX_INCLUDE} = ${${PREFIX_INCLUDE}}" )

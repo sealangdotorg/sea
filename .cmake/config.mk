@@ -162,10 +162,15 @@ update: $(UPDATE_FILE:%=%-update)
 license: $(UPDATE_ROOT:%=%-license) $(UPDATE_PATH:%=%-license)
 
 %-license:
-	@echo "-- License: $(patsubst %-update,%,$@)"
+	@echo "-- Relicense: $(patsubst %-update,%,$@)"
 	@(cd $(patsubst %-update,%,$@); \
 	  python2 $(UPDATE_ROOT)/src/py/Licenser.py \
 	)
+
+license-info:
+	@grep LICENSE.txt -e "---:" | sed "s/---://g"
+	@head LICENSE.txt -n `grep -B1 -ne "---" LICENSE.txt | head -n 1 | sed "s/-//g"` > $(OBJ)/notice.txt
+	@cat $(OBJ)/notice.txt | sed "s/^/  /g" | sed "s/$$/\\\n/g" | tr -d '\n' > $(OBJ)/notice
 
 
 analyze: debug-analyze
