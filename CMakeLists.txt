@@ -75,15 +75,15 @@ include( CPack )
 add_custom_target( ${PROJECT}
   COMMAND make --no-print-directory -C lib/stdhl
   COMMAND make --no-print-directory -C lib/pass
-  COMMAND make --no-print-directory -C lib/casm-tc
-  COMMAND make --no-print-directory -C lib/casm-fe
   COMMAND make --no-print-directory -C lib/casm-ir
-#  COMMAND make --no-print-directory -C lib/casm-rt
+  COMMAND make --no-print-directory -C lib/casm-rt
+  COMMAND make --no-print-directory -C lib/casm-fe
+  COMMAND make --no-print-directory -C lib/casm-tc
 #  COMMAND make --no-print-directory -C lib/casm-be
-#  COMMAND make --no-print-directory -C lib/cjel-tc
-#  COMMAND make --no-print-directory -C lib/cjel-fe
 #  COMMAND make --no-print-directory -C lib/cjel-ir
 #  COMMAND make --no-print-directory -C lib/cjel-rt
+#  COMMAND make --no-print-directory -C lib/cjel-tc
+#  COMMAND make --no-print-directory -C lib/cjel-fe
 #  COMMAND make --no-print-directory -C lib/cjel-be
 #  COMMAND make --no-print-directory -C app/casmc
   COMMAND make --no-print-directory -C app/casmd
@@ -100,15 +100,15 @@ add_custom_target( ${PROJECT}
 add_custom_target( ${PROJECT}-check
   COMMAND make --no-print-directory -C lib/stdhl test
   COMMAND make --no-print-directory -C lib/pass test
-  COMMAND make --no-print-directory -C lib/casm-tc test
-  COMMAND make --no-print-directory -C lib/casm-fe test
   COMMAND make --no-print-directory -C lib/casm-ir test
-#  COMMAND make --no-print-directory -C lib/casm-rt test
+  COMMAND make --no-print-directory -C lib/casm-rt test
+  COMMAND make --no-print-directory -C lib/casm-fe test
+  COMMAND make --no-print-directory -C lib/casm-tc test
 #  COMMAND make --no-print-directory -C lib/casm-be test
-#  COMMAND make --no-print-directory -C lib/cjel-tc test
-#  COMMAND make --no-print-directory -C lib/cjel-fe test
 #  COMMAND make --no-print-directory -C lib/cjel-ir test
 #  COMMAND make --no-print-directory -C lib/cjel-rt test
+#  COMMAND make --no-print-directory -C lib/cjel-fe test
+#  COMMAND make --no-print-directory -C lib/cjel-tc test
 #  COMMAND make --no-print-directory -C lib/cjel-be test
 #  COMMAND make --no-print-directory -C app/casmc test
   COMMAND make --no-print-directory -C app/casmd test
@@ -126,15 +126,15 @@ add_custom_target( ${PROJECT}-check
 add_custom_target( ${PROJECT}-run
   COMMAND make --no-print-directory -C lib/stdhl benchmark
   COMMAND make --no-print-directory -C lib/pass benchmark
-  COMMAND make --no-print-directory -C lib/casm-tc benchmark
-  COMMAND make --no-print-directory -C lib/casm-fe benchmark
   COMMAND make --no-print-directory -C lib/casm-ir benchmark
-#  COMMAND make --no-print-directory -C lib/casm-rt benchmark
+  COMMAND make --no-print-directory -C lib/casm-rt benchmark
+  COMMAND make --no-print-directory -C lib/casm-fe benchmark
+  COMMAND make --no-print-directory -C lib/casm-tc benchmark
 #  COMMAND make --no-print-directory -C lib/casm-be benchmark
-#  COMMAND make --no-print-directory -C lib/cjel-tc benchmark
-#  COMMAND make --no-print-directory -C lib/cjel-fe benchmark
 #  COMMAND make --no-print-directory -C lib/cjel-ir benchmark
 #  COMMAND make --no-print-directory -C lib/cjel-rt benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-fe benchmark
+#  COMMAND make --no-print-directory -C lib/cjel-tc benchmark
 #  COMMAND make --no-print-directory -C lib/cjel-be benchmark
 #  COMMAND make --no-print-directory -C app/casmc benchmark
   COMMAND make --no-print-directory -C app/casmd benchmark
