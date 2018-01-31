@@ -68,7 +68,7 @@ PROJECT_NUMBER         =
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = 
+PROJECT_BRIEF          = $(PROJECT_NUMBER)
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -92,7 +92,7 @@ OUTPUT_DIRECTORY       = ./obj
 # performance problems for the file system.
 # The default value is: NO.
 
-CREATE_SUBDIRS         = YES
+CREATE_SUBDIRS         = NO
 
 # If the ALLOW_UNICODE_NAMES tag is set to YES, doxygen will allow non-ASCII
 # characters to appear in the names of generated files. If set to NO, non-ASCII
@@ -793,21 +793,19 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = ./var/doc \
-                         ./lib/casm-fe/src \
-                         ./lib/casm-ir/src \
-                         ./lib/casm-rt/src \
-                         ./lib/casm-tc/src \
-                         ./lib/casm-be/src \
-                         ./lib/csel-ir/src \
-                         ./lib/csel-rt/src \
-                         ./lib/csel-be/src \
+                         ./lib/stdhl/obj/src/cpp/libstdhl/Version.h \
+			 ./lib/stdhl/src/c \
+                         ./lib/stdhl/src/cpp \
+                         ./lib/pass/obj/src/libpass/Version.h \
                          ./lib/pass/src \
-			 ./lib/stdhl/c \
-                         ./lib/stdhl/cpp \
-                         ./casmi/src \
-                         ./casmc/src \
-                         ./casmf/src
-
+                         ./lib/casm-fe/obj/src/libcasm-fe/Version.h \
+                         ./lib/casm-fe/src \
+                         ./lib/casm-tc/obj/src/libcasm-tc/Version.h \
+                         ./lib/casm-tc/src \
+                         ./lib/casmd/obj/src/casmd/Version.h \
+			 ./app/casmd/src \
+                         ./lib/casmi/obj/src/casmi/Version.h \
+			 ./app/casmi/src
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -883,7 +881,9 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = ./lib/casm-fe/src/various
+EXCLUDE                = ./lib/stdhl/src/cpp/json \
+		         ./lib/stdhl/src/cpp/xml \
+		         ./lib/casm-fe/src/various
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1873,7 +1873,7 @@ RTF_SOURCE_CODE        = NO
 # classes and files.
 # The default value is: NO.
 
-GENERATE_MAN           = NO
+GENERATE_MAN           = YES
 
 # The MAN_OUTPUT tag is used to specify where the man pages will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
