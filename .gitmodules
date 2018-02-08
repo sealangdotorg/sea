@@ -25,35 +25,35 @@
 #
 
 [submodule "doc/hahn2014bsc"]
-	path = doc/hahn2014bsc
+	path = var/doc/hahn2014bsc
 	url = git@github.com:casm-lang/casm-lang.doc.hahn2014bsc.git
 
 [submodule "doc/infuehr2013bsc"]
-	path = doc/infuehr2013bsc
+	path = var/doc/infuehr2013bsc
 	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc.git
 
 [submodule "doc/lezuo2014phd"]
-	path = doc/lezuo2014phd
+	path = var/doc/lezuo2014phd
 	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd.git
 
 [submodule "doc/nguyen2017bsc"]
-	path = doc/nguyen2017bsc
+	path = var/doc/nguyen2017bsc
 	url = git@github.com:casm-lang/casm-lang.doc.nguyen2017bsc.git
 
 [submodule "doc/paulweber2014msc"]
-	path = doc/paulweber2014msc
+	path = var/doc/paulweber2014msc
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2014msc.git
 
 [submodule "doc/paulweber2016abz"]
-	path = doc/paulweber2016abz
+	path = var/doc/paulweber2016abz
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2016abz.git
 
 [submodule "doc/paulweber2019phd"]
-	path = doc/paulweber2019phd
+	path = var/doc/paulweber2019phd
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd.git
 
 [submodule "doc/pescosta2017bsc"]
-	path = doc/pescosta2017bsc
+	path = var/doc/pescosta2017bsc
 	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc.git
 
 
