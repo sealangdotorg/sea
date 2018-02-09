@@ -31,27 +31,30 @@ TODO
 
 *** Code of Conduct
 
-We use in this project the
-[[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant code of conduct]]
-, and by participating to this project you shall uphold to this code.
+We use in this project the [[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant Code of Conduct]], and by participating to this project you shall uphold to this code.
 
 *** Applications, Libraries and Plugins
 
-TODO
+The project consists of several different application, library, and plug-in projects which reside in a separate repository and are tracked in this repository via =git= sub-module references.
 
 ** How Can I Contribute?
 
 *** Reporting Bugs
 
-TODO
+If you have discovered a bug or found an issue in this project, 
+even have a question about this project, 
+please use our overall project [[https://github.com/casm-lang/casm/issues][issue tracker]] 
+open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there and assign the appropriate labels.
+A detailed list and description of labels is given below.
 
 *** First Code Contribution
 
-TODO
-
-=easy task= and =help wanted= issues
+If you want to start your contribution, look out for =easy task= and =help wanted= issues
+in the [[https://github.com/casm-lang/casm/issues][issue tracker]].
 
 *** Pull Requests
+
+TBD
 
 ** Style Guides
 
@@ -60,11 +63,10 @@ TODO
 TODO
 
 #+begin_src:
-HEADER
+<header>: <short description>
 
-* TOPIC 1 ... DESCRIPTION
-* TOPIC 2 ... DESCRIPTION
-* TOPIC 3 ... DESCRIPTION
+* <detailed description>
+* see: <links or refs>
 #+end_src
 
 
@@ -74,10 +76,8 @@ HEADER
 
 The following table contains the definition of the CASM project and
 organizational issue (=I=) and pull request (=PR=) labels, which are
-used in the overall project https://github.com/casm-lang/casm, and
-a sub-set is used in all other CASM sub-project repositories
-(https://github.com/casm-lang/casmi,
-https://github.com/casm-lang/libcasm-fe etc.). 
+used in the overall [[https://github.com/casm-lang/casm][CASM]] project, and a sub-set is used in all other 
+CASM sub-project repositories ([[https://github.com/casm-lang/casmi][casmi]], [[https://github.com/casm-lang/libcasm-fe][libcasm-fe]] etc.). 
 The =search= link provides a quick lookup to the defined labels and 
 does show all references of such label in the full =casm-lang= namespace.
 Please keep in mind that some issue and/or pull request labels are defined
