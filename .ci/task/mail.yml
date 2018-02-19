@@ -30,6 +30,8 @@ image_resource:
     repository: ppaulweber/docker-cpp
 inputs:
   - name: config
+  - name: repo
+    path: in/repo
 params:
   REPO: repo
 run:
