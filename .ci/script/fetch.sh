@@ -38,6 +38,8 @@ uname -a
 
 ls -lA $IN
 
+git -C $IN/repo submodule update --init $SUBMODULE
+
 cp -rf $IN/* $OUT/
 
 git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_to
