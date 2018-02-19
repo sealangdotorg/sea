@@ -32,6 +32,8 @@ inputs:
   - name: config
   - name: repo
     path: in/repo
+outputs:
+  - name: out
 params:
   REPO: repo
 run:
