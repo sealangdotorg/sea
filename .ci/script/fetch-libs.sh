@@ -43,3 +43,5 @@ for i in $LIBS; do
 done
 
 cp -rf $IN/repo $OUT/$REPO
+
+git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_to

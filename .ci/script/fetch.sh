@@ -39,3 +39,5 @@ uname -a
 ls -lA $IN
 
 cp -rf $IN/* $OUT/
+
+git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_to
