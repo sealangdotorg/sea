@@ -23,13 +23,18 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
+if [ -z "$REPO" ]; then
+    echo "error: environment variable 'REPO' is not set!"
+    exit -1
+fi
+
 set -e
 
 date
 
 uname -a
 
-git log -1 --pretty=format:'"%an" <%ae>' > mail_to
+git -C $REPO log -1 --pretty=format:'"%an" <%ae>' > mail_to
 
 echo "$BUILD_TEAM_NAME/$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME/$BUILD_NAME ($BUILD_ID)" > mail_subject
 

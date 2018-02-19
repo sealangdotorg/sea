@@ -30,5 +30,7 @@ image_resource:
     repository: ppaulweber/docker-cpp
 inputs:
   - name: config
+params:
+  REPO: repo
 run:
   path: config/.ci/script/mail.sh
