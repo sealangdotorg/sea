@@ -26,4 +26,5 @@
 - name: {{NAME}}
   type: docker-image
   source:
-    repository: mdomke/concourse-e{{NAME}}
+    repository: ppaulweber/concourse-{{NAME}}-resource
+    tag: supported-env-vars
