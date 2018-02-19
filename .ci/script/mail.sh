@@ -34,8 +34,12 @@ date
 
 uname -a
 
+printenv
+
 git -C in/repo log -1 --pretty=format:'"%an" <%ae>' > out/mail_to
 
-echo "$BUILD_TEAM_NAME/$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME/$BUILD_NAME ($BUILD_ID)" > out/mail_subject
+echo "${BUILD_TEAM_NAME}/${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}/${BUILD_NAME} (${BUILD_ID})" > out/mail_subject
 
-echo "$ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME ($BUILD_ID)" > out/mail_body
+echo "${ATC_EXTERNAL_URL}/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME} (${BUILD_ID})" > out/mail_body
+
+
