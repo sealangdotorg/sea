@@ -36,6 +36,6 @@ outputs:
   - name: out
 params:
   REPO: repo
-  SUBMODULES:
+  MODS: 
 run:
   path: config/.ci/script/fetch.sh

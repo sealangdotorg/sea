@@ -38,7 +38,7 @@ uname -a
 
 ls -lA $IN
 
-git -C $IN/repo submodule update --init $SUBMODULE
+git -C $IN/repo submodule update --init $MODS
 
 cp -rf $IN/* $OUT/
 
