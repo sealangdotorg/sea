@@ -39,11 +39,23 @@ uname -a
 ls -lA $IN
 
 if [ -z "$MODS" ]; then
-    echo "info: omit update of 'git' sub-modules"
+    echo "info: omit MODS"
 else
     git -C $IN/repo submodule update --init $MODS
+fi
+
+if [ -z "$LIBS" ]; then
+    echo "info: omit LIBS"
+else
+    cnt=0
+    for i in $LIBS; do
+	cp -rf lib$cnt $OUT/$i
+	cnt=$((cnt + 1))
+    done
 fi
 
 cp -rf $IN/* $OUT/
 
 git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_addr
+
+ls -lA $OUT
