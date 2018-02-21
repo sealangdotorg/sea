@@ -48,11 +48,3 @@ done
 cp -rf $IN/repo $OUT/$REPO
 
 git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_addr
-
-echo "Error!: $BUILD_TEAM_NAME/$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME" > $OUT/mail_aborted
-
-echo "Passed: $BUILD_TEAM_NAME/$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME" > $OUT/mail_success
-
-echo "Failed: $BUILD_TEAM_NAME/$BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME" > $OUT/mail_failure
-
-echo $ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME > $OUT/mail_body
