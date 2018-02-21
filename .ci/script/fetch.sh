@@ -38,7 +38,11 @@ uname -a
 
 ls -lA $IN
 
-git -C $IN/repo submodule update --init $MODS
+if [ -z "$MODS" ]; then
+    echo "info: omit update of 'git' sub-modules"
+else
+    git -C $IN/repo submodule update --init $MODS
+fi
 
 cp -rf $IN/* $OUT/
 
