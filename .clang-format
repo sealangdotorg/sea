@@ -74,6 +74,7 @@ Cpp11BracedListStyle: false
 DerivePointerAlignment: true
 DisableFormat: false
 ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: false
 IndentCaseLabels: true
 IndentWidth: 4
 IndentWrappedFunctionNames: false
