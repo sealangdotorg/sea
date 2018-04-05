@@ -22,9 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# resource_types:
 - name: {{NAME}}
   type: docker-image
   source:
-    repository: ppaulweber/concourse-{{NAME}}-resource
-    tag: supported-env-vars
+    repository: pcfseceng/{{NAME}}
