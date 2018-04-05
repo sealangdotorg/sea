@@ -22,10 +22,10 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
     
-- name: {{NAME}}@master
+- name: {{NAME}}
   type: git
   source:
+    branch: master
     uri: git@github.com:google/googletest.git
     private_key: {{github-auth}}
-    branch: master
     disable_ci_skip: true

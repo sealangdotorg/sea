@@ -25,7 +25,7 @@
 - name: {{NAME}}
   type: git
   source:
+    branch: master
     uri: git@github.com:casm-lang/casm.git
     private_key: {{github-auth}}
-    branch: master
     disable_ci_skip: true

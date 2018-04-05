@@ -21,11 +21,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
-    
+
 - name: {{NAME}}
   type: git
   source:
+    branch: {{TAG}}
     uri: git@github.com:casm-lang/{{NAME}}.git
     private_key: {{github-auth}}
-    branch: {{TAG}}
     disable_ci_skip: true

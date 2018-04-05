@@ -23,8 +23,9 @@
 #
 
 - name: {{NAME}}
-  type: matrix-notification-resource
+  type: git
   source:
-    matrix_server_url: {{matrix-addr}}
-    token: {{matrix-auth}}
-    room_id: {{matrix-room}}
+    branch: {{TAG}}
+    uri: git@github.com:casm-lang/{{NAME}}.git
+    private_key: {{github-auth}}
+    disable_ci_skip: true

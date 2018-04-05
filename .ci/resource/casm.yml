@@ -1,11 +1,10 @@
 #
-#   Copyright (c) 2014-2016 CASM Organization
+#   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
 #   All rights reserved.
 #
 #   Developed by: Philipp Paulweber
 #                 Emmanuel Pescosta
-#                 Florian Hahn
-#                 https://github.com/casm-lang/casm
+#                 <https://github.com/casm-lang/casm>
 #
 #   This file is part of casm.
 #
@@ -22,8 +21,11 @@
 #   You should have received a copy of the GNU General Public License
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
-
+        
 - name: {{NAME}}
-  type: mail
+  type: git
   source:
-    from: ci@casm-lang.org
+    branch: {{TAG}}
+    uri: git@github.com:casm-lang/{{NAME}}.git
+    private_key: {{github-auth}}
+    disable_ci_skip: true
