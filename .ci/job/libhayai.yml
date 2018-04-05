@@ -30,18 +30,41 @@
     - get: {{NAME}}
       params: { submodules: none }
       trigger: true
-    - get: libgtest
-      passed: [ libgtest.latest ]
-      trigger: true
-    - get: libhayai
-      passed: [ libhayai.latest ]
-      trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/2.yml
+    file: config/.ci/task/fetch.yml
     input_mapping:
       repo: {{NAME}}
-      lib1: libgtest
-      lib2: libhayai
-    params:
-      LIBS: gtest hayai
-    {{fetch_build_test}}
+    on_failure:
+      put: send-email
+      params:
+        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (fetch)"
+        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+  - task: build-and-test
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ppaulweber/docker-cpp
+      inputs:
+        - name: {{NAME}}
+          path: in/{{NAME}}
+      outputs:
+        - name: out
+      run:
+        path: sh
+        args:
+          - -exc
+          - |
+            date
+            uname -a
+            ( cd in/{{NAME}}; \
+              cmake -DTEST=true .; \
+              make; \
+              make test \
+            )
+    on_failure:
+      put: send-email
+      params:
+        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (build|test)"
+        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"

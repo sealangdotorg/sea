@@ -1,32 +1,23 @@
     on_failure:
-      put: notify
+      put: send-email
       params:
-        team: casm
-        link: true
-        always_notify: true
-        text: |
-          Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (fetch)
+        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (fetch)"
+        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
   - task: build
     file: config/.ci/task/build.yml
     input_mapping:
       in: out
     on_failure:
-      put: notify
+      put: send-email
       params:
-        team: casm
-        link: true
-        always_notify: true
-        text: |
-          Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (build)
+        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (build)"
+        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
   - task: test
     file: config/.ci/task/test.yml
     input_mapping:
       in: out
     on_failure:
-      put: notify
+      put: send-email
       params:
-        team: casm
-        link: true
-        always_notify: true
-        text: |
-          Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (test)
+        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (test)"
+        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
