@@ -34,6 +34,8 @@ inputs:
 outputs:
   - name: out
 params:
+  IN:   in
+  OUT:  out
   REPO: repo
   ARGS: test
 run:

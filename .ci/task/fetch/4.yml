@@ -32,14 +32,18 @@ inputs:
   - name: config
   - name: repo
     path: in/repo
-  - name: dep0
-  - name: dep1
-  - name: dep2
+  - name: lib1
+  - name: lib2
+  - name: lib3
+  - name: lib4
 outputs:
   - name: out
 params:
+  IN:   in
+  OUT:  out
   REPO: repo
-  LIB: in/repo/lib
+  MODS: 
+  LIBS: 
   DEPS: 
 run:
-  path: config/.ci/script/fetch-deps.sh
+  path: config/.ci/script/fetch.sh

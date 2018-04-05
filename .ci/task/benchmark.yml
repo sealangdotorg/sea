@@ -30,18 +30,13 @@ image_resource:
     repository: ppaulweber/docker-cpp
 inputs:
   - name: config
-  - name: repo
-    path: in/repo
-  - name: dep0
-  - name: dep1
-  - name: dep2
-  - name: dep3
-  - name: dep4
+  - name: in
 outputs:
   - name: out
 params:
+  IN:   in
+  OUT:  out
   REPO: repo
-  LIB: in/repo/lib
-  DEPS: 
+  ARGS: benchmark
 run:
-  path: config/.ci/script/fetch-deps.sh
+  path: config/.ci/script/make.sh

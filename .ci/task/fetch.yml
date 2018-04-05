@@ -35,8 +35,11 @@ inputs:
 outputs:
   - name: out
 params:
+  IN:   in
+  OUT:  out
   REPO: repo
   MODS: 
   LIBS: 
+  DEPS: 
 run:
   path: config/.ci/script/fetch.sh
