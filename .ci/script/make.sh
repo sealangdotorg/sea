@@ -23,18 +23,23 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
+if [ -z "$IN" ]; then
+    echo "error: environment variable 'IN' is not set!"
+    exit -1
+fi
+
+if [ -z "$OUT" ]; then
+    echo "error: environment variable 'OUT' is not set!"
+    exit -1
+fi
+
 if [ -z "$REPO" ]; then
     echo "error: environment variable 'REPO' is not set!"
     exit -1
 fi
 
-IN=in
-OUT=out
-
 set -e -x
-
 date
-
 uname -a
 
 ln -s `pwd` /build

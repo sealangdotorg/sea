@@ -23,39 +23,53 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
+if [ -z "$IN" ]; then
+    echo "error: environment variable 'IN' is not set!"
+    exit -1
+fi
+
+if [ -z "$OUT" ]; then
+    echo "error: environment variable 'OUT' is not set!"
+    exit -1
+fi
+
 if [ -z "$REPO" ]; then
     echo "error: environment variable 'REPO' is not set!"
     exit -1
 fi
 
-IN=in
-OUT=out
-
 set -e -x
-
 date
 uname -a
 
+# print 'in'
 ls -lA $IN
 
-if [ -z "$MODS" ]; then
-    echo "info: omit MODS"
-else
-    git -C $IN/repo submodule update --init $MODS
+# modules
+if [ -n "$MODS" ]; then
+    echo "info: fetch sub-modules '$MODS'"
+    git -C $IN/$REPO submodule update --init $MODS
 fi
 
-if [ -z "$LIBS" ]; then
-    echo "info: omit LIBS"
-else
-    cnt=0
+# libraries
+if [ -n "$LIBS" ]; then
+    if [ -z "$DEPS" ]; then
+	DEPS=$IN
+    fi
+
+    echo "info: fetch libraries '$LIBS' to '$DEPS'"
+    cnt=1
     for i in $LIBS; do
-	cp -rf lib$cnt $OUT/$i
+	cp -rf lib$cnt $DEPS/$i
 	cnt=$((cnt + 1))
     done
 fi
 
+# copy 'in' to 'out'
 cp -rf $IN/* $OUT/
 
-git -C $IN/repo log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_addr
+# create 'email addr' from current repo commit
+git -C $IN/$REPO log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_addr
 
+# print 'out'
 ls -lA $OUT
