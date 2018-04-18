@@ -21,20 +21,9 @@
 #   You should have received a copy of the GNU General Public License
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
-        
-- name: {{NAME}}@{{TAG}}
-  type: git-resource
-  source:
-    branch: {{TAG}}
-    uri: git@github.com:casm-lang/{{NAME}}.git
-    private_key: {{github-auth}}
-    skip_ssl_verification: true
-    disable_ci_skip: true
 
-- name: {{NAME}}@{{TAG}}-status
-  type: status-github
+- name: {{NAME}}
+  type: docker-image
   source:
-    repository: casm-lang/{{NAME}}
-    access_token: {{github-token}}
-    branch: {{TAG}}
-    context: casm-lang/{{NAME}}/{{TAG}}/ci
+    repository: ppaulweber/concourse-{{NAME}}
+    tag: feature_submodule_parameters
