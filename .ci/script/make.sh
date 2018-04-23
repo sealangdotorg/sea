@@ -42,8 +42,10 @@ set -e -x
 date
 uname -a
 
-ln -s `pwd` /build
+mkdir /tmp/build
 
-(cd /build/$IN/$REPO; make $ARGS)
+mv `pwd`/$IN/* /tmp/build
 
-cp -rf $IN/* $OUT/
+(cd /tmp/build/$REPO; make $ARGS)
+
+cp -rf /tmp/build/* $OUT/
