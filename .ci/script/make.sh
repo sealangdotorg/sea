@@ -49,3 +49,5 @@ mv `pwd`/$IN/* /tmp/ci
 (cd /tmp/ci/$REPO; make $ARGS)
 
 cp -rf /tmp/ci/* $OUT/
+
+mv /tmp/ci/* `pwd`/$IN
