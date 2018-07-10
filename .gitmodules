@@ -172,6 +172,16 @@
 [submodule "var/doc/pescosta2017bsc"]
 	path = var/doc/pescosta2017bsc
 	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc.git
+
 [submodule "var/doc/paulweber2018abz"]
 	path = var/doc/paulweber2018abz
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2018abz.git
+
+
+#
+# Various (Packages)
+#
+
+[submodule "var/pkg/aur"]
+	path = var/pkg/aur
+	url = git@github.com:casm-lang/casm-lang.pkg.aur.git
