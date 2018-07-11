@@ -179,9 +179,9 @@
 
 
 #
-# Various (Packages)
+# Packages
 #
 
-[submodule "var/pkg/aur"]
-	path = var/pkg/aur
-	url = git@github.com:casm-lang/casm-lang.pkg.aur.git
+[submodule "pkg/archlinux"]
+	path = pkg/archlinux
+	url = https://github.com/casm-lang/casm-lang.pkg.archlinux
