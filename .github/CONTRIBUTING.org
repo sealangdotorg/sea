@@ -23,19 +23,38 @@
 # 
 [[https://github.com/casm-lang/casm-lang.logo/raw/master/etc/headline.png]]
 
+#+options: toc:nil
+
+
 * Contributing to CASM
 
-TODO
+This document outlines the organizational structure of the CASM project 
+and some guidelines how you can contribute to it. 
+
 
 ** What should I know before I get started?
 
 *** Code of Conduct
 
-We use in this project the [[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant Code of Conduct]], and by participating to this project you shall uphold to this code.
+We use in this project 
+the [[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant Code of Conduct]], 
+and by participating to this project you shall uphold to this code.
+
 
 *** Applications, Libraries and Plugins
 
-The project consists of several different application, library, and plug-in projects which reside in a separate repository and are tracked in this repository via =git= sub-module references.
+The project consists of several different application, library, 
+and extension plug-in projects which reside in a separate repository 
+and are tracked in this repository via =git= sub-module references.
+
+
+*** Having Questions
+
+If you have a question about this project or the sub-projects, 
+please use our overall project [[https://github.com/casm-lang/casm/issues][issue tracker]] and
+open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there and assign the =question= label.
+
+
 
 ** How Can I Contribute?
 
@@ -47,26 +66,35 @@ please use our overall project [[https://github.com/casm-lang/casm/issues][issue
 open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there and assign the appropriate labels.
 A detailed list and description of labels is given below.
 
+
 *** First Code Contribution
 
-If you want to start your contribution, look out for =easy task= and =help wanted= issues
+If you want to start your contribution, look out for =good first issue= and =help wanted= labeled issues
 in the [[https://github.com/casm-lang/casm/issues][issue tracker]].
+
 
 *** Pull Requests
 
 TBD
 
+
 ** Style Guides
 
 *** Git Commit Messages
 
-TODO
+The commit messages shall have the following style in all the project repositories:
+
+- <header> :: (required): Provides the context of the contributed commit
+- <short description> :: (optional) If the header information is not expressive enough provide here the proper short description of the change.
+- <emoji> :: (optional) The only valid used emoji so far in the header is the =:tada:= (:tada:) for "Happy New Year" commits.
+- <detailed description> :: (optional) For detailed listing of changes us a star-based list annotation.
+- <links or refs> :: (optional) For further information regarding a issue of pull request information, comment etc. use proper "* see: <...>" descriptions. 
 
 #+begin_src:
-<header>: <short description>
+<header> [: <short description>] [<emoji>]
 
-* <detailed description>
-* see: <links or refs>
+[* <detailed description>]
+[* see: <links or refs>]
 #+end_src
 
 
@@ -81,13 +109,14 @@ CASM sub-project repositories ([[https://github.com/casm-lang/casmi][casmi]], [[
 The =search= link provides a quick lookup to the defined labels and 
 does show all references of such label in the full =casm-lang= namespace.
 Please keep in mind that some issue and/or pull request labels are defined
-only for the overall project =casm= and/or the sub-repositories =*casm*= 
+only for the overall /Main Project/ and/or the /Sub Project/ repositories 
 (e.g. =casmi=, =libcasm-fe= etc.).
 
 # base URL for organization wide LABEL searches
 # https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22LABEL%22
 
-| Label Name           | casm-lang [[:mag:]] | Description                                                               | =casm=             | =*casm*=           |
+|----------------------+-----------------+---------------------------------------------------------------------------+--------------------+--------------------|
+| Label (General)      | casm-lang [[:mag:]] | Description                                                               | Main Project       | Sub-Project        |
 |----------------------+-----------------+---------------------------------------------------------------------------+--------------------+--------------------|
 | =api=                | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22api%22][search]]          | Related to API issues.                                                    | [[:white_check_mark:]] |                    |
 | =blocked=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22blocked%22][search]]          | Collects topics, which are blocked by other topics.                       | [[:white_check_mark:]] | [[:white_check_mark:]] |
@@ -97,27 +126,12 @@ only for the overall project =casm= and/or the sub-repositories =*casm*=
 | =cmd=                | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22cmd%22][search]]          | Command line related issue.                                               | [[:white_check_mark:]] |                    |
 | =documentation=      | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22documentation%22][search]]          | Related to any type of documentation.                                     | [[:white_check_mark:]] | [[:white_check_mark:]] |
 | =duplicate=          | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22duplicate%22][search]]          | Marks duplicated topics.                                                  | [[:white_check_mark:]] | [[:white_check_mark:]] |
-| =easy-task=          | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22easy-task%22][search]]          | Small and easy tasks to start with the project, especially for beginners. | [[:white_check_mark:]] |                    |
+| =good first issue=   | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22good+first+issue%22][search]]          | Small and easy tasks to start with the project, especially for beginners. | [[:white_check_mark:]] |                    |
 | =feature=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22feature%22][search]]          | Feature request and improvement of specific topics.                       | [[:white_check_mark:]] |                    |
 | =grammar=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22grammar%22][search]]          | Syntax and grammar related changes.                                       | [[:white_check_mark:]] |                    |
 | =gui=                | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22gui%22][search]]          | Graphical user interface related issue.                                   | [[:white_check_mark:]] |                    |
-| =help-wanted=        | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22help-wanted%22][search]]          | Task, which needs attention and help from other developers.               | [[:white_check_mark:]] | [[:white_check_mark:]] |
+| =help wanted=        | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22help+wanted%22][search]]          | Task, which needs attention and help from other developers.               | [[:white_check_mark:]] | [[:white_check_mark:]] |
 | =invalid=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22invalid%22][search]]          | Invalid or incorrect formulated topics.                                   | [[:white_check_mark:]] | [[:white_check_mark:]] |
-| =libcasm-be=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-be%22][search]]          | Task related to the CASM back-end implementation.                         | [[:white_check_mark:]] |                    |
-| =libcasm-fe=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-fe%22][search]]          | Task related to the CASM front-end implementation.                        | [[:white_check_mark:]] |                    |
-| =libcasm-ir=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-ir%22][search]]          | Task related to the CASM intermediate representation implementation.      | [[:white_check_mark:]] |                    |
-| =libcasm-rt=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-rt%22][search]]          | Task related to the CASM run-time implementation.                         | [[:white_check_mark:]] |                    |
-| =libcasm-tc=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-tc%22][search]]          | Task related to the CASM unit/integration test cases.                     | [[:white_check_mark:]] |                    |
-| =libcjel-be=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-be%22][search]]          | Task related to the CJEL back-end implementation.                         | [[:white_check_mark:]] |                    |
-| =libcjel-ir=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-ir%22][search]]          | Task related to the CJEL intermediate representation implementation.      | [[:white_check_mark:]] |                    |
-| =libcjel-rt=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-rt%22][search]]          | Task related to the CJEL run-time implementation.                         | [[:white_check_mark:]] |                    |
-| =libgtest=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libgtest%22][search]]          | Task related to the GTEST unit-test framework implementation.             | [[:white_check_mark:]] |                    |
-| =libhayai=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libhayai%22][search]]          | Task related to the HAYAI benchmark framework implementation.             | [[:white_check_mark:]] |                    |
-| =libstdhl=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libstdhl%22][search]]          | Task related to the STDHL implementation.                                 | [[:white_check_mark:]] |                    |
-| =libtptp=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libtptp%22][search]]          | Task related to the TPTP implementation.                                  | [[:white_check_mark:]] |                    |
-| =libpass=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libpass%22][search]]          | Task related to the PASS infrastructure implementation.                   | [[:white_check_mark:]] |                    |
-| =libasmjit=          | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libasmjit%22][search]]          | Task related to the ASMJIT infrastructure implementation.                 | [[:white_check_mark:]] |                    |
-| =libz3=              | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libz3%22][search]]          | Task related to the Z3 infrastructure implementation.                     | [[:white_check_mark:]] |                    |
 | =needs-changes=      | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22needs-changes%22][search]]          | Pull requests, which failed for approval and new changes are required.    |                    | [[:white_check_mark:]] |
 | =needs-more-info=    | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22needs-more-info%22][search]]          | Created issue is missing important information etc.                       | [[:white_check_mark:]] |                    |
 | =needs-reproduction= | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22needs-reproduction%22][search]]          | Like bugs but still need a precise reproduction description.              | [[:white_check_mark:]] |                    |
@@ -129,3 +143,21 @@ only for the overall project =casm= and/or the sub-repositories =*casm*=
 | =semantics=          | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22semantics%22][search]]          | Semantics and behavior related changes.                                   | [[:white_check_mark:]] |                    |
 | =wontfix=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22wontfix%22][search]]          | Tasks which are not fixed right now and delayed for future processing.    | [[:white_check_mark:]] | [[:white_check_mark:]] |
 | =work-in-progress=   | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22work-in-progress%22][search]]          | Pull requests, which are still WIP.                                       |                    | [[:white_check_mark:]] |
+|----------------------+-----------------+---------------------------------------------------------------------------+--------------------+--------------------|
+| Label (Library)      | casm-lang [[:mag:]] | Description                                                               | Main Project       | Sub-Project        |
+|----------------------+-----------------+---------------------------------------------------------------------------+--------------------+--------------------|
+| =libasmjit=          | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libasmjit%22][search]]          | Task related to the ASMJIT infrastructure implementation.                 | [[:white_check_mark:]] |                    |
+| =libcasm-be=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-be%22][search]]          | Task related to the CASM back-end implementation.                         | [[:white_check_mark:]] |                    |
+| =libcasm-fe=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-fe%22][search]]          | Task related to the CASM front-end implementation.                        | [[:white_check_mark:]] |                    |
+| =libcasm-ir=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-ir%22][search]]          | Task related to the CASM intermediate representation implementation.      | [[:white_check_mark:]] |                    |
+| =libcasm-rt=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-rt%22][search]]          | Task related to the CASM run-time implementation.                         | [[:white_check_mark:]] |                    |
+| =libcasm-tc=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcasm-tc%22][search]]          | Task related to the CASM unit/integration test cases.                     | [[:white_check_mark:]] |                    |
+| =libcjel-be=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-be%22][search]]          | Task related to the CJEL back-end implementation.                         | [[:white_check_mark:]] |                    |
+| =libcjel-ir=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-ir%22][search]]          | Task related to the CJEL intermediate representation implementation.      | [[:white_check_mark:]] |                    |
+| =libcjel-rt=         | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libcjel-rt%22][search]]          | Task related to the CJEL run-time implementation.                         | [[:white_check_mark:]] |                    |
+| =libgtest=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libgtest%22][search]]          | Task related to the GTEST unit-test framework implementation.             | [[:white_check_mark:]] |                    |
+| =libhayai=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libhayai%22][search]]          | Task related to the HAYAI benchmark framework implementation.             | [[:white_check_mark:]] |                    |
+| =libpass=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libpass%22][search]]          | Task related to the PASS infrastructure implementation.                   | [[:white_check_mark:]] |                    |
+| =libstdhl=           | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libstdhl%22][search]]          | Task related to the STDHL implementation.                                 | [[:white_check_mark:]] |                    |
+| =libtptp=            | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libtptp%22][search]]          | Task related to the TPTP implementation.                                  | [[:white_check_mark:]] |                    |
+| =libz3=              | [[https://github.com/issues?utf8=%E2%9C%93&q=org%3Acasm-lang+is%3Aopen+label%3A%22libz3%22][search]]          | Task related to the Z3 infrastructure implementation.                     | [[:white_check_mark:]] |                    |
