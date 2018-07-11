@@ -23,10 +23,32 @@
 # 
 [[https://github.com/casm-lang/casm-lang.logo/raw/master/etc/headline.png]]
 
-* casm -- CASM Project
+#+options: toc:nil
 
-This repository contains sub-module references to the root projects/applications of the CASM project.
-Besides referring to the other projects, the full documentation will be made available here in the near future.
+
+* casm -- The CASM Project
+
+This is the main repository of the Corinthian Abstract State Machine (CASM) project.
+
+
+** Structure
+
+It is organized as a multi-repository project.
+Therefore this repository contains all =git= sub-modules references to 
+the sub-projects applications, libraries, documentations, plugins etc.
+
+
+** Contributing
+
+Before you consider contributing to any of the =casm= repositories of 
+the [[https://github.com/casm-lang][casm-lang]] 
+organization, please read carefully 
+the [[.github/CONTRIBUTING.org][contribution]] guidelines.
+
+
+** Documentation
+
+Will be announced here.
 
 
 ** Copyright and License
@@ -35,6 +57,7 @@ The copyright holder of
 =casm= is the [[https://casm-lang.org][CASM organization]] ([[https://github.com/casm-lang][@casm-lang]]) 
 and the used license of 
 =casm= is the [[https://www.gnu.org/licenses/gpl-3.0.html][GNU GPLv3]].
+
 
 *** Notice
 
