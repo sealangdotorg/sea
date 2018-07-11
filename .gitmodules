@@ -101,27 +101,27 @@
 
 
 #
-# Plug-ins
+# Extension (Plug-ins)
 #
 
-[submodule "var/plugin/emacs"]
-	path = var/plugin/emacs
+[submodule "ext/emacs"]
+	path = ext/emacs
 	url = git@github.com:casm-lang/casm-lang.plugin.emacs.git
 
-[submodule "var/plugin/kate"]
-	path = var/plugin/kate
+[submodule "ext/kate"]
+	path = ext/kate
 	url = git@github.com:casm-lang/casm-lang.plugin.kate.git
 
-[submodule "var/plugin/monaco"]
-	path = var/plugin/monaco
+[submodule "ext/monaco"]
+	path = ext/monaco
 	url = git@github.com:casm-lang/casm-lang.plugin.monaco.git
 
-[submodule "var/plugin/tmbundle"]
-	path = var/plugin/tmbundle
+[submodule "ext/tmbundle"]
+	path = ext/tmbundle
 	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
 
-[submodule "var/plugin/vscode"]
-	path = var/plugin/vscode
+[submodule "ext/vscode"]
+	path = ext/vscode
 	url = git@github.com:casm-lang/casm-lang.plugin.vscode.git
 
 
