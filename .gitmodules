@@ -188,3 +188,6 @@
 [submodule "pkg/appimage"]
 	path = pkg/appimage
 	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
+[submodule "pkg/flatpak"]
+	path = pkg/flatpak
+	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
