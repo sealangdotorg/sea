@@ -185,3 +185,6 @@
 [submodule "pkg/archlinux"]
 	path = pkg/archlinux
 	url = git@github.com/casm-lang/casm-lang.pkg.archlinux
+[submodule "pkg/appimage"]
+	path = pkg/appimage
+	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
