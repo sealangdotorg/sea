@@ -28,4 +28,4 @@
 * pkg -- Packages
 
 This folder contains the supported package bundles by CASM itself. 
-Currently we support an Arch Linux AUR configuration.
+Currently we support an Arch Linux AUR, AppImage and FlatPak configuration.
