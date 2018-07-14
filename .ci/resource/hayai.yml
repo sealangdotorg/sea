@@ -22,10 +22,9 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
     
-- name: {{NAME}}
+- name: {{NAME}}@{{TAG}}
   type: git
   source:
-    branch: master
-    uri: git@github.com:nickbruun/hayai.git
-    private_key: {{github-auth}}
+    branch: {{TAG}}
+    uri: https://github.com/nickbruun/hayai.git
     disable_ci_skip: true
