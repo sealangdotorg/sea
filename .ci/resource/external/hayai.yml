@@ -22,9 +22,9 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
     
-- name: {{NAME}}@{{TAG}}
+- name: {{REPO}}@{{TAG}}
   type: git
   source:
     branch: {{TAG}}
-    uri: https://github.com/asmjit/asmjit.git
+    uri: https://github.com/nickbruun/hayai.git
     disable_ci_skip: true

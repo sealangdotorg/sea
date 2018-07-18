@@ -22,19 +22,10 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}@{{TAG}}
-  type: git
-  source:
-    branch: {{TAG}}
-    uri: git@github.com:casm-lang/{{NAME}}.git
-    private_key: {{github-auth}}
-    skip_ssl_verification: true
-    disable_ci_skip: true
-
-- name: {{NAME}}@{{TAG}}-status
+- name: {{REPO}}@{{TAG}}-status
   type: status-github
   source:
-    repository: casm-lang/{{NAME}}
+    repository: casm-lang/{{REPO}}
     access_token: {{github-token}}
     branch: {{TAG}}
-    context: casm-lang/{{NAME}}/{{TAG}}/ci
+    context: casm-lang/{{REPO}}/{{TAG}}/ci

@@ -21,20 +21,10 @@
 #   You should have received a copy of the GNU General Public License
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
-
-- name: {{NAME}}@{{TAG}}
+    
+- name: {{REPO}}@{{TAG}}
   type: git
   source:
     branch: {{TAG}}
-    uri: git@github.com:casm-lang/{{NAME}}.git
-    private_key: {{github-auth}}
-    skip_ssl_verification: true
+    uri: https://github.com/Z3Prover/z3.git
     disable_ci_skip: true
-
-- name: {{NAME}}@{{TAG}}-status
-  type: status-github
-  source:
-    repository: casm-lang/{{NAME}}
-    access_token: {{github-token}}
-    branch: {{TAG}}
-    context: casm-lang/{{NAME}}/{{TAG}}/ci
