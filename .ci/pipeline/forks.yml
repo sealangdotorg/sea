@@ -1,0 +1,43 @@
+#
+#   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+#
+#   This file is part of casm.
+#
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#
+
+---
+{{active}}
+{{public}}
+
+resources:
+{{resource:external/asmjit}}
+{{resource:casm-lang:libasmjit@master}}
+{{resource:external/gtest}}
+{{resource:casm-lang:libgtest@master}}
+{{resource:external/hayai}}
+{{resource:casm-lang:libhayai@master}}
+{{resource:external/z3}}
+{{resource:casm-lang:libz3@master}}
+
+jobs:
+{{job:external-fork:asmjit@master}}
+{{job:external-fork:gtest@master}}
+{{job:external-fork:hayai@master}}
+{{job:external-fork:z3@master}}
