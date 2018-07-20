@@ -42,59 +42,39 @@ UPDATE_FILE += .travis.yml
 
 include .cmake/config.mk
 
+clean-deps:
+	rm -rf app/*/obj lib/*/obj lib/*/build
 
-DATETIME=$(shell date)
+
 ATTIC=.attic
-CI_PL_CFG=$(ATTIC)/ci_pipeline_config.yml
-CI_PATH=.ci
-CI_RSRC=$(CI_PATH)/resource
-CI_TYPE=$(CI_PATH)/type
-CI_JOBS=$(CI_PATH)/job
-CI_EXT=.yml
-
-doxy:
-	@mkdir -p obj
-	@doxygen
 
 $(ATTIC):
 	@mkdir -p $@
 
+CI_PATH=.ci
+CI_PIPELINE=$(CI_PATH)/pipeline
+CI_EXT=.yml
 
-ci: $(ATTIC)
-	@echo $(CI_PL_CFG)
+PIPELINES  = forks
+PIPELINES += nightly
+PIPELINES += development
 
-	@echo "#### generated at '$(DATETIME)'" > $(CI_PL_CFG)
-	@echo "resource_types:" >> $(CI_PL_CFG)
-	@( for i in `ls $(CI_TYPE)/*$(CI_EXT)`; do \
-		echo "$@: processing '$$i'"; \
-		export FILENAME=`basename $$i $(CI_EXT)`; \
-		echo "#### $$i" >> $(CI_PL_CFG); \
-		cat $$i | sed -e "s/{{NAME}}/$$FILENAME/g" | sed -e "/#   /d" >> $(CI_PL_CFG); \
-		echo "" >> $(CI_PL_CFG); \
-	done )
+ci: $(PIPELINES:%=ci-%)
 
-	@echo "resources:" >> $(CI_PL_CFG)
-	@( for i in `ls $(CI_RSRC)/*$(CI_EXT)`; do \
-		echo "$@: processing '$$i'"; \
-		export FILENAME=`basename $$i $(CI_EXT)`; \
-		echo "#### $$i" >> $(CI_PL_CFG); \
-		cat $$i | sed -e "s/{{NAME}}/$$FILENAME/g" | sed -e "/#   /d" >> $(CI_PL_CFG); \
-		echo "" >> $(CI_PL_CFG); \
-	done )
+ci-%: $(ATTIC)
+	$(eval CI_SRC := $(CI_PIPELINE)/$(patsubst ci-%,%,$@)$(CI_EXT))
+	$(eval CI_DST := $(ATTIC)/$(patsubst ci-%,%,$@)$(CI_EXT))
+	@echo "-- Generating '$(CI_SRC)' -> '$(CI_DST)'"
+	@(sh .ci/script/pipeline.sh $(CI_SRC) $(CI_DST))
 
-	@echo "groups: [] ## TODO: FIXME: PPA: add automatic group generation" >> $(CI_PL_CFG)
 
-	@echo "jobs:" >> $(CI_PL_CFG)
-	@( for i in `ls $(CI_JOBS)/*$(CI_EXT)`; do \
-		echo "$@: processing '$$i'"; \
-		export FILENAME=`basename $$i $(CI_EXT)`; \
-		echo "#### $$i" >> $(CI_PL_CFG); \
-		cat $$i | \
-			sed -e "s/{{NAME}}/$$FILENAME/g" | \
-			sed "/{{fetch_build_test}}/ r .ci/job/.fetch_build_test" | \
-			sed "/{{fetch_build_test}}/d" | \
-			sed -e "/#   /d" >> $(CI_PL_CFG); \
-		echo "" >> $(CI_PL_CFG); \
-	done )
+doxy: export PROJECT_NUMBER:=$(shell git describe --always --tags --dirty)
 
-	fly -t casm sp -p casm -c $(CI_PL_CFG) -l ~/.ci.yml
+.PHONY: doxy
+doxy:
+	@echo "$(PROJECT_NUMBER)"
+	@mkdir -p obj
+	@doxygen
+
+status-ci:
+	@( clear; while true; do date; fly -t casm-lang@main bs -c 25; fly -t casm-lang@main ws; tput cup 0 0; sleep 1; done)
