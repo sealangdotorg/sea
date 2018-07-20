@@ -60,7 +60,7 @@
         text: |
           ci.casm-lang.org/builds/$BUILD_ID testing $BUILD_JOB_NAME failed
 
-- name: {{NAME}}.latest
+- name: {{NAME}}-
   plan:
   - aggregate:
     - get: config

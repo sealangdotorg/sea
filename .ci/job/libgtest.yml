@@ -22,52 +22,14 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}.latest
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
     - get: config
-      params: { submodules: none }
-    - get: {{NAME}}
-      params: { submodules: none }
+      params:
+        submodules: none
+    - get: {{REPO}}@{{TAG}}
       trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch.yml
-    input_mapping:
-      repo: {{NAME}}
-    on_failure:
-      put: send-email
       params:
-        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (fetch)"
-        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
-  - task: build-and-test
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: ppaulweber/docker-cpp
-      inputs:
-        - name: {{NAME}}
-          path: in/{{NAME}}
-      outputs:
-        - name: out
-      run:
-        path: sh
-        args:
-          - -exc
-          - |
-            date
-            uname -a
-            ( cd in/{{NAME}}; \
-              GTEST_TARGET=googletest SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
-              BUILD_TYPE=debug VERBOSE_MAKE=true ./ci/travis.sh \
-            )
-            ( cd in/{{NAME}}; \
-              GTEST_TARGET=googlemock SHARED_LIB=OFF STATIC_LIB=ON CMAKE_PKG=OFF \
-              BUILD_TYPE=debug VERBOSE_MAKE=true ./ci/travis.sh \
-            )
-    on_failure:
-      put: send-email
-      params:
-        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (build|test)"
-        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+        submodules: none
+  {{step:external/fetch_build_test:{{REPO}}@{{TAG}}}}

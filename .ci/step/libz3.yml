@@ -22,9 +22,14 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      date
+      uname -a
+      ( cd in/repo; python scripts/mk_make.py ) 
+      ( cd in/repo; cd build; make CC=clang CXX=clang++ )
+      ( cd in/repo; cd build; make test )
+      ( cd in/repo; cd build; ./test-z3 )

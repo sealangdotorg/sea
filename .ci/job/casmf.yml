@@ -22,71 +22,51 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# jobs:
-- name: {{NAME}}.linux64-clang-debug
+- name: {{NAME}}-
   plan:
   - aggregate:
     - get: config
       params: { submodules: none }
-    - get: {{NAME}}@master
-      trigger: true
-      params: { submodules: none }
-    - get: gtest@master
-      passed: [ gtest.linux64-clang-debug ]
-      trigger: true
-    - get: hayai@master
-      passed: [ hayai.linux64-clang-debug ]
-      trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl.linux64-clang-debug ]
+    - get: {{NAME}}
       params: { submodules: none }
       trigger: true
-    - get: libpass@master
-      passed: [ libpass.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libgtest
+      passed: [ libgtest- ]
       trigger: true
-    - get: libcasm-ir@master
-      passed: [ libcasm-ir.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libhayai
+      passed: [ libhayai- ]
       trigger: true
-    - get: libcasm-rt@master
-      passed: [ libcasm-rt.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libstdhl
+      passed: [ libstdhl- ]
       trigger: true
-    - get: libcasm-fe@master
-      passed: [ libcasm-fe.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libpass
+      passed: [ libpass- ]
       trigger: true
-    - get: libcasm-tc@master
-      passed: [ libcasm-tc.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libcasm-ir
+      passed: [ libcasm-ir- ]
+      trigger: true
+    - get: libcasm-rt
+      passed: [ libcasm-rt- ]
+      trigger: true
+    - get: libcasm-fe
+      passed: [ libcasm-fe- ]
+      trigger: true
+    - get: libcasm-tc
+      passed: [ libcasm-tc- ]
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/deps7.yml
+    file: config/.ci/task/fetch/8.yml
     input_mapping:
-      repo: {{NAME}}@master
-      dep0: gtest@master
-      dep1: hayai@master
-      dep2: libstdhl@master
-      dep3: libpass@master
-      dep4: libcasm-ir@master
-      dep5: libcasm-rt@master
-      dep6: libcasm-fe@master
-      dep7: libcasm-tc@master
+      repo: {{NAME}}
+      lib1: libgtest
+      lib2: libhayai
+      lib3: libstdhl
+      lib4: libpass
+      lib5: libcasm-ir
+      lib6: libcasm-rt
+      lib7: libcasm-fe
+      lib8: libcasm-tc
     params:
-      DEPS: gtest hayai stdhl pass casm-ir casm-rt casm-fe casm-tc
-    {{fetch_build_test}}
-
-
-- name: {{NAME}}@master.linux64-clang-debug
-  plan:
-  - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: {{NAME}}@master
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch.yml
-    input_mapping:
-      repo: {{NAME}}@master
+      LIBS: gtest hayai stdhl pass casm-ir casm-rt casm-fe casm-tc
+      DEPS: in/repo/lib
     {{fetch_build_test}}

@@ -22,31 +22,41 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# jobs:
-- name: {{NAME}}.linux64-clang-debug
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
     - get: config
-      params: { submodules: none }
-    - get: {{NAME}}@master
+      params:
+        submodules: none
+    - get: {{REPO}}@{{TAG}}
       trigger: true
-    - get: gtest@master
-      passed: [ gtest.linux64-clang-debug ]
+      params:
+        submodules: none
+    - get: libgtest@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libgtest-{{TAG}}
       trigger: true
-    - get: hayai@master
-      passed: [ hayai.linux64-clang-debug ]
+    - get: libhayai@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libhayai-{{TAG}}
       trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libstdhl@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libstdhl-{{TAG}}
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs2.yml
+    file: config/.ci/task/fetch/3.yml
     input_mapping:
-      repo: {{NAME}}@master
-      lib0: gtest@master
-      lib1: hayai@master
-      lib2: libstdhl@master
+      repo: {{REPO}}@{{TAG}}
+      lib1: libgtest@{{TAG}}
+      lib2: libhayai@{{TAG}}
+      lib3: libstdhl@{{TAG}}
     params:
       LIBS: gtest hayai stdhl
-    {{fetch_build_test}}
+  {{step:notify_build_test:{{REPO}}@{{TAG}}}}

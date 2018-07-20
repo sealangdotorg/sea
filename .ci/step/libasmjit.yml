@@ -22,9 +22,19 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      date
+      uname -a
+      ( cd in/repo; mkdir build ) 
+      ( cd in/repo/build; cmake \
+        -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ \
+        -DASMJIT_BUILD_TEST=1 \
+        .. \
+      )
+      ( cd in/repo; cd build; make )
+      ( cd in/repo; cd build; for i in `ls asmjit*`; do echo $i; ./$i; done )

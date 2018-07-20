@@ -22,26 +22,19 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}.latest
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: {{NAME}}
-      params: { submodules: none }
-      trigger: true
-    - get: libgtest
-      passed: [ libgtest.latest ]
-      trigger: true
-    - get: libhayai
-      passed: [ libhayai.latest ]
-      trigger: true
+    {{step:repo-get-config}}
+    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
+    {{step:repo-get-trig:libgtest@{{TAG}}}}
+    {{step:repo-get-trig:libhayai@{{TAG}}}}
   - task: fetch
     file: config/.ci/task/fetch/2.yml
     input_mapping:
-      repo: {{NAME}}
-      lib1: libgtest
-      lib2: libhayai
+      repo: {{REPO}}@{{TAG}}
+      lib1: libgtest@{{TAG}}
+      lib2: libhayai@{{TAG}}
     params:
       LIBS: gtest hayai
-    {{fetch_build_test}}
+  {{step:notify_build_test:{{REPO}}@{{TAG}}}}

@@ -22,7 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}.latest
+- name: {{NAME}}-
   plan:
   - aggregate:
     - get: config
@@ -30,15 +30,12 @@
     - get: {{NAME}}
       params: { submodules: none }
       trigger: true
+  {{put_status_pending}}
   - task: fetch
     file: config/.ci/task/fetch.yml
     input_mapping:
       repo: {{NAME}}
-    on_failure:
-      put: send-email
-      params:
-        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (fetch)"
-        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+    {{on_failure_of_fetch}}
   - task: build-and-test
     config:
       platform: linux
@@ -63,8 +60,5 @@
               make; \
               make test \
             )
-    on_failure:
-      put: send-email
-      params:
-        subject_text: "Failed: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} (build|test)"
-        body_text: "${ATC_EXTERNAL_URL}/teams/main/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+    {{on_failure_of_build_and_test}}
+  {{put_status_success}}

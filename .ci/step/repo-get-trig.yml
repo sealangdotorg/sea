@@ -22,41 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# jobs:
-- name: {{NAME}}.linux64-clang-debug
-  plan:
-  - aggregate:
-    - get: {{NAME}}@master
-      trigger: true
-  - task: fetch-and-build-and-test
-    config:
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: ppaulweber/docker-cpp
-      inputs:
-        - name: {{NAME}}@master
-          path: in/{{NAME}}
-      outputs:
-        - name: out
-      run:
-        path: sh
-        args:
-          - -exc
-          - |
-            date
-            uname -a
-            ( cd in/{{NAME}}; \
-              cmake -DTEST=true .; \
-              make; \
-              make test \
-            )
-    on_failure:
-      put: notify
-      params:
-        team: casm
-        link: true
-        always_notify: true
-        text: |
-          Failed: $BUILD_PIPELINE_NAME/$BUILD_JOB_NAME#$BUILD_NAME (fetch/build/test)
+- get: {{REPO}}@{{TAG}}
+  trigger: true
+  params:
+    submodules: none

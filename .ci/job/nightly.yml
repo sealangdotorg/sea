@@ -22,48 +22,15 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{REPO}}-{{TAG}}
+- name: {{REPO}}-check
   plan:
   - aggregate:
+    - get: after-midnight
+      trigger: true
     - get: config
       params:
         submodules: none
     - get: {{REPO}}@{{TAG}}
-      trigger: true
       params:
-        submodules: none
-    - get: libgtest@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libgtest-{{TAG}}
-      trigger: true
-    - get: libhayai@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libhayai-{{TAG}}
-      trigger: true
-    - get: libstdhl@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libstdhl-{{TAG}}
-      trigger: true
-    - get: libpass@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libpass-{{TAG}}
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch/4.yml
-    input_mapping:
-      repo: {{REPO}}@{{TAG}}
-      lib1: libgtest@{{TAG}}
-      lib2: libhayai@{{TAG}}
-      lib3: libstdhl@{{TAG}}
-      lib4: libpass@{{TAG}}
-    params:
-      LIBS: gtest hayai stdhl pass
-  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
+        submodule_recursive: "false"
+  {{step:fetch_build_test:{{REPO}}@{{TAG}}}}

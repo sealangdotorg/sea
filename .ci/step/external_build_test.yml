@@ -22,9 +22,16 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+- task: fetch-and-build-and-test
+  config:
+    platform: linux
+    image_resource:
+      type: docker-image
+      source:
+        repository: ppaulweber/docker-cpp
+    inputs:
+      - name: {{REPO}}@{{TAG}}
+        path: in/repo
+    outputs:
+      - name: out
+    {{step:{{ARG}}}}

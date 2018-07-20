@@ -32,38 +32,4 @@
       trigger: true
       params:
         submodules: none
-    - get: libgtest@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libgtest-{{TAG}}
-      trigger: true
-    - get: libhayai@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libhayai-{{TAG}}
-      trigger: true
-    - get: libstdhl@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libstdhl-{{TAG}}
-      trigger: true
-    - get: libpass@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libpass-{{TAG}}
-      trigger: true
-  - task: fetch
-    file: config/.ci/task/fetch/4.yml
-    input_mapping:
-      repo: {{REPO}}@{{TAG}}
-      lib1: libgtest@{{TAG}}
-      lib2: libhayai@{{TAG}}
-      lib3: libstdhl@{{TAG}}
-      lib4: libpass@{{TAG}}
-    params:
-      LIBS: gtest hayai stdhl pass
-  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
+  {{step:external_build_test:{{REPO}}@{{TAG}}&{{REPO}}}}

@@ -22,9 +22,9 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+put: send-email
+params:
+  to: {{REPO}}@{{TAG}}/.git/committer
+  subject_text: "{{OPT}}: ${BUILD_PIPELINE_NAME}/${BUILD_JOB_NAME}#${BUILD_NAME} ({{ARG}})"
+  body_text: |
+    ${ATC_EXTERNAL_URL}/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}

@@ -22,47 +22,62 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# jobs:
-- name: {{NAME}}.linux64-clang-debug
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
     - get: config
-      params: { submodules: none }
-    - get: {{NAME}}@master
+      params:
+        submodules: none
+    - get: {{REPO}}@{{TAG}}
       trigger: true
-      params: { submodules: none }
-    - get: gtest@master
-      passed: [ gtest.linux64-clang-debug ]
+      params:
+        submodules: none
+    - get: libgtest@{{TAG}}
+      passed:
+        - libgtest-{{TAG}}
       trigger: true
-    - get: hayai@master
-      passed: [ hayai.linux64-clang-debug ]
+      params:
+        submodules: none
+    - get: libhayai@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libhayai-{{TAG}}
       trigger: true
-    - get: libstdhl@master
-      passed: [ libstdhl.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libstdhl@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libstdhl-{{TAG}}
       trigger: true
-    - get: libpass@master
-      passed: [ libpass.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libpass@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libpass-{{TAG}}
       trigger: true
-    - get: libcasm-ir@master
-      passed: [ libcasm-ir.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libcasm-ir@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libcasm-ir-{{TAG}}
       trigger: true
-    - get: libcasm-rt@master
-      passed: [ libcasm-rt.linux64-clang-debug ]
-      params: { submodules: none }
+    - get: libcasm-rt@{{TAG}}
+      params:
+        submodules: none
+      passed:
+        - libcasm-rt-{{TAG}}
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/libs5.yml
+    file: config/.ci/task/fetch/6.yml
     input_mapping:
-      repo: {{NAME}}@master
-      lib0: gtest@master
-      lib1: hayai@master
-      lib2: libstdhl@master
-      lib3: libpass@master
-      lib4: libcasm-ir@master
-      lib5: libcasm-rt@master
+      repo: {{REPO}}@{{TAG}}
+      lib1: libgtest@{{TAG}}
+      lib2: libhayai@{{TAG}}
+      lib3: libstdhl@{{TAG}}
+      lib4: libpass@{{TAG}}
+      lib5: libcasm-ir@{{TAG}}
+      lib6: libcasm-rt@{{TAG}}
     params:
       LIBS: gtest hayai stdhl pass casm-ir casm-rt
-    {{fetch_build_test}}
+  {{step:notify_build_test:{{REPO}}@{{TAG}}}}

@@ -22,9 +22,18 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+run:
+  path: sh
+  args:
+    - -exc
+    - |
+      date
+      uname -a
+      ( cd in/repo; mkdir build )
+      ( cd in/repo/build; cmake \
+        -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++\
+        -DTEST=true \
+        .. \
+      )
+      ( cd in/repo/build; make && make test )

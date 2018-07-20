@@ -22,9 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}
-  type: time
-  source:
-    start: 1:23 AM
-    stop:  4:56 PM
-    location: Europe/Vienna
+on_failure:
+  {{step:send-email:{{REPO}}@{{TAG}}&{{ARG}}%Failed}}
+on_abort:
+  {{step:send-email:{{REPO}}@{{TAG}}&{{ARG}}%Abort}}
