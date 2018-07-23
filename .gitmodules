@@ -191,3 +191,6 @@
 [submodule "pkg/flatpak"]
 	path = pkg/flatpak
 	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
+[submodule "pkg/docker"]
+	path = pkg/docker
+	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
