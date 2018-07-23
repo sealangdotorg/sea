@@ -1,3 +1,26 @@
+#
+#   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+#
+#   This file is part of casm.
+#
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#
 
 #
 # Applications
@@ -132,6 +155,7 @@
 [submodule "var/logo"]
 	path = var/logo
 	url = git@github.com:casm-lang/casm-lang.logo.git
+
 [submodule "var/web"]
 	path = var/web
 	url = git@github.com:casm-lang/casm-lang.github.io.git
@@ -184,13 +208,17 @@
 
 [submodule "pkg/archlinux"]
 	path = pkg/archlinux
-	url = git@github.com:casm-lang/casm-lang.pkg.archlinux
+	url = git@github.com:casm-lang/casm-lang.pkg.archlinux.git
+
 [submodule "pkg/appimage"]
 	path = pkg/appimage
 	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
+
 [submodule "pkg/flatpak"]
 	path = pkg/flatpak
 	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
+
 [submodule "pkg/docker"]
 	path = pkg/docker
 	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
+
