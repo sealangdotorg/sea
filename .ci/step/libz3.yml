@@ -29,7 +29,7 @@ run:
     - |
       date
       uname -a
-      ( cd in/repo; python scripts/mk_make.py ) 
-      ( cd in/repo; cd build; make CC=clang CXX=clang++ )
+      ( cd in/repo; CC=clang CXX=clang++ python scripts/mk_make.py )
+      ( cd in/repo; cd build; make )
       ( cd in/repo; cd build; make test )
       ( cd in/repo; cd build; ./test-z3 )
