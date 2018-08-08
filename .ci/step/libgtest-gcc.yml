@@ -34,7 +34,9 @@ run:
         -DCMAKE_C_COMPILER=gcc \
         -DCMAKE_CXX_COMPILER=g++\
         -DPYTHON_EXECUTABLE=/usr/bin/python \
-        -Dgtest_build_tests=ON \
         .. \
       )
-      ( cd in/repo/build; make && make test )
+      ( cd in/repo/build; make )
+
+#        -Dgtest_build_tests=ON \
+#      ( cd in/repo/build; make test )
