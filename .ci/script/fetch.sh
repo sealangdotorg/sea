@@ -68,8 +68,5 @@ fi
 # copy 'in' to 'out'
 cp -rf $IN/* $OUT/
 
-# create 'email addr' from current repo commit
-git -C $IN/$REPO log -1 --pretty=format:'"%an" <%ae>' > $OUT/mail_addr
-
 # print 'out'
 ls -lA $OUT
