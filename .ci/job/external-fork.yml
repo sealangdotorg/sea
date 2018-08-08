@@ -23,6 +23,7 @@
 #
 
 - name: {{REPO}}-clang
+  public: true
   plan:
   - aggregate:
     - get: {{REPO}}@{{TAG}}
@@ -30,6 +31,7 @@
   {{step:external_build_test:{{REPO}}@{{TAG}}&lib{{REPO}}}}
 
 - name: {{REPO}}-gcc
+  public: true
   plan:
   - aggregate:
     - get: {{REPO}}@{{TAG}}
@@ -37,6 +39,7 @@
   {{step:external_build_test:{{REPO}}@{{TAG}}&lib{{REPO}}-gcc}}
 
 - name: {{REPO}}-deploy
+  public: true
   plan:
   - aggregate:
     - get: {{REPO}}@{{TAG}}
