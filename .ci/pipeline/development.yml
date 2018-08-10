@@ -34,6 +34,7 @@ resources:
 {{resource:casm-lang:libgtest@master}}
 {{resource:casm-lang:libhayai@master}}
 {{resource:casm-lang:libz3@master}}
+
 {{resource:casm-lang:libstdhl@master}}
 {{resource:casm-lang:libpass@master}}
 {{resource:casm-lang:libcasm-ir@master}}
