@@ -47,7 +47,7 @@ CI_EXT=.yml
 
 DATETIME=`date`
 
-target=casm-lang@main
+target=ci
 
 
 process_resource_type()
