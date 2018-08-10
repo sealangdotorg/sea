@@ -25,61 +25,16 @@
 - name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
-    - get: config
-      params:
-        submodules: none
-    - get: {{REPO}}@{{TAG}}
-      trigger: true
-      params:
-        submodules: none
-    - get: libgtest@{{TAG}}
-      passed:
-        - libgtest-{{TAG}}
-      trigger: true
-      params:
-        submodules: none
-    - get: libhayai@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libhayai-{{TAG}}
-      trigger: true
-    - get: libstdhl@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libstdhl-{{TAG}}
-      trigger: true
-    - get: libpass@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libpass-{{TAG}}
-      trigger: true
-    - get: libcasm-ir@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libcasm-ir-{{TAG}}
-      trigger: true
-    - get: libcasm-rt@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libcasm-rt-{{TAG}}
-      trigger: true
-    - get: libcasm-fe@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libcasm-fe-{{TAG}}
-      trigger: true
-    - get: libcasm-tc@{{TAG}}
-      params:
-        submodules: none
-      passed:
-        - libcasm-tc-{{TAG}}
-      trigger: true
+    {{step:repo-get-config}}
+    {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
+    {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
+    {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
+    {{step:repo-get-trig-pass:libpass@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-ir@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-rt@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-fe@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-tc@{{TAG}}}}
+    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
   - task: fetch
     file: config/.ci/task/fetch/8.yml
     input_mapping:

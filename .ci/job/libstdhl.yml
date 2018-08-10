@@ -26,9 +26,9 @@
   plan:
   - aggregate:
     {{step:repo-get-config}}
-    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
     {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
     {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
+    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
   - task: fetch
     file: config/.ci/task/fetch/2.yml
     input_mapping:
