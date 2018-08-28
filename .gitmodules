@@ -210,6 +210,10 @@
 	path = var/container/linux
 	url = git@github.com:casm-lang/casm-lang.container.linux.git
 
+[submodule "var/container/windows"]
+	path = var/container/windows
+	url = git@github.com:casm-lang/casm-lang.container.windows.git
+
 
 #
 # Packages
