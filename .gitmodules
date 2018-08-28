@@ -203,6 +203,15 @@
 
 
 #
+# Various (Container)
+#
+
+[submodule "var/container/linux"]
+	path = var/container/linux
+	url = git@github.com:casm-lang/casm-lang.container.linux.git
+
+
+#
 # Packages
 #
 
@@ -221,4 +230,3 @@
 [submodule "pkg/docker"]
 	path = pkg/docker
 	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
-
