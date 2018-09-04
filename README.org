@@ -28,6 +28,8 @@
 
 * casm -- The CASM Project
 
+[[https://gitter.im/casm-lang/casm][https://badges.gitter.im/casm-lang/casm.png]]
+
 This is the main repository of the Corinthian Abstract State Machine (CASM) project.
 
 
