@@ -23,6 +23,7 @@
 #
 
 #
+#
 # Applications
 #
 
@@ -42,7 +43,7 @@
 	path = app/casmi
 	url = git@github.com:casm-lang/casmi.git
 
-
+#
 #
 # Libraries (External Forks)
 #
@@ -63,7 +64,7 @@
 	path = lib/z3
 	url = git@github.com:casm-lang/libz3.git
 
-
+#
 #
 # Libraries (General)
 #
@@ -80,7 +81,7 @@
 	path = lib/tptp
 	url = git@github.com:casm-lang/libtptp.git
 
-
+#
 #
 # Libraries (CASM)
 #
@@ -105,7 +106,7 @@
 	path = lib/casm-tc
 	url = git@github.com:casm-lang/libcasm-tc.git
 
-
+#
 #
 # Libraries (CJEL)
 #
@@ -122,7 +123,7 @@
 	path = lib/cjel-be
 	url = git@github.com:casm-lang/libcjel-be.git
 
-
+#
 #
 # Extension (Plug-ins)
 #
@@ -147,20 +148,41 @@
 	path = ext/vscode
 	url = git@github.com:casm-lang/casm-lang.plugin.vscode.git
 
+#
+#
+# Packages
+#
+
+[submodule "pkg/archlinux"]
+	path = pkg/archlinux
+	url = git@github.com:casm-lang/casm-lang.pkg.archlinux.git
+
+[submodule "pkg/appimage"]
+	path = pkg/appimage
+	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
+
+[submodule "pkg/flatpak"]
+	path = pkg/flatpak
+	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
+
+[submodule "pkg/docker"]
+	path = pkg/docker
+	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
 
 #
-# Various (Logo, Website)
+#
+# Various (Container)
 #
 
-[submodule "var/logo"]
-	path = var/logo
-	url = git@github.com:casm-lang/casm-lang.logo.git
+[submodule "var/container/linux"]
+	path = var/container/linux
+	url = git@github.com:casm-lang/casm-lang.container.linux.git
 
-[submodule "var/web"]
-	path = var/web
-	url = git@github.com:casm-lang/casm-lang.github.io.git
+[submodule "var/container/windows"]
+	path = var/container/windows
+	url = git@github.com:casm-lang/casm-lang.container.windows.git
 
-
+#
 #
 # Various (Documentation)
 #
@@ -201,36 +223,15 @@
 	path = var/doc/paulweber2018abz
 	url = git@github.com:casm-lang/casm-lang.doc.paulweber2018abz.git
 
-
 #
-# Various (Container)
 #
-
-[submodule "var/container/linux"]
-	path = var/container/linux
-	url = git@github.com:casm-lang/casm-lang.container.linux.git
-
-[submodule "var/container/windows"]
-	path = var/container/windows
-	url = git@github.com:casm-lang/casm-lang.container.windows.git
-
-
-#
-# Packages
+# Various (Logo, Website)
 #
 
-[submodule "pkg/archlinux"]
-	path = pkg/archlinux
-	url = git@github.com:casm-lang/casm-lang.pkg.archlinux.git
+[submodule "var/logo"]
+	path = var/logo
+	url = git@github.com:casm-lang/casm-lang.logo.git
 
-[submodule "pkg/appimage"]
-	path = pkg/appimage
-	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
-
-[submodule "pkg/flatpak"]
-	path = pkg/flatpak
-	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
-
-[submodule "pkg/docker"]
-	path = pkg/docker
-	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
+[submodule "var/web"]
+	path = var/web
+	url = git@github.com:casm-lang/casm-lang.github.io.git
