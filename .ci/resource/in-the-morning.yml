@@ -22,23 +22,9 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
----
-{{active}}
-{{public}}
-
-resources:
-{{resource:in-the-morning}}
-{{resource:external/asmjit}}
-{{resource:casm-lang:libasmjit@master}}
-{{resource:external/gtest}}
-{{resource:casm-lang:libgtest@master}}
-{{resource:external/hayai}}
-{{resource:casm-lang:libhayai@master}}
-{{resource:external/z3}}
-{{resource:casm-lang:libz3@master}}
-
-jobs:
-{{job:external-fork:asmjit@master}}
-{{job:external-fork:gtest@master}}
-{{job:external-fork:hayai@master}}
-{{job:external-fork:z3@master}}
+- name: {{NAME}}
+  type: time
+  source:
+    start: 4:56 AM
+    stop:  7:00 PM
+    location: Europe/Vienna

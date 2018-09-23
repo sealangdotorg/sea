@@ -42,9 +42,10 @@
   public: true
   plan:
   - aggregate:
+    - get: in-the-morning
+      trigger: true
     - get: {{REPO}}@{{TAG}}
       params: {  clean_tags: true }
-      trigger: true
       passed:
         - {{REPO}}-clang
         - {{REPO}}-gcc
