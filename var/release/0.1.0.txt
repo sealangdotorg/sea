@@ -1,9 +1,0 @@
-
-===== 0.1.0 =====
-{{tag>release}}
-
-<callout title="Release `auxentios`">
-June 4, 2018
-
-https://github.com/casm-lang/casm/releases/tag/0.1.0
-</callout>
