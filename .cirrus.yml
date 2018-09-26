@@ -1,0 +1,107 @@
+#
+#   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+#
+#   This file is part of casm.
+#
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#
+
+linux_task:
+  container:
+    image: casmlang/container.linux
+    memory: 2
+    cpu: 1
+  env:
+    GITHUB_TOKEN: ENCRYPTED[TODO]
+  matrix:
+    env:
+      B: "debug"
+      C: "clang"
+    env:
+      B: "coverage"
+      C: "gcc"
+  fetch_script:
+    - make ci-fetch
+  build_script:
+    - make ci-build
+  test_script:
+    - make ci-test
+#  benchmark_script:
+#    - make ci-benchmark
+  coverage_script:
+    - |
+      if [ "$C" == "gcc" ];
+        wget https://codecov.io/bash;
+        sh bash -f "!*#usr#include*" 2> /dev/null;
+      fi
+
+darwin_task:
+  osx_instance:
+    image: high-sierra-xcode-9.4.1
+  env:
+    GITHUB_TOKEN: ENCRYPTED[TODO]
+  matrix:
+    env:
+      B: "debug"
+      C: "clang"
+    env:
+      B: "debug"
+      C: "gcc"
+  setup_script:
+    - brew install cmake
+    - if [ "$C" == "gcc" ]; then brew install gcc; fi
+    - brew install flex  && brew link --force flex
+    - brew install bison && brew link --force bison
+  fetch_script:
+    - make ci-fetch
+  build_script:
+    - make ci-build
+  test_script:
+    - make ci-test
+#  benchmark_script:
+#    - make ci-benchmark
+
+windows_task:
+  windows_container:
+    image: casmlang/container.windows
+    os_version: 2016
+    cpu: 1
+  env:
+    GITHUB_TOKEN: ENCRYPTED[TODO]
+  matrix:
+    env:
+      V: mingw64
+      B: "debug"
+      C: "clang"
+    env:
+      V: mingw64
+      B: "debug"
+      C: "gcc"
+  fetch_script:
+    - set PATH=C:\msys2\%V%\bin;%PATH%
+    - make ci-fetch
+  build_script:
+    - set PATH=C:\msys2\%V%\bin;%PATH%
+    - make ci-build
+  test_script:
+    - set PATH=C:\msys2\%V%\bin;%PATH%
+    - make ci-test
+#  benchmark_script:
+#    - set PATH=C:\msys2\%V%\bin;%PATH%
+#    - make ci-benchmark
