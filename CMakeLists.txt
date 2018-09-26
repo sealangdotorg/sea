@@ -26,10 +26,8 @@ set( PROJECT casm )
 
 cmake_minimum_required( VERSION ${CMAKE_VERSION} )
 
-project( ${PROJECT} LANGUAGES C CXX )
-set( CMAKE_CXX_STANDARD 11 )
+project( ${PROJECT} )
 set( CMAKE_VERSION 3.2 )
-set( CMAKE_INCLUDE_CURRENT_DIR ON )
 set( CMAKE_MODULE_PATH ${${PROJECT}_SOURCE_DIR}/.cmake )
 
 
