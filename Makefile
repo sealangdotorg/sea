@@ -46,6 +46,16 @@ clean-deps:
 	rm -rf app/*/obj lib/*/obj lib/*/build
 
 
+ci-fetch: ci-git-access
+
+ci-git-access:
+	@echo "-- Git Access Configuration"
+	@git config --global \
+	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "https://github.com/"
+	@git config --global \
+	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "git@github.com:"
+
+
 ATTIC=.attic
 
 $(ATTIC):
