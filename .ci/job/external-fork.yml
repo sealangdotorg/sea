@@ -38,6 +38,16 @@
       trigger: true
   {{step:external_build_test:{{REPO}}@{{TAG}}&lib{{REPO}}-gcc}}
 
+- name: {{REPO}}-trigger
+  public: true
+  plan:
+  - aggregate:
+    - get: {{REPO}}@{{TAG}}
+      trigger: {{ARG}}
+      passed:
+        - {{REPO}}-clang
+        - {{REPO}}-gcc
+
 - name: {{REPO}}-deploy
   public: true
   plan:
@@ -47,8 +57,7 @@
     - get: {{REPO}}@{{TAG}}
       params: {  clean_tags: true }
       passed:
-        - {{REPO}}-clang
-        - {{REPO}}-gcc
+        - {{REPO}}-trigger
   - aggregate:
     - put: lib{{REPO}}@{{TAG}}
       params: { repository: {{REPO}}@{{TAG}} }
