@@ -30,18 +30,9 @@ project( ${PROJECT} )
 set( CMAKE_VERSION 3.2 )
 set( CMAKE_MODULE_PATH ${${PROJECT}_SOURCE_DIR}/.cmake )
 
-
-#
-# includes
-#
-
 include( CPack )
 include( FeatureSummary )
 include( LibPackage )
-
-#
-# packages
-#
 
 package_git( ${PROJECT} )
 package_git_submodule( libstdhl   master REQUIRED obj   lib/stdhl   )
