@@ -22,19 +22,21 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-  {{step:notification:{{REPO}}@{{TAG}}&fetch}}
-- task: deps
-  file: config/.ci/task/deps.yml
-  input_mapping:
-    in: out
-  {{step:notification:{{REPO}}@{{TAG}}&deps}}
-- task: build
-  file: config/.ci/task/build.yml
-  input_mapping:
-    in: out
-  {{step:notification:{{REPO}}@{{TAG}}&build}}
-- task: test
-  file: config/.ci/task/test.yml
-  input_mapping:
-    in: out
-  {{step:notification:{{REPO}}@{{TAG}}&test}}
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: ppaulweber/docker-cpp
+inputs:
+  - name: config
+  - name: in
+outputs:
+  - name: out
+params:
+  IN:   in
+  OUT:  out
+  REPO: repo
+  ARGS: deps
+run:
+  path: config/.ci/script/make.sh
