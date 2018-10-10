@@ -32,38 +32,46 @@ set( CMAKE_MODULE_PATH ${${PROJECT}_SOURCE_DIR}/.cmake )
 
 
 #
-# packages
+# includes
 #
 
+include( CPack )
+include( FeatureSummary )
 include( LibPackage )
+
+#
+# packages
+#
 
 package_git( ${PROJECT} )
 package_git_submodule( libstdhl   master REQUIRED obj   lib/stdhl   )
 package_git_submodule( libgtest   master REQUIRED build lib/gtest   )
 package_git_submodule( libhayai   master REQUIRED build lib/hayai   )
 package_git_submodule( libpass    master REQUIRED obj   lib/pass    )
-package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
-package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
 package_git_submodule( libcasm-ir master REQUIRED obj   lib/casm-ir )
 package_git_submodule( libcasm-rt master REQUIRED obj   lib/casm-rt )
+package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
 #package_git_submodule( libcasm-be master REQUIRED obj   lib/casm-be )
-#package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
-#package_git_submodule( libcjel-fe master REQUIRED obj   lib/cjel-fe )
+package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
 #package_git_submodule( libcjel-ir master REQUIRED obj   lib/cjel-ir )
 #package_git_submodule( libcjel-rt master REQUIRED obj   lib/cjel-rt )
+#package_git_submodule( libcjel-fe master REQUIRED obj   lib/cjel-fe )
 #package_git_submodule( libcjel-be master REQUIRED obj   lib/cjel-be )
+#package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
 #package_git_submodule( casmc      master REQUIRED obj   app/casmc   )
 #package_git_submodule( casmd      master REQUIRED obj   app/casmd   )
 #package_git_submodule( casmf      master REQUIRED obj   app/casmf   )
 package_git_submodule( casmi      master REQUIRED obj   app/casmi   )
-
-
-#
-# includes
-#
-
-include( FeatureSummary )
-include( CPack )
+package_git_deps(
+  libgtest>libstdhl
+  libhayai>libstdhl
+  libstdhl>libpass
+  libpass>libcasm-ir
+  libcasm-ir>libcasm-rt
+  libcasm-rt>libcasm-fe
+  libcasm-fe>libcasm-tc
+  libcasm-tc>casmi
+  )
 
 
 #
@@ -71,9 +79,8 @@ include( CPack )
 #
 
 add_custom_target( ${PROJECT}
-  COMMAND make --no-print-directory -C app/casmi
-  WORKING_DIRECTORY
-    ${PROJECT_SOURCE_DIR}
+  DEPENDS
+    ${PROJECT}-deps
 )
 
 
@@ -82,7 +89,10 @@ add_custom_target( ${PROJECT}
 #
 
 add_custom_target( ${PROJECT}-check
-  COMMAND make --no-print-directory -C app/casmi test
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-test
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-check
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
 )
@@ -93,7 +103,10 @@ add_custom_target( ${PROJECT}-check
 #
 
 add_custom_target( ${PROJECT}-run
-#  COMMAND make --no-print-directory -C app/casmi benchmark
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-benchmark
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-run
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
 )

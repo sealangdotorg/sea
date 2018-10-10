@@ -343,12 +343,17 @@ SYNCS = $(TYPES:%=%-sync)
 TESTS = $(TYPES:%=%-test)
 BENCH = $(TYPES:%=%-benchmark)
 INSTA = $(TYPES:%=%-install)
+DEPS  = $(TYPES:%=%-deps)
 ANALY = $(TYPES:%=%-analyze)
 ALL   = $(TYPES:%=%-all)
 
 ENV_CMAKE_FLAGS  = -G$(ENV_GEN)
 ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
-ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(BIN)
+
+ifndef I
+  I = $(BIN)
+endif
+ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(I)
 
 ifeq (,$(findstring Visual,$(ENV_GEN)))
   ENV_CMAKE_FLAGS += -DCMAKE_C_COMPILER=$(ENV_CC)
@@ -396,21 +401,10 @@ else
   endif
 endif
 
+
 ENV_BUILD_FLAGS  =
 ifneq (,$(findstring Makefile,$(ENV_GEN)))
   ENV_BUILD_FLAGS += --no-print-directory $(MFLAGS)
-endif
-
-
-ifeq ("$(wildcard $(OBJ)/CMakeCache.txt)","")
-$(OBJ)/Makefile: $(OBJ) info-build
-	@cd $(OBJ) && cmake $(ENV_CMAKE_FLAGS) ..
-  ifeq ($(ENV_CC),msvc)
-	@printf "rebuild_cache:\n" > $@
-  endif
-else
-$(OBJ)/Makefile: $(OBJ)
-	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ) rebuild_cache
 endif
 
 
@@ -418,9 +412,13 @@ sync: debug-sync
 
 sync-all: $(TYPES:%=%-sync)
 
+ifeq ("$(wildcard $(OBJ)/CMakeCache.txt)","")
+$(SYNCS):%-sync: $(OBJ) info-build
+	@cd $(OBJ) && cmake $(ENV_CMAKE_FLAGS) ..
+else
 $(SYNCS):%-sync: $(OBJ)
-	@$(MAKE) --no-print-directory TYPE=$(patsubst %-sync,%,$@) $(OBJ)/Makefile
-
+	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target rebuild_cache -- $(ENV_BUILD_FLAGS)
+endif
 
 $(TYPES):%: %-sync
 	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target $(TARGET) -- $(ENV_BUILD_FLAGS)
@@ -436,7 +434,7 @@ test: debug-test
 test-all: $(TYPES:%=%-test)
 
 $(TESTS):%-test: %
-	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target $(TARGET)-check -- $(ENV_BUILD_FLAGS)
+	@cmake --build $(OBJ) --config $(patsubst %-test,%,$@) --target $(TARGET)-check -- $(ENV_BUILD_FLAGS)
 ifeq ($(ENV_CC),emcc)
 	cd ./$(OBJ) && \
 	`cat CMakeFiles/$(TARGET)-check.dir/link.txt | \
@@ -453,7 +451,7 @@ benchmark: debug-benchmark
 benchmark-all: $(TYPES:%=%-benchmark)
 
 $(BENCH):%-benchmark: %
-	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target $(TARGET)-run -- $(ENV_BUILD_FLAGS)
+	@cmake --build $(OBJ) --config $(patsubst %-benchmark,%,$@) --target $(TARGET)-run -- $(ENV_BUILD_FLAGS)
 ifeq ($(ENV_CC),emcc)
 	cd ./$(OBJ) && \
 	`cat CMakeFiles/$(TARGET)-run.dir/link.txt | \
@@ -470,7 +468,14 @@ install: debug-install
 install-all: $(TYPES:%=%-install)
 
 $(INSTA):%-install: %
-	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target install -- $(ENV_BUILD_FLAGS)
+	@cmake --build $(OBJ) --config $(patsubst %-install,%,$@) --target install -- $(ENV_BUILD_FLAGS)
+
+
+
+deps: debug-deps
+
+$(DEPS):%-deps: %-sync
+	@cmake --build $(OBJ) --config $(patsubst %-deps,%,$@) --target $(TARGET)-deps -- $(ENV_BUILD_FLAGS)
 
 
 format: $(FORMAT:%=%-format-cpp)
@@ -599,14 +604,14 @@ info-build: info
 	@printf '   F = $(F)\n'
 
 info-repo:
-	@echo `pwd`
-	@printf "%-20s %-10s %-25s %s\n" \
-		"submodule:     repo:" \
+	@printf "%s %-20s %-10s %-25s %s\n" \
+		"--" \
+		"Repository" \
 		`git rev-parse --short HEAD` \
 		`git describe --tags --always --dirty` \
 		`git branch | grep -e "\* " | sed "s/* //g"`
 	@git submodule foreach \
-	'printf "%-20s %-10s %-25s %s\n" \
+	'printf "   %-20s %-10s %-25s %s\n" \
 		$$path \
 		`git rev-parse --short HEAD` \
 		`git describe --tags --always --dirty` \
@@ -721,6 +726,9 @@ ci-fetch: ci-info
 	@git submodule foreach \
 	'git branch --remotes | grep $(ENV_CI_BRANCH) && git checkout $(ENV_CI_BRANCH) || git checkout master; echo ""'
 	@make --no-print-directory info-repo
+
+ci-deps: ci-check
+	@make --no-print-directory C=$(C) $(B)-deps
 
 ci-build: ci-check
 	@make --no-print-directory C=$(C) $(B)

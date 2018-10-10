@@ -38,12 +38,46 @@ UPDATE_PATH += app/casmi
 UPDATE_FILE  = .clang-format
 UPDATE_FILE += .cmake/config.mk
 UPDATE_FILE += .cmake/LibPackage.cmake
-UPDATE_FILE += .travis.yml
 
 include .cmake/config.mk
 
+
 clean-deps:
 	rm -rf app/*/obj lib/*/obj lib/*/build
+
+
+doxy: export PROJECT_NUMBER:=$(shell git describe --always --tags --dirty)
+
+.PHONY: doxy
+doxy:
+	@echo "$(PROJECT_NUMBER)"
+	@mkdir -p obj
+	@doxygen
+
+
+FLY_PATH=.ci
+FLY_PIPELINE=$(FLY_PATH)/pipeline
+FLY_EXT=.yml
+
+PIPELINES  = forks
+PIPELINES += nightly
+PIPELINES += development
+
+fly: $(PIPELINES:%=fly-%)
+
+ATTIC=.attic
+
+$(ATTIC):
+	@mkdir -p $@
+
+fly-%: $(ATTIC)
+	$(eval FLY_SRC := $(FLY_PIPELINE)/$(patsubst fly-%,%,$@)$(FLY_EXT))
+	$(eval FLY_DST := $(ATTIC)/$(patsubst fly-%,%,$@)$(FLY_EXT))
+	@echo "-- Generating '$(FLY_SRC)' -> '$(FLY_DST)'"
+	@(sh .ci/script/pipeline.sh $(FLY_SRC) $(FLY_DST))
+
+status-fly:
+	@( clear; while true; do date; fly -t casm-lang@main bs -c 25; fly -t casm-lang@main ws; tput cup 0 0; sleep 1; done)
 
 
 ci-fetch: ci-git-access
@@ -56,35 +90,3 @@ ci-git-access:
 	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "git@github.com:"
 
 
-ATTIC=.attic
-
-$(ATTIC):
-	@mkdir -p $@
-
-CI_PATH=.ci
-CI_PIPELINE=$(CI_PATH)/pipeline
-CI_EXT=.yml
-
-PIPELINES  = forks
-PIPELINES += nightly
-PIPELINES += development
-
-ci: $(PIPELINES:%=ci-%)
-
-ci-%: $(ATTIC)
-	$(eval CI_SRC := $(CI_PIPELINE)/$(patsubst ci-%,%,$@)$(CI_EXT))
-	$(eval CI_DST := $(ATTIC)/$(patsubst ci-%,%,$@)$(CI_EXT))
-	@echo "-- Generating '$(CI_SRC)' -> '$(CI_DST)'"
-	@(sh .ci/script/pipeline.sh $(CI_SRC) $(CI_DST))
-
-
-doxy: export PROJECT_NUMBER:=$(shell git describe --always --tags --dirty)
-
-.PHONY: doxy
-doxy:
-	@echo "$(PROJECT_NUMBER)"
-	@mkdir -p obj
-	@doxygen
-
-status-ci:
-	@( clear; while true; do date; fly -t casm-lang@main bs -c 25; fly -t casm-lang@main ws; tput cup 0 0; sleep 1; done)
