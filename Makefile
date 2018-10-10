@@ -77,7 +77,7 @@ fly-%: $(ATTIC)
 	@(sh .ci/script/pipeline.sh $(FLY_SRC) $(FLY_DST))
 
 status-fly:
-	@( clear; while true; do date; fly -t casm-lang@main bs -c 25; fly -t casm-lang@main ws; tput cup 0 0; sleep 1; done)
+	@( clear; while true; do date; fly -t ci bs -c 25; fly -t ci ws; tput cup 0 0; sleep 1; done)
 
 
 ci-fetch: ci-git-access
