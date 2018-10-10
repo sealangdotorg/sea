@@ -28,7 +28,7 @@ linux_task:
     memory: 2
     cpu: 1
   env:
-    GITHUB_TOKEN: ENCRYPTED[TODO]
+    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
   matrix:
     env:
       B: "debug"
@@ -36,17 +36,18 @@ linux_task:
     env:
       B: "coverage"
       C: "gcc"
+      CODECOV_TOKEN: ENCRYPTED[d8c9f79fb80e84a54de55ce49613507676cfabda0ad7f12220393fdba0499e048e6844074ca9e0d666d51133ec24c9bd]
   fetch_script:
     - make ci-fetch
   build_script:
     - make ci-build
   test_script:
     - make ci-test
-#  benchmark_script:
-#    - make ci-benchmark
+  benchmark_script:
+    - if [ "$B" == "release" ]; then make ci-benchmark; fi
   coverage_script:
     - |
-      if [ "$C" == "gcc" ];
+      if [ "$C" == "gcc" ]; then
         wget https://codecov.io/bash;
         sh bash -f "!*#usr#include*" 2> /dev/null;
       fi
@@ -55,7 +56,7 @@ darwin_task:
   osx_instance:
     image: high-sierra-xcode-9.4.1
   env:
-    GITHUB_TOKEN: ENCRYPTED[TODO]
+    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
   matrix:
     env:
       B: "debug"
@@ -74,8 +75,8 @@ darwin_task:
     - make ci-build
   test_script:
     - make ci-test
-#  benchmark_script:
-#    - make ci-benchmark
+  benchmark_script:
+    - if [ "$B" == "release" ]; then make ci-benchmark; fi
 
 windows_task:
   windows_container:
@@ -83,7 +84,7 @@ windows_task:
     os_version: 2016
     cpu: 1
   env:
-    GITHUB_TOKEN: ENCRYPTED[TODO]
+    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
   matrix:
     env:
       V: mingw64
@@ -102,6 +103,6 @@ windows_task:
   test_script:
     - set PATH=C:\msys2\%V%\bin;%PATH%
     - make ci-test
-#  benchmark_script:
-#    - set PATH=C:\msys2\%V%\bin;%PATH%
-#    - make ci-benchmark
+  benchmark_script:
+    - set PATH=C:\msys2\%V%\bin;%PATH%
+    - if "%B%"=="release" ( make ci-benchmark )
