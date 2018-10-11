@@ -31,18 +31,289 @@ BIN = install
 .PHONY: $(OBJ)
 .NOTPARALLEL: $(OBJ)
 
-CLANG := $(shell clang --version 2> /dev/null)
-ifdef CLANG
-  CC=clang
-  CXX=clang++
+ifneq (,$(findstring sh,$(SHELL)))
+ENV_SHELL := sh
+WHICH := which
+DEVNUL := /dev/null
+endif
+ifneq (,$(findstring cmd,$(SHELL)))
+ENV_SHELL := cmd
+WHICH := where
+DEVNUL := NUL
+endif
+ifeq ($(ENV_SHELL),)
+  $(error environment shell '$(ENV_SHELL)' not supported!)
 endif
 
-ifdef ENV_CC
-  CC=$(ENV_CC)
+ifeq ($(shell ${WHICH} uname 2>${DEVNUL}),)
+  $(error "'uname' is not in your system PATH")
+endif
+ifeq ($(shell ${WHICH} cmake 2>${DEVNUL}),)
+  $(error "'cmake' is not in your system PATH")
 endif
 
-ifdef ENV_CXX
-  CXX=$(ENV_CXX)
+ENV_ARCH := $(shell uname -m)
+# x86_64
+# i686
+ifneq ($(ENV_ARCH),x86_64)
+ifneq ($(ENV_ARCH),i686)
+  $(error environment architecture '$(ENV_ARCH)' not supported!)
+endif
+endif
+
+ENV_PLAT := "$(shell uname -a)"
+ifneq (,$(findstring Linux,$(ENV_PLAT)))
+  ENV_OSYS := Linux
+endif
+ifneq (,$(findstring Darwin,$(ENV_PLAT)))
+  ENV_OSYS := Mac
+  $(eval ENV_PLAT="$(shell uname -vns | sed 's/; / /g' | sed 's/: / /g' | sed 's/Darwin Kernel Version//g')")
+endif
+ifneq (,$(findstring MSYS,$(ENV_PLAT)))
+  ENV_OSYS := Windows
+  $(eval ENV_PLAT="$(shell uname -vnsmo)")
+endif
+ifneq (,$(findstring CYGWIN,$(ENV_PLAT)))
+  ENV_OSYS := Windows
+  $(eval ENV_PLAT="$(shell uname -vnsmo)")
+endif
+ifeq ($(ENV_OSYS),)
+  $(error environment OS '$(ENV_PLAT)' not supported!)
+endif
+
+ifeq ($(ENV_OSYS),Linux)
+  ENV_CPUM := $(shell cat /proc/cpuinfo | grep -e "model name" | sed "s/model name.*: //g" | head -n1 )
+endif
+ifeq ($(ENV_OSYS),Mac)
+  ENV_CPUM := $(shell sysctl -n machdep.cpu.brand_string )
+endif
+ifeq ($(ENV_OSYS),Windows)
+  ENV_CPUM := $(shell wmic CPU get NAME | head -n2 | tail -n1 )
+endif
+
+CLANG := $(shell ${WHICH} clang 2>${DEVNUL})
+GCC := $(shell gcc --version 2>${DEVNUL})
+
+ifdef C
+  ifeq ($(C),clang)
+    ENV_CC=clang
+    ENV_CXX=clang++
+  endif
+  ifeq ($(C),gcc)
+    ENV_CC=gcc
+    ENV_CXX=g++
+  endif
+  ifeq ($(C),msvc)
+    ENV_CC=msvc
+    ENV_CXX=msvc
+  endif
+  ifeq ($(C),emcc)
+    ENV_CC=emcc
+    ENV_CXX=em++
+  endif
+else
+  ifdef CLANG
+    ENV_CC=clang
+    ENV_CXX=clang++
+  else
+    ifdef GCC
+      ENV_CC=gcc
+      ENV_CXX=g++
+    endif
+  endif
+endif
+
+ifeq ($(ENV_CC),)
+  $(error environment C compiler '$(C)' not defined!)
+endif
+
+ifeq ($(ENV_CXX),)
+  $(error environment C++ compiler '$(X)' not defined!)
+endif
+
+
+ifdef ENV_GEN
+  G=$(ENV_GEN)
+endif
+
+ifndef G
+  G=make
+endif
+
+# Unix Makefiles
+ifeq ($(G),make)
+  $(eval ENV_GEN="Unix Makefiles")
+endif
+ifeq ($(G),make-cb)
+  $(eval ENV_GEN="CodeBlocks - Unix Makefiles")
+endif
+ifeq ($(G),make-cl)
+  $(eval ENV_GEN="CodeLite - Unix Makefiles")
+endif
+ifeq ($(G),make-s2)
+  $(eval ENV_GEN="Sublime Text 2 - Unix Makefiles")
+endif
+ifeq ($(G),make-kp)
+  $(eval ENV_GEN="Kate - Unix Makefiles")
+endif
+ifeq ($(G),make-e4)
+  $(eval ENV_GEN="Eclipse CDT4 - Unix Makefiles")
+endif
+
+# MinGW Makefiles
+ifeq ($(G),make-gw)
+  $(eval ENV_GEN="MinGW Makefiles")
+endif
+ifeq ($(G),make-gw-cb)
+  $(eval ENV_GEN="CodeBlocks - MinGW Makefiles")
+endif
+ifeq ($(G),make-gw-cl)
+  $(eval ENV_GEN="CodeLite - MinGW Makefiles")
+endif
+ifeq ($(G),make-gw-s2)
+  $(eval ENV_GEN="Sublime Text 2 - MinGW Makefiles")
+endif
+ifeq ($(G),make-gw-kp)
+  $(eval ENV_GEN="Kate - MinGW Makefiles")
+endif
+ifeq ($(G),make-gw-e4)
+  $(eval ENV_GEN="Eclipse CDT4 - MinGW Makefiles")
+endif
+
+# Msys Makefiles
+ifeq ($(G),make-ms)
+  $(eval ENV_GEN="MSYS Makefiles")
+endif
+
+# Watcom Makefiles
+ifeq ($(G),make-wc)
+  $(eval ENV_GEN="Watcom WMake")
+endif
+
+# Borland Makefiles
+ifeq ($(G),make-bl)
+  $(eval ENV_GEN="Borland Makefiles")
+endif
+
+# NMake Makefiles
+ifeq ($(G),make-nm)
+  $(eval ENV_GEN="NMake Makefiles")
+endif
+ifeq ($(G),make-nm-cb)
+  $(eval ENV_GEN="CodeBlocks - NMake Makefiles")
+endif
+ifeq ($(G),make-nm-cl)
+  $(eval ENV_GEN="CodeLite - NMake Makefiles")
+endif
+ifeq ($(G),make-nm-s2)
+  $(eval ENV_GEN="Sublime Text 2 - NMake Makefiles")
+endif
+ifeq ($(G),make-nm-kp)
+  $(eval ENV_GEN="Kate - NMake Makefiles")
+endif
+ifeq ($(G),make-nm-e4)
+  $(eval ENV_GEN="Eclipse CDT4 - NMake Makefiles")
+endif
+ifeq ($(G),make-nj)
+  $(eval ENV_GEN="NMake Makefiles JOM")
+endif
+ifeq ($(G),make-nj-cb)
+  $(eval ENV_GEN="CodeBlocks - NMake Makefiles JOM")
+endif
+
+# Green Hills MULTI
+ifeq ($(G),multi)
+  $(eval ENV_GEN="Green Hills MULTI")
+endif
+
+# Ninja
+ifeq ($(G),ninja)
+  $(eval ENV_GEN="Ninja")
+endif
+ifeq ($(G),ninja-cb)
+  $(eval ENV_GEN="CodeBlocks - Ninja")
+endif
+ifeq ($(G),ninja-cl)
+  $(eval ENV_GEN="CodeLite - Ninja")
+endif
+ifeq ($(G),ninja-s2)
+  $(eval ENV_GEN="Sublime Text 2 - Ninja")
+endif
+ifeq ($(G),ninja-kp)
+  $(eval ENV_GEN="Kate - Ninja")
+endif
+ifeq ($(G),ninja-e4)
+  $(eval ENV_GEN="Eclipse CDT4 - Ninja")
+endif
+
+# Visual Studio 2017 (Version 15)
+ifeq ($(G),vs17)
+  $(eval ENV_GEN="Visual Studio 15 2017")
+endif
+ifeq ($(G),vs17w64)
+  $(eval ENV_GEN="Visual Studio 15 2017 Win64")
+endif
+ifeq ($(G),vs17arm)
+  $(eval ENV_GEN="Visual Studio 15 2017 ARM")
+endif
+
+# Visual Studio 2015 (Version 14)
+ifeq ($(G),vs15)
+  $(eval ENV_GEN="Visual Studio 14 2015")
+endif
+ifeq ($(G),vs15w64)
+  $(eval ENV_GEN="Visual Studio 14 2015 Win64")
+endif
+ifeq ($(G),vs15arm)
+  $(eval ENV_GEN="Visual Studio 14 2015 ARM")
+endif
+
+# Visual Studio 2013 (Version 12)
+ifeq ($(G),vs13)
+  $(eval ENV_GEN="Visual Studio 12 2013")
+endif
+ifeq ($(G),vs13w64)
+  $(eval ENV_GEN="Visual Studio 12 2013 Win64")
+endif
+ifeq ($(G),vs13arm)
+  $(eval ENV_GEN="Visual Studio 12 2013 ARM")
+endif
+
+# Visual Studio 2012 (Version 11)
+ifeq ($(G),vs12)
+  $(eval ENV_GEN="Visual Studio 11 2012")
+endif
+ifeq ($(G),vs12w64)
+  $(eval ENV_GEN="Visual Studio 11 2012 Win64")
+endif
+ifeq ($(G),vs12arm)
+  $(eval ENV_GEN="Visual Studio 11 2012 ARM")
+endif
+
+# Visual Studio 2010 (Version 10)
+ifeq ($(G),vs10)
+  $(eval ENV_GEN="Visual Studio 10 2010")
+endif
+ifeq ($(G),vs10w64)
+  $(eval ENV_GEN="Visual Studio 10 2010 Win64")
+endif
+ifeq ($(G),vs10ia64)
+  $(eval ENV_GEN="Visual Studio 10 2010 IA64")
+endif
+
+# Visual Studio 2008 (Version 10)
+ifeq ($(G),vs08)
+  $(eval ENV_GEN="Visual Studio 9 2008")
+endif
+ifeq ($(G),vs08w64)
+  $(eval ENV_GEN="Visual Studio 9 2008 Win64")
+endif
+ifeq ($(G),vs08ia64)
+  $(eval ENV_GEN="Visual Studio 9 2008 IA64")
+endif
+
+ifeq ($(ENV_GEN),)
+  $(error environment generator '$(G)' not supported!, see 'make info-generators')
 endif
 
 
@@ -53,7 +324,9 @@ help:
 
 
 $(OBJ):
-	@mkdir -p $(OBJ)
+ifeq ($(wildcard $(OBJ)),)
+	@mkdir $(OBJ)
+endif
 
 clean:
 ifneq ("$(wildcard $(OBJ)/CMakeCache.txt)","")
@@ -64,29 +337,74 @@ clean-all:
 	@echo "-- Removing build directory" $(OBJ)
 	@rm -rf $(OBJ)
 
-TYPES = debug sanitize release
+TYPES = debug sanitize coverage release
 
 SYNCS = $(TYPES:%=%-sync)
 TESTS = $(TYPES:%=%-test)
 BENCH = $(TYPES:%=%-benchmark)
 INSTA = $(TYPES:%=%-install)
+DEPS  = $(TYPES:%=%-deps)
 ANALY = $(TYPES:%=%-analyze)
 ALL   = $(TYPES:%=%-all)
 
+ENV_CMAKE_FLAGS  = -G$(ENV_GEN)
+ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
 
-$(OBJ)/Makefile: $(OBJ)
-ifeq ("$(wildcard $(OBJ)/CMakeCache.txt)","")
-	@(\
-	cd $(OBJ); \
-	cmake \
-	-D CMAKE_INSTALL_PREFIX=$(BIN) \
-	-D CMAKE_BUILD_TYPE=$(TYPE) \
-	-D CMAKE_C_COMPILER=$(CC) \
-	-D CMAKE_CXX_COMPILER=$(CXX) \
-	.. \
-	)
+ifndef I
+  I = $(BIN)
+endif
+ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(I)
+
+ifeq (,$(findstring Visual,$(ENV_GEN)))
+  ENV_CMAKE_FLAGS += -DCMAKE_C_COMPILER=$(ENV_CC)
+  ENV_CMAKE_FLAGS += -DCMAKE_CXX_COMPILER=$(ENV_CXX)
+
+  ifeq ("$(TYPE)","sanitize")
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="\
+      -O1 -g -Wall -Wextra\
+      -fno-omit-frame-pointer -fno-optimize-sibling-calls\
+      -fsanitize=undefined -fsanitize=address\
+    "
+  endif
+  ifeq ("$(TYPE)","coverage")
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="\
+      -O0 -g -Wall -Wextra\
+      -fprofile-arcs -ftest-coverage\
+    "
+  endif
+
+  ifeq ($(ENV_OSYS),Windows)
+    ifeq ($(ENV_CC),clang)
+      ENV_CMAKE_FLAGS += -DCMAKE_EXE_LINKER_FLAGS="\
+        -Wl,--allow-multiple-definition\
+      "
+    endif
+  endif
 else
-	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ) rebuild_cache
+  ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="\
+   /D_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING\
+   /D_CRT_SECURE_NO_WARNINGS\
+   /WX-\
+   /EHsc\
+   /MTd\
+  "
+  ENV_CMAKE_FLAGS += -DCMAKE_STATIC_LINKER_FLAGS="\
+   /VERBOSE:LIB\
+  "
+  ENV_CMAKE_FLAGS += -DCMAKE_EXE_LINKER_FLAGS="\
+   /VERBOSE:LIB\
+  "
+  ifeq ($(ENV_CC),clang)
+    ENV_CMAKE_FLAGS += -T LLVM-vs2017
+    $(eval ENV_CC=clang-cl)
+    $(eval ENV_CXX=clang-cl)
+  endif
+endif
+
+
+ENV_BUILD_FLAGS  =
+ifneq (,$(findstring Makefile,$(ENV_GEN)))
+  ENV_BUILD_FLAGS += --no-print-directory $(MFLAGS)
 endif
 
 
@@ -94,17 +412,21 @@ sync: debug-sync
 
 sync-all: $(TYPES:%=%-sync)
 
+ifeq ("$(wildcard $(OBJ)/CMakeCache.txt)","")
+$(SYNCS):%-sync: $(OBJ) info-build
+	@cd $(OBJ) && cmake $(ENV_CMAKE_FLAGS) ..
+else
 $(SYNCS):%-sync: $(OBJ)
-	@$(MAKE) $(MFLAGS) --no-print-directory TYPE=$(patsubst %-sync,%,$@) $(OBJ)/Makefile
-
+	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target rebuild_cache -- $(ENV_BUILD_FLAGS)
+endif
 
 $(TYPES):%: %-sync
-	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ) ${TARGET}
+	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) --target $(TARGET) -- $(ENV_BUILD_FLAGS)
 
 all: debug-all
 
 $(ALL):%-all: %-sync
-	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ)
+	@cmake --build $(OBJ) --config $(patsubst %-sync,%,$@) -- $(ENV_BUILD_FLAGS)
 
 
 test: debug-test
@@ -112,8 +434,14 @@ test: debug-test
 test-all: $(TYPES:%=%-test)
 
 $(TESTS):%-test: %
-	@$(MAKE) $(MFLAGS) --no-print-directory \
-	-C $(OBJ) $(TARGET)-check
+	@cmake --build $(OBJ) --config $(patsubst %-test,%,$@) --target $(TARGET)-check -- $(ENV_BUILD_FLAGS)
+ifeq ($(ENV_CC),emcc)
+	cd ./$(OBJ) && \
+	`cat CMakeFiles/$(TARGET)-check.dir/link.txt | \
+	sed "s/$(TARGET)-check/$(TARGET)-check.js -s MAIN_MODULE=1/g"`
+	cd ./$(OBJ) && ln -fs $(TARGET)-check.js $(TARGET)-check
+	$(eval ENV_FLAGS=$(ENV_FLAGS) node)
+endif
 	@echo "-- Running unit test"
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
 
@@ -123,8 +451,14 @@ benchmark: debug-benchmark
 benchmark-all: $(TYPES:%=%-benchmark)
 
 $(BENCH):%-benchmark: %
-	@$(MAKE) $(MFLAGS) --no-print-directory \
-	-C $(OBJ) $(TARGET)-run
+	@cmake --build $(OBJ) --config $(patsubst %-benchmark,%,$@) --target $(TARGET)-run -- $(ENV_BUILD_FLAGS)
+ifeq ($(ENV_CC),emcc)
+	cd ./$(OBJ) && \
+	`cat CMakeFiles/$(TARGET)-run.dir/link.txt | \
+	sed "s/$(TARGET)-run/$(TARGET)-run.js -s MAIN_MODULE=1/g"`
+	cd ./$(OBJ) && ln -fs $(TARGET)-run.js $(TARGET)-run
+	$(eval ENV_FLAGS=$(ENV_FLAGS) node)
+endif
 	@echo "-- Running benchmark"
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
 
@@ -134,18 +468,22 @@ install: debug-install
 install-all: $(TYPES:%=%-install)
 
 $(INSTA):%-install: %
-	@$(MAKE) $(MFLAGS) --no-print-directory -C $(OBJ) install
+	@cmake --build $(OBJ) --config $(patsubst %-install,%,$@) --target install -- $(ENV_BUILD_FLAGS)
+
+
+
+deps: debug-deps
+
+$(DEPS):%-deps: %-sync
+	@cmake --build $(OBJ) --config $(patsubst %-deps,%,$@) --target $(TARGET)-deps -- $(ENV_BUILD_FLAGS)
 
 
 format: $(FORMAT:%=%-format-cpp)
 
 %-format-cpp:
 	@echo "-- Formatting Code C++: $(patsubst %-format-cpp,%,$@)"
-	@clang-format -i \
-	`ls $(patsubst %-format-cpp,%,$@)/*.h 2> /dev/null | grep -e .h` 2> /dev/null
-	@clang-format -i \
-	`ls $(patsubst %-format-cpp,%,$@)/*.cpp 2> /dev/null | grep -e .cpp` 2> /dev/null
-
+	@clang-format -i `ls $(patsubst %-format-cpp,%,$@)/*.h 2> /dev/null | grep -e "\.h"` 2> /dev/null
+	@clang-format -i `ls $(patsubst %-format-cpp,%,$@)/*.cpp 2> /dev/null | grep -e "\.cpp"` 2> /dev/null
 
 update: $(UPDATE_FILE:%=%-update)
 
@@ -163,13 +501,12 @@ license: $(UPDATE_ROOT:%=%-license) $(UPDATE_PATH:%=%-license)
 
 %-license:
 	@echo "-- Relicense: $(patsubst %-update,%,$@)"
-	@(cd $(patsubst %-update,%,$@); \
-	  python2 $(UPDATE_ROOT)/src/py/Licenser.py \
-	)
+	@cd $(patsubst %-update,%,$@); \
+	python2 $(UPDATE_ROOT)/src/py/Licenser.py
 
 license-info:
 	@grep LICENSE.txt -e "---:" | sed "s/---://g"
-	@head LICENSE.txt -n `grep -B1 -ne "---" LICENSE.txt | head -n 1 | sed "s/-//g"` > $(OBJ)/notice.txt
+	@head -n `grep -B1 -ne "---" LICENSE.txt | head -n 1 | sed "s/-//g"` LICENSE.txt > $(OBJ)/notice.txt
 	@cat $(OBJ)/notice.txt | sed "s/^/  /g" | sed "s/$$/\\\n/g" | tr -d '\n' > $(OBJ)/notice
 
 
@@ -229,7 +566,9 @@ SCAN_BUILD_REPORT_ATTIC = $(SCAN_BUILD_REPORT).attic
 
 %-analyze-scan-build: clean
 	@echo "-- Running 'scan-build' $(patsubst %-analyze-scan-build,%,$@)"
-	@mkdir -p $(SCAN_BUILD_REPORT_ATTIC)
+ifeq ($(wildcard $(SCAN_BUILD_REPORT_ATTIC)/.*),)
+	@mkdir $(SCAN_BUILD_REPORT_ATTIC)
+endif
 
 	scan-build \
 	-v \
@@ -246,3 +585,156 @@ SCAN_BUILD_REPORT_ATTIC = $(SCAN_BUILD_REPORT).attic
 	@ln -f -s \
 	$(SCAN_BUILD_REPORT_ATTIC)/`ls -t $(SCAN_BUILD_REPORT_ATTIC) | head -1` \
 	$(SCAN_BUILD_REPORT)
+
+
+info:
+	@echo "-- Environment"
+	@echo "   M = $(ENV_CPUM)"
+	@echo "   P = $(ENV_PLAT)"
+	@echo "   O = $(ENV_OSYS)"
+	@echo "   A = $(ENV_ARCH)"
+	@echo "   S = $(shell ${WHICH} $(SHELL))"
+
+
+info-build: info
+	@echo "   C = $(shell ${WHICH} $(ENV_CC))"
+	@echo "   X = $(shell ${WHICH} $(ENV_CXX))"
+	@echo "   G = $(shell ${WHICH} cmake)"
+	$(eval F=$(subst -D,\n       -D,$(ENV_CMAKE_FLAGS)))
+	@printf '   F = $(F)\n'
+
+info-repo:
+	@printf "%s %-20s %-10s %-25s %s\n" \
+		"--" \
+		"Repository" \
+		`git rev-parse --short HEAD` \
+		`git describe --tags --always --dirty` \
+		`git branch | grep -e "\* " | sed "s/* //g"`
+	@git submodule foreach \
+	'printf "   %-20s %-10s %-25s %s\n" \
+		$$path \
+		`git rev-parse --short HEAD` \
+		`git describe --tags --always --dirty` \
+		`git branch | grep -e "\* " | sed "s/* //g"`' | sed '/Entering/d'
+
+info-variables:
+	$(foreach v, $(.VARIABLES), $(info $(v) = $($(v))))
+
+
+info-generators:
+	@echo "-- Enviroment CMake Generator Aliases"
+	@echo "   make       = 'Unix Makefiles'"
+	@echo "   make-cb    = 'CodeBlocks - Unix Makefiles'"
+	@echo "   make-cl    = 'CodeLite - Unix Makefiles'"
+	@echo "   make-s2    = 'Sublime Text 2 - Unix Makefiles'"
+	@echo "   make-kp    = 'Kate - Unix Makefiles'"
+	@echo "   make-e4    = 'Eclipse CDT4 - Unix Makefiles'"
+	@echo "   make-gw    = 'MinGW Makefiles'"
+	@echo "   make-gw-cb = 'CodeBlocks - MinGW Makefiles'"
+	@echo "   make-gw-cl = 'CodeLite - MinGW Makefiles'"
+	@echo "   make-gw-s2 = 'Sublime Text 2 - MinGW Makefiles'"
+	@echo "   make-gw-kp = 'Kate - MinGW Makefiles'"
+	@echo "   make-gw-e4 = 'Eclipse CDT4 - MinGW Makefiles'"
+	@echo "   make-ms    = 'MSYS Makefiles'"
+	@echo "   make-wc    = 'Watcom WMake'"
+	@echo "   make-bl    = 'Borland Makefiles'"
+	@echo "   make-nm    = 'NMake Makefiles'"
+	@echo "   make-nm-cb = 'CodeBlocks - NMake Makefiles'"
+	@echo "   make-nm-cl = 'CodeLite - NMake Makefiles'"
+	@echo "   make-nm-s2 = 'Sublime Text 2 - NMake Makefiles'"
+	@echo "   make-nm-kp = 'Kate - NMake Makefiles'"
+	@echo "   make-nm-e4 = 'Eclipse CDT4 - NMake Makefiles'"
+	@echo "   make-nj    = 'NMake Makefiles JOM'"
+	@echo "   make-nj-cb = 'CodeBlocks - NMake Makefiles JOM'"
+	@echo "   multi      = 'Green Hills MULTI'"
+	@echo "   ninja      = 'Ninja'"
+	@echo "   ninja-cb   = 'CodeBlocks - Ninja'"
+	@echo "   ninja-cl   = 'CodeLite - Ninja'"
+	@echo "   ninja-s2   = 'Sublime Text 2 - Ninja'"
+	@echo "   ninja-kp   = 'Kate - Ninja'"
+	@echo "   ninja-e4   = 'Eclipse CDT4 - Ninja'"
+	@echo "   vs17       = 'Visual Studio 15 2017'"
+	@echo "   vs17w64    = 'Visual Studio 15 2017 Win64'"
+	@echo "   vs17arm    = 'Visual Studio 15 2017 ARM'"
+	@echo "   vs15       = 'Visual Studio 14 2015'"
+	@echo "   vs15w64    = 'Visual Studio 14 2015 Win64'"
+	@echo "   vs15arm    = 'Visual Studio 14 2015 ARM'"
+	@echo "   vs13       = 'Visual Studio 12 2013'"
+	@echo "   vs13w64    = 'Visual Studio 12 2013 Win64'"
+	@echo "   vs13arm    = 'Visual Studio 12 2013 ARM'"
+	@echo "   vs12       = 'Visual Studio 11 2012'"
+	@echo "   vs12w64    = 'Visual Studio 11 2012 Win64'"
+	@echo "   vs12arm    = 'Visual Studio 11 2012 ARM'"
+	@echo "   vs10       = 'Visual Studio 10 2010'"
+	@echo "   vs10w64    = 'Visual Studio 10 2010 Win64'"
+	@echo "   vs10ia64   = 'Visual Studio 10 2010 IA64'"
+	@echo "   vs08       = 'Visual Studio 9 2008'"
+	@echo "   vs08w64    = 'Visual Studio 9 2008 Win64'"
+	@echo "   vs08ia64   = 'Visual Studio 9 2008 IA64'"
+
+
+#
+#
+# Continues Integration and Deployment
+#
+
+# https://cirrus-ci.org/guide/writing-tasks/#environment-variables
+ENV_CI_BRANCH         := $(CIRRUS_BRANCH)
+ENV_CI_BRANCH_BASE    := $(CIRRUS_BASE_BRANCH)
+ENV_CI_BRANCH_DEFAULT := $(CIRRUS_DEFAULT_BRANCH)
+ENV_CI_BUILD          := $(CIRRUS_BUILD_ID)
+ENV_CI_BUILD_PATH     := $(CIRRUS_WORKING_DIR)
+ENV_CI_BUILD_INDEX    := $(CI_NODE_INDEX)
+ENV_CI_BUILD_TOTAL    := $(CI_NODE_TOTAL)
+ENV_CI_COMMIT         := $(CIRRUS_CHANGE_IN_REPO)
+ENV_CI_COMMIT_BASE    := $(CIRRUS_BASE_SHA)
+ENV_CI_DEPTH          := $(CIRRUS_CLONE_DEPTH)
+ENV_CI_HTTP           := $(CIRRUS_HTTP_CACHE_HOST)
+ENV_CI_OS             := $(CIRRUS_OS)
+ENV_CI_PR             := $(CIRRUS_PR)
+ENV_CI_REPO           := $(CIRRUS_REPO_FULL_NAME)
+ENV_CI_REPO_NAME      := $(CIRRUS_REPO_NAME)
+ENV_CI_REPO_OWNER     := $(CIRRUS_REPO_OWNER)
+ENV_CI_REPO_URL       := $(CIRRUS_REPO_CLONE_URL)
+ENV_CI_SHELL          := $(CIRRUS_SHELL)
+ENV_CI_TAG            := $(CIRRUS_TAG)
+ENV_CI_TASK_NAME      := $(CIRRUS_TASK_NAME)
+ENV_CI_TASK_ID        := $(CIRRUS_TASK_ID)
+
+ci-check:
+ifeq ($(CI),true)
+  ifneq ($(CIRRUS_CI),true)
+    $(error unsupported CI environment)
+  endif
+  ifndef C
+    $(error no compiler selected)
+  endif
+  ifndef B
+    $(error no build type selected)
+  endif
+endif
+
+ci-info: ci-check info
+	@echo "   I = $(ENV_CI_BUILD)"
+	@echo "   B = $(ENV_CI_BRANCH)"
+	@echo "   # = $(ENV_CI_COMMIT)"
+	@echo ""
+
+ci-fetch: ci-info
+	@git submodule update --init
+	@echo ""
+	@git submodule foreach \
+	'git branch --remotes | grep $(ENV_CI_BRANCH) && git checkout $(ENV_CI_BRANCH) || git checkout master; echo ""'
+	@make --no-print-directory info-repo
+
+ci-deps: ci-check
+	@make --no-print-directory C=$(C) $(B)-deps
+
+ci-build: ci-check
+	@make --no-print-directory C=$(C) $(B)
+
+ci-test: ci-check
+	@make --no-print-directory C=$(C) $(B)-test
+
+ci-benchmark: ci-check
+	@make --no-print-directory C=$(C) $(B)-benchmark

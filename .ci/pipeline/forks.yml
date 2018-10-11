@@ -38,7 +38,7 @@ resources:
 {{resource:casm-lang:libz3@master}}
 
 jobs:
-{{job:external-fork:asmjit@master}}
-{{job:external-fork:gtest@master}}
-{{job:external-fork:hayai@master}}
-{{job:external-fork:z3@master}}
+{{job:external-fork:asmjit@master&true}}
+{{job:external-fork:gtest@master&false}}
+{{job:external-fork:hayai@master&true}}
+{{job:external-fork:z3@master&true}}

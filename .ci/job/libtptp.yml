@@ -22,43 +22,23 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-{{active}}
-{{public}}
-
----
-resources:
-{{resource:send-email}}
-{{resource:config}}
-
-{{resource:casm-lang:libasmjit@master}}
-{{resource:casm-lang:libgtest@master}}
-{{resource:casm-lang:libhayai@master}}
-{{resource:casm-lang:libz3@master}}
-
-{{resource:casm-lang:libstdhl@master}}
-{{resource:casm-lang:libpass@master}}
-{{resource:casm-lang:libtptp@master}}
-
-{{resource:casm-lang:libcasm-ir@master}}
-{{resource:casm-lang:libcasm-rt@master}}
-{{resource:casm-lang:libcasm-fe@master}}
-{{resource:casm-lang:libcasm-tc@master}}
-
-{{resource:casm-lang:casmi@master}}
-
-jobs:
-{{job:external:libasmjit@master}}
-{{job:external:libgtest@master}}
-{{job:external:libhayai@master}}
-{{job:external:libz3@master}}
-
-{{job:libstdhl@master}}
-{{job:libpass@master}}
-{{job:libtptp@master}}
-
-{{job:libcasm-ir@master}}
-{{job:libcasm-rt@master}}
-{{job:libcasm-fe@master}}
-{{job:libcasm-tc@master}}
-
-{{job:casmi@master}}
+- name: {{REPO}}-{{TAG}}
+  plan:
+  - aggregate:
+    {{step:repo-get-config}}
+    {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
+    {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
+    {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
+    {{step:repo-get-trig-pass:libpass@{{TAG}}}}
+    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
+  - task: fetch
+    file: config/.ci/task/fetch/4.yml
+    input_mapping:
+      repo: {{REPO}}@{{TAG}}
+      lib1: libgtest@{{TAG}}
+      lib2: libhayai@{{TAG}}
+      lib3: libstdhl@{{TAG}}
+      lib4: libpass@{{TAG}}
+    params:
+      LIBS: gtest hayai stdhl pass
+  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
