@@ -22,7 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{REPO}}-check
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
     - get: after-midnight

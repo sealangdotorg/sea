@@ -29,7 +29,7 @@
 * casm: CASM Project
 
 [[https://gitter.im/casm-lang/casm][https://badges.gitter.im/casm-lang/casm.png]]
-[[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casm-check][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casm-check/badge">@@ ]]
+[[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casm-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casm-master/badge">@@ ]]
 [[https://cirrus-ci.com/github/casm-lang/casm][https://api.cirrus-ci.com/github/casm-lang/casm.svg]]
 [[https://codecov.io/gh/casm-lang/casm][https://codecov.io/gh/casm-lang/casm/badge.svg]]
 [[https://github.com/casm-lang/casm/tags][https://img.shields.io/github/tag/casm-lang/casm.svg]]

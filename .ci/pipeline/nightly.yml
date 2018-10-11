@@ -30,9 +30,24 @@ resources:
 {{resource:send-email}}
 {{resource:after-midnight}}
 {{resource:config}}
-{{resource:casm-lang:casm@master}}
+
 {{resource:casm-lang:libstdhl@master}}
+{{resource:casm-lang:libpass@master}}
+{{resource:casm-lang:libtptp@master}}
+{{resource:casm-lang:libcasm-ir@master}}
+{{resource:casm-lang:libcasm-rt@master}}
+{{resource:casm-lang:libcasm-fe@master}}
+{{resource:casm-lang:libcasm-tc@master}}
+{{resource:casm-lang:casmi@master}}
+{{resource:casm-lang:casm@master}}
 
 jobs:
 {{job:nightly:libstdhl@master}}
+{{job:nightly:libpass@master}}
+{{job:nightly:libtptp@master}}
+{{job:nightly:libcasm-ir@master}}
+{{job:nightly:libcasm-rt@master}}
+{{job:nightly:libcasm-fe@master}}
+{{job:nightly:libcasm-tc@master}}
+{{job:nightly:casmi@master}}
 {{job:nightly:casm@master}}
