@@ -64,4 +64,4 @@
       lib7: libcjel-ir
     params:
       LIBS: gtest hayai stdhl pass casm-ir casm-rt cjel-ir
-    {{fetch_build_test}}
+    {{fetch_deps_build_test}}

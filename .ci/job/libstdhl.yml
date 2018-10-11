@@ -37,4 +37,4 @@
       lib2: libhayai@{{TAG}}
     params:
       LIBS: gtest hayai
-  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
+  {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}

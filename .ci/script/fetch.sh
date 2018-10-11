@@ -40,9 +40,6 @@ fi
 
 set -e -x
 
-git config --global url."git@github.com:casm-lang".insteadOf "https://github.com/casm-lang"
-git config --global url."git@github.com:casmlang".insteadOf "https://github.com/casmlang"
-
 # print 'in'
 ls -lA $IN
 

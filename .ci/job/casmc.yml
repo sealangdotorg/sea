@@ -69,4 +69,4 @@
     params:
       LIBS: gtest hayai stdhl pass casm-ir casm-rt casm-fe casm-tc
       DEPS: in/repo/lib
-    {{fetch_build_test}}
+    {{fetch_deps_build_test}}

@@ -22,23 +22,8 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{REPO}}-{{TAG}}
-  plan:
-  - aggregate:
-    {{step:repo-get-config}}
-    {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
-    {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
-    {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
-    {{step:repo-get-trig-pass:libpass@{{TAG}}}}
-    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
-  - task: fetch
-    file: config/.ci/task/fetch/4.yml
-    input_mapping:
-      repo: {{REPO}}@{{TAG}}
-      lib1: libgtest@{{TAG}}
-      lib2: libhayai@{{TAG}}
-      lib3: libstdhl@{{TAG}}
-      lib4: libpass@{{TAG}}
-    params:
-      LIBS: gtest hayai stdhl pass
-  {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}
+- task: fetch
+  file: config/.ci/task/fetch.yml
+  input_mapping:
+    repo: {{REPO}}@{{TAG}}
+{{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}

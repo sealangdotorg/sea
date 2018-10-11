@@ -41,4 +41,4 @@
       lib4: libpass@{{TAG}}
     params:
       LIBS: gtest hayai stdhl pass
-  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
+  {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}

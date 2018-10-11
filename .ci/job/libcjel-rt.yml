@@ -56,4 +56,4 @@
       lib5: libcjel-ir
     params:
       LIBS: gtest hayai stdhl pass cjel-ir
-    {{fetch_build_test}}
+    {{fetch_deps_build_test}}

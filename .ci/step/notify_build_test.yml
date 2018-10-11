@@ -23,11 +23,6 @@
 #
 
   {{step:notification:{{REPO}}@{{TAG}}&fetch}}
-- task: deps
-  file: config/.ci/task/deps.yml
-  input_mapping:
-    in: out
-  {{step:notification:{{REPO}}@{{TAG}}&deps}}
 - task: build
   file: config/.ci/task/build.yml
   input_mapping:

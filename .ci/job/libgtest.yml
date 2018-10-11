@@ -32,4 +32,4 @@
       trigger: true
       params:
         submodules: none
-  {{step:external/fetch_build_test:{{REPO}}@{{TAG}}}}
+  {{step:external/fetch_deps_build_test:{{REPO}}@{{TAG}}}}

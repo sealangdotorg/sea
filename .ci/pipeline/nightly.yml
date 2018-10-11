@@ -50,4 +50,4 @@ jobs:
 {{job:nightly:libcasm-fe@master}}
 {{job:nightly:libcasm-tc@master}}
 {{job:nightly:casmi@master}}
-{{job:nightly:casm@master}}
+{{job:nightly-nodeps:casm@master}}

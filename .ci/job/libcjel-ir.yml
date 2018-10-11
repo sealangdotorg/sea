@@ -52,4 +52,4 @@
       lib4: libpass
     params:
       LIBS: gtest hayai stdhl pass
-    {{fetch_build_test}}
+    {{fetch_deps_build_test}}

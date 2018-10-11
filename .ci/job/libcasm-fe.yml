@@ -45,4 +45,4 @@
       lib6: libcasm-rt@{{TAG}}
     params:
       LIBS: gtest hayai stdhl pass casm-ir casm-rt
-  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
+  {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}
