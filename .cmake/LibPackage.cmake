@@ -412,7 +412,10 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
     set( ${PREFIX}_REPO_DIR ${PROJECT_SOURCE_DIR}/${PREFIX_PATH} )
     set( ${PREFIX}_MAKE_DIR ${${PREFIX}_REPO_DIR}/${TMP} )
 
-    if( "${CMAKE_INSTALL_PREFIX}" STREQUAL "${CMAKE_BINARY_DIR}/install" )
+    get_filename_component( ${PREFIX}_CMAKE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}"     ABSOLUTE )
+    get_filename_component( ${PREFIX}_DUMMY_INSTALL_DIR "${CMAKE_BINARY_DIR}/install" ABSOLUTE )
+
+    if( "${${PREFIX}_CMAKE_INSTALL_PREFIX}" STREQUAL "${${PREFIX}_CMAKE_INSTALL_PREFIX}" )
       set( ${PREFIX}_ROOT_DIR ${${PREFIX}_MAKE_DIR}/install )
     else()
       set( ${PREFIX}_ROOT_DIR ${CMAKE_INSTALL_PREFIX} )
