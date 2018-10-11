@@ -798,6 +798,8 @@ INPUT                  = ./doc \
                          ./lib/stdhl/src/cpp \
                          ./lib/pass/obj/src/libpass/Version.h \
                          ./lib/pass/src \
+                         ./lib/tptp/obj/src/libpass/Version.h \
+                         ./lib/tptp/src \
                          ./lib/casm-fe/obj/src/libcasm-fe/Version.h \
                          ./lib/casm-fe/src \
                          ./lib/casm-tc/obj/src/libcasm-tc/Version.h \
