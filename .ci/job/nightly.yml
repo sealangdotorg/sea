@@ -32,6 +32,11 @@
         submodules: none
     - get: {{REPO}}@{{TAG}}
       params:
-        submodule_recursive: "false"
-        submodule_remote: "true"
-  {{step:fetch_build_test:{{REPO}}@{{TAG}}}}
+        submodules: none
+  - task: fetch
+    file: config/.ci/task/fetch.yml
+    input_mapping:
+      repo: {{REPO}}@{{TAG}}
+    params:
+      MODS: --remote
+  {{step:notify_build_test:{{REPO}}@{{TAG}}}}
