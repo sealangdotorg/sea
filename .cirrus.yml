@@ -105,4 +105,5 @@ windows_task:
     - make ci-test
   benchmark_script:
     - set PATH=C:\msys2\%V%\bin;%PATH%
-    - if "%B%"=="release" ( make ci-benchmark )
+    - echo if "%B%"=="release" make ci-benchmark > obj\benchmark_script.bat
+    - obj\benchmark_script.bat
