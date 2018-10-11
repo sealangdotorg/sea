@@ -33,4 +33,5 @@
     - get: {{REPO}}@{{TAG}}
       params:
         submodule_recursive: "false"
+        submodule_remote: "true"
   {{step:fetch_build_test:{{REPO}}@{{TAG}}}}

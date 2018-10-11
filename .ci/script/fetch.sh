@@ -39,8 +39,8 @@ if [ -z "$REPO" ]; then
 fi
 
 set -e -x
-date
-uname -a
+
+git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 # print 'in'
 ls -lA $IN
