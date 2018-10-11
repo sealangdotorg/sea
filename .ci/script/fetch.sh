@@ -38,7 +38,7 @@ if [ -z "$REPO" ]; then
     exit -1
 fi
 
-set -e -x
+set -e
 
 # print 'in'
 ls -lA $IN
@@ -62,6 +62,20 @@ if [ -n "$LIBS" ]; then
 	cnt=$((cnt + 1))
     done
 fi
+
+# print 'git' repository and sub-module information
+printf "%s %-20s %-10s %-25s %s\n" \
+       "--" \
+       "Repository" \
+       `git rev-parse --short HEAD` \
+       `git describe --tags --always --dirty` \
+       `git branch | grep -e "\* " | sed "s/* //g"`
+git submodule foreach \
+	'printf "   %-20s %-10s %-25s %s\n" \
+	$path \
+	`git rev-parse --short HEAD` \
+	`git describe --tags --always --dirty` \
+	`git branch | grep -e "\* " | sed "s/* //g"`' | sed '/Entering/d'
 
 # copy 'in' to 'out'
 cp -rf $IN/* $OUT/
