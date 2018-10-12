@@ -60,8 +60,9 @@ FLY_PIPELINE=$(FLY_PATH)/pipeline
 FLY_EXT=.yml
 
 PIPELINES  = forks
-PIPELINES += nightly
 PIPELINES += development
+PIPELINES += nightly
+PIPELINES += release
 
 fly: $(PIPELINES:%=fly-%)
 
