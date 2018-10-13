@@ -1,3 +1,5 @@
+![](https://github.com/casm-lang/casm-lang.logo/raw/master/etc/headline.png)
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
