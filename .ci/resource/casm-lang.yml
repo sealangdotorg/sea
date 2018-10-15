@@ -28,5 +28,7 @@
     branch: {{TAG}}
     uri: git@github.com:casm-lang/{{REPO}}.git
     private_key: {{github-auth}}
+    username: {{github-user}}
+    password: {{github-pass}}
     skip_ssl_verification: true
     disable_ci_skip: true
