@@ -1,2 +1,2 @@
-- describe i a high-level view the changes the PR provides
+- describe in a high-level view the changes the PR provide
 - reference the corresponding issue number
