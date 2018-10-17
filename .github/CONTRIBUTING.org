@@ -28,18 +28,16 @@
 
 * Contributing to CASM
 
-This document outlines the organizational structure of the CASM project 
-and some guidelines how you can contribute to it. 
-
+This document outlines the organizational structure of the CASM project and its associated sub-projects (sub-modules) together with some guidelines how you can contribute to those repositories.
 
 ** What should I know before I get started?
 
 *** Code of Conduct
 
-We use in this project 
-the [[https://github.com/casm-lang/casm/blob/master/.github/CODE_OF_CONDUCT.org][Contributor Covenant Code of Conduct]], 
-and by participating to this project you shall uphold to this code.
-
+We use in this project and its associated sub-modules
+the [[CODE_OF_CONDUCT.org][Contributor Covenant Code of Conduct]], and by participating
+to this project and its associated sub-modules
+you shall uphold to this code.
 
 *** Applications, Libraries and Plugins
 
@@ -47,14 +45,14 @@ The project consists of several different application, library,
 and extension plug-in projects which reside in a separate repository 
 and are tracked in this repository via =git= sub-module references.
 
-
 *** Having Questions
 
 If you have a question about this project or the sub-projects, 
 please use our overall project [[https://github.com/casm-lang/casm/issues][issue tracker]] and
-open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there and assign the =question= label.
+open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there.
 
-
+To guide you through common issue creation cases, we provided templates 
+for [[https://github.com/casm-lang/casm/issues/new?template=bug.md][bug report]], [[https://github.com/casm-lang/casm/issues/new?template=feature.md][feature request]], and [[https://github.com/casm-lang/casm/issues/new?template=question.md][question]] related issues.
 
 ** How Can I Contribute?
 
@@ -66,19 +64,23 @@ please use our overall project [[https://github.com/casm-lang/casm/issues][issue
 open a [[https://github.com/casm-lang/casm/issues/new][new issue]] there and assign the appropriate labels.
 A detailed list and description of labels is given below.
 
-
 *** First Code Contribution
 
-If you want to start your contribution, look out for =good first issue= and =help wanted= labeled issues
-in the [[https://github.com/casm-lang/casm/issues][issue tracker]].
-
+If you want to start your contribution, 
+look out for =good first issue= and =help wanted= 
+labeled issues in the [[https://github.com/casm-lang/casm/issues][issue tracker]].
 
 *** Pull Requests
 
 TBD
 
-
 ** Style Guides
+
+# *** Git Commits
+# 
+# This commit was signed with a verified signature.
+# 
+# https://help.github.com/articles/signing-commits-with-gpg/
 
 *** Git Commit Messages
 
@@ -96,7 +98,6 @@ The commit messages shall have the following style in all the project repositori
 [* <detailed description>]
 [* see: <links or refs>]
 #+end_src
-
 
 ** Additional Notes
 
