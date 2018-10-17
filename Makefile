@@ -54,6 +54,25 @@ doxy:
 	@mkdir -p obj
 	@doxygen
 
+GITHUB_PATH  = $(subst ., $(UPDATE_ROOT), $(UPDATE_PATH))
+GITHUB_DIR   = .github
+GITHUB_FILE  = CODE_OF_CONDUCT.md
+GITHUB_FILE += CODE_OF_CONDUCT.org
+GITHUB_FILE += CONTRIBUTING_SUBMODULE.org
+GITHUB_FILE += ISSUE_TEMPLATE.org
+GITHUB_FILE += PULL_REQUEST_TEMPLATE.org
+
+github: $(GITHUB_FILE:%=github-%)
+
+define github-command
+  $(eval GH_SRC := $(GITHUB_DIR)/$(2))
+  $(eval GH_DST := $(1)/$(GH_SRC))
+#  $(info "-- Generating '$(GH_SRC)' -> '$(GH_DST)'")
+  $(shell cp -vf $(GH_SRC) $(GH_DST))
+endef
+
+github-%:
+	$(foreach path,$(GITHUB_PATH),$(call github-command,$(path),$(patsubst github-%,%,$@)))
 
 FLY_PATH=.ci
 FLY_PIPELINE=$(FLY_PATH)/pipeline
