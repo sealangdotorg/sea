@@ -195,9 +195,21 @@
 	path = var/doc/infuehr2013bsc
 	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc.git
 
+[submodule "var/doc/lascsak2019bsc"]
+	path = var/doc/lascsak2019bsc
+	url = git@github.com:casm-lang/casm-lang.doc.lascsak2019bsc.git
+
 [submodule "var/doc/lezuo2014phd"]
 	path = var/doc/lezuo2014phd
 	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd.git
+
+[submodule "var/doc/molnar2019bsc"]
+	path = var/doc/molnar2019bsc
+	url = git@github.com:casm-lang/casm-lang.doc.molnar2019bsc.git
+
+[submodule "var/doc/moosbrugger2019csp"]
+	path = var/doc/moosbrugger2019csp
+	url = git@github.com:casm-lang/casm-lang.doc.moosbrugger2019csp.git
 
 [submodule "var/doc/nguyen2017bsc"]
 	path = var/doc/nguyen2017bsc
