@@ -31,7 +31,7 @@
 #+html: <callout type="primary">
 ****** Release "berenice"
 
-October TBA, 2018
+November 4, 2018
 
 The release identifier [[http://www.behindthename.com/name/berenice][berenice]]
 is derived from the Greek word Βερενικη (Berenike, or Berenice) and means "bringing victory".
