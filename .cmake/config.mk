@@ -728,8 +728,10 @@ ci-info: ci-check info
 ci-fetch: ci-info
 	@git submodule update --init
 	@echo ""
+ifeq (,$(findstring release/,$(ENV_CI_BRANCH)))
 	@git submodule foreach \
 	'git branch --remotes | grep $(ENV_CI_BRANCH) && git checkout $(ENV_CI_BRANCH) || git checkout master; echo ""'
+endif
 	@make --no-print-directory info-repo
 
 ci-deps: ci-check
