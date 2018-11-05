@@ -61,6 +61,7 @@ package_git_deps(
   libcasm-ir>libcasm-rt
   libcasm-rt>libcasm-fe
   libcasm-fe>libcasm-tc
+  libcasm-fe>casmd
   libcasm-tc>casmi
   )
 
