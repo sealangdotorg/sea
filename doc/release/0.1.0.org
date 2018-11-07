@@ -24,21 +24,18 @@
 #
 
 #+options: toc:nil
-
-** 0.1.0
 #+html: {{tag>release}}
 
-#+html: <callout type="primary">
-****** Release "auxentios"
+*** 0.1.0
 
-June 4, 2018
+#+html: <callout type="primary" title="Release ''auxentios''">
+[[https://github.com/casm-lang/casm/releases/tag/0.1.0][{{fa>github?lg}}]] June 4, 2018
 
-The release identifier [[http://www.behindthename.com/name/auxentios][auxentios]] 
+The release identifier [[http://www.behindthename.com/name/auxentios][auxentios]]
 is derived from the Greek word αυξανω (auxano) and means "to increase, to grow".
 #+html: </callout>
 
 This is the first official public release of the CASM project.
 It contains a release build of the CASM interpreter application called =casmi=.
 For now, we only support =Linux= and ship a statically build =x86_64= compatible 64bit binary with zero dependencies.
-The binary sources are packed and deployed to various environments including ArchLinux AUR and Docker, 
-see: https://github.com/casm-lang/casm/releases/tag/0.1.0
+The binary sources are packed and deployed to various environments including ArchLinux AUR and Docker.
