@@ -93,7 +93,7 @@ The commit messages shall have the following style in all the project repositori
 - <links or refs> :: (optional) For further information regarding a issue of pull request information, comment etc. use proper "* see: <...>" descriptions. 
 
 #+begin_src:
-<header> [: <short description>] [<emoji>]
+<header>[: <short description>] [<emoji>]
 
 [* <detailed description>]
 [* see: <links or refs>]
