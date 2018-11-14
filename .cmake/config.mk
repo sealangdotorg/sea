@@ -620,7 +620,7 @@ info-repo:
 		$$path \
 		`git rev-parse --short HEAD` \
 		`git describe --tags --always --dirty` \
-		`git branch | grep -e "\* " | sed "s/* //g"`' | sed '/Entering/d'
+		`git branch | grep "* " | sed "s/* //g" | sed "s/ /-/g"`' | sed '/Entering/d'
 
 info-variables:
 	$(foreach v, $(.VARIABLES), $(info $(v) = $($(v))))
