@@ -45,6 +45,7 @@ resources:
 {{resource:casm-lang:libcasm-tc@master}}
 
 {{resource:casm-lang:casmi@master}}
+{{resource:casm-lang:casmf@master}}
 {{resource:casm-lang:casmd@master}}
 
 jobs:
@@ -63,4 +64,5 @@ jobs:
 {{job:libcasm-tc@master}}
 
 {{job:casmi@master}}
+{{job:casmf@master}}
 {{job:casmd@master}}

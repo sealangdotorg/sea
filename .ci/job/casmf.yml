@@ -22,51 +22,31 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-- name: {{NAME}}-
+- name: {{REPO}}-{{TAG}}
   plan:
   - aggregate:
-    - get: config
-      params: { submodules: none }
-    - get: {{NAME}}
-      params: { submodules: none }
-      trigger: true
-    - get: libgtest
-      passed: [ libgtest- ]
-      trigger: true
-    - get: libhayai
-      passed: [ libhayai- ]
-      trigger: true
-    - get: libstdhl
-      passed: [ libstdhl- ]
-      trigger: true
-    - get: libpass
-      passed: [ libpass- ]
-      trigger: true
-    - get: libcasm-ir
-      passed: [ libcasm-ir- ]
-      trigger: true
-    - get: libcasm-rt
-      passed: [ libcasm-rt- ]
-      trigger: true
-    - get: libcasm-fe
-      passed: [ libcasm-fe- ]
-      trigger: true
-    - get: libcasm-tc
-      passed: [ libcasm-tc- ]
-      trigger: true
+    {{step:repo-get-config}}
+    {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
+    {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
+    {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
+    {{step:repo-get-trig-pass:libpass@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-ir@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-rt@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-fe@{{TAG}}}}
+    {{step:repo-get-trig-pass:libcasm-tc@{{TAG}}}}
+    {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
   - task: fetch
     file: config/.ci/task/fetch/8.yml
     input_mapping:
-      repo: {{NAME}}
-      lib1: libgtest
-      lib2: libhayai
-      lib3: libstdhl
-      lib4: libpass
-      lib5: libcasm-ir
-      lib6: libcasm-rt
-      lib7: libcasm-fe
-      lib8: libcasm-tc
+      repo: {{REPO}}@{{TAG}}
+      lib1: libgtest@{{TAG}}
+      lib2: libhayai@{{TAG}}
+      lib3: libstdhl@{{TAG}}
+      lib4: libpass@{{TAG}}
+      lib5: libcasm-ir@{{TAG}}
+      lib6: libcasm-rt@{{TAG}}
+      lib7: libcasm-fe@{{TAG}}
+      lib8: libcasm-tc@{{TAG}}
     params:
       LIBS: gtest hayai stdhl pass casm-ir casm-rt casm-fe casm-tc
-      DEPS: in/repo/lib
-    {{fetch_deps_build_test}}
+  {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}
