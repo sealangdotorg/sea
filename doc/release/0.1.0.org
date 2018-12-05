@@ -28,14 +28,30 @@
 
 *** 0.1.0
 
-#+html: <callout type="primary" title="Release ''auxentios''">
+#+html: <callout title="Release ''auxentios''">
 [[https://github.com/casm-lang/casm/releases/tag/0.1.0][{{fa>github?lg}}]] June 4, 2018
 
 The release identifier [[http://www.behindthename.com/name/auxentios][auxentios]]
 is derived from the Greek word αυξανω (auxano) and means "to increase, to grow".
 #+html: </callout>
 
-This is the first official public release of the CASM project.
+#+html: <grid>
+#+html: <col lg="3" md="12">
+#+html: <TEXT align="justify">
+This is the first official release of the CASM project.
 It contains a release build of the CASM interpreter application called =casmi=.
-For now, we only support =Linux= and ship a statically build =x86_64= compatible 64bit binary with zero dependencies.
+For now, we only support =Linux= and ship a statically build =x86_64= compatible 64-bit binary with zero dependencies.
 The binary sources are packed and deployed to various environments including ArchLinux AUR and Docker.
+
+#+html: </TEXT>
+#+html: </col>
+#+html: <col lg="9" md="12">
+
+| {{fa>file-alt?lg}}  | *Language*    | Contains the first version of the offical CASM language [[./../syntax][syntax]], which contains the core elements of an ASM language implementation. |
+|                     |               |                                                                                                                                     |
+| {{fa>microchip?lg}} | *Environment* | This release supports building =x86_64= compatible 64-bit binaries for =Linux=-based operating systems.                             |
+|                     |               |                                                                                                                                     |
+| {{fa>terminal?lg}}  | *Application* | Introducing the CASM interpreter command line application called =casmi= to numerically execute (simulate) CASM specification.      |
+
+#+html: </col>
+#+html: </grid>
