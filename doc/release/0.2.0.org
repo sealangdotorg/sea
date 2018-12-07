@@ -57,7 +57,7 @@ Last but not least, we publish our own LSP client plug-in extension for the =mon
 |                        |               |                                                                                                                            |
 | {{fa>terminal?lg}}     | *Application* | Introducing the CASM language server/service daemon command line application called =casmd= to interact with LSP clients.  |
 |                        |               |                                                                                                                            |
-| {{fa>puzzle-piece?lg}} | *Plug-in*     | Integrated a LSP client as =monaco= editor extension to provide a CASM language environment service.                       |
+| {{fa>puzzle-piece?lg}} | *Plug-in*     | Integrated a LSP client as =monaco= editor extension provided as a CASM language environment service.                      |
 |                        |               |                                                                                                                            |
 
 #+html: </col>
