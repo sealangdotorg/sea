@@ -1,0 +1,64 @@
+# 
+#   Copyright (C) 2014-2018 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+# 
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+# 
+#   This file is part of casm.
+# 
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+# 
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+# 
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+# 
+#
+
+#+options: toc:nil
+#+html: {{tag>release}}
+
+*** 0.2.0
+
+#+html: <callout title="Release ''berenice''">
+[[https://github.com/casm-lang/casm/releases/tag/0.2.0][{{fa>github?lg}]] December 7, 2018
+
+The release identifier [[http://www.behindthename.com/name/berenice][berenice]]
+is derived from the Greek word Βερενικη (Berenike, or Berenice) and means "bringing victory".
+#+html: </callout>
+
+#+html: <grid>
+#+html: <col lg="3" md="12">
+#+html: <TEXT align="justify">
+This is the second official release of the CASM project.
+It introduces four big improvements.
+First, we added a new language construct to specify invariant conditions through globally defined invariant definitions inside a CASM specification.
+Just try it with the shipped  =casmi=.
+Second, our huge effort over the summer has finally paid off. Now we are able to compile the CASM project more or less platform independent with various C++ compilers.
+Therefore, we support and ship pre-compiled =x86_64= binaries for =Linux=, =Mac=, and =Windows=.
+Third, besides the interpreter we ship a new daemon application called =casmd=, which is our own server-sided Language Server Protocol (LSP) implementation to interact with LSP (editor) clients.
+Last but not least, we publish our own LSP client plug-in extension for the =monaco= editor framework. With this plug-in a fully functional CASM editor environment allows you to specify, debug, and run (execute) the provided CASM specification.
+
+#+html: </TEXT>
+#+html: </col>
+#+html: <col lg="9" md="12">
+
+| {{fa>file-alt?lg}}     | *Language*    | We introduced a new language syntax [[./../syntax#InvariantDefinition][definition element]] to specify global invariant conditions in CASM specifications.      |
+|                        |               |                                                                                                                            |
+| {{fa>microchip?lg}}    | *Environment* | Platform independent compilation supported to build =x86_64= compatible 64-bit binaries for =Linux=, =Mac=, and =Windows=. |
+|                        |               |                                                                                                                            |
+| {{fa>terminal?lg}}     | *Application* | Introducing the CASM language server/service daemon command line application called =casmd= to interact with LSP clients.  |
+|                        |               |                                                                                                                            |
+| {{fa>puzzle-piece?lg}} | *Plug-in*     | Integrated a LSP client as =monaco= editor extension to provide a CASM language environment service.                       |
+|                        |               |                                                                                                                            |
+
+#+html: </col>
+#+html: </grid>

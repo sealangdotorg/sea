@@ -50,7 +50,7 @@ package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
 #package_git_submodule( libcjel-be master REQUIRED obj   lib/cjel-be )
 #package_git_submodule( libcjel-tc master REQUIRED obj   lib/cjel-tc )
 #package_git_submodule( casmc      master REQUIRED obj   app/casmc   )
-#package_git_submodule( casmd      master REQUIRED obj   app/casmd   )
+package_git_submodule( casmd      master REQUIRED obj   app/casmd   )
 #package_git_submodule( casmf      master REQUIRED obj   app/casmf   )
 package_git_submodule( casmi      master REQUIRED obj   app/casmi   )
 package_git_deps(
@@ -62,6 +62,7 @@ package_git_deps(
   libcasm-rt>libcasm-fe
   libcasm-fe>libcasm-tc
   libcasm-tc>casmi
+  libcasm-tc>casmd
   )
 
 
