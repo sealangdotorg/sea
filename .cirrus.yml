@@ -54,7 +54,7 @@ linux_task:
 
 darwin_task:
   osx_instance:
-    image: high-sierra-xcode-9.4.1
+    image: mojave-xcode-10.1
   env:
     GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
   matrix:
@@ -65,10 +65,8 @@ darwin_task:
       B: "debug"
       C: "gcc"
   setup_script:
-    - brew install cmake
-    - if [ "$C" == "gcc" ]; then brew install gcc; fi
-    - brew install flex  && brew link --force flex
-    - brew install bison && brew link --force bison
+    - ln -s /usr/local/bin/gcc-8 /usr/local/bin/gcc
+    - ln -s /usr/local/bin/g++-8 /usr/local/bin/g++
   fetch_script:
     - make ci-fetch
   build_script:
@@ -81,7 +79,7 @@ darwin_task:
 windows_task:
   windows_container:
     image: casmlang/container.windows
-    os_version: 2016
+    os_version: 2019
     cpu: 1
   env:
     GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
