@@ -45,3 +45,5 @@
 set -e
 
 make --no-print-directory -C app/casmi test
+
+make --no-print-directory -C app/casmf test
