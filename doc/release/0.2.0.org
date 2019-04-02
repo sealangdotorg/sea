@@ -29,14 +29,14 @@
 *** 0.2.0
 
 #+html: <callout title="Release ''berenice''">
-[[https://github.com/casm-lang/casm/releases/tag/0.2.0][{{fa>github?lg}]] December 7, 2018
+[[https://github.com/casm-lang/casm/releases/tag/0.2.0][{{fa>github?lg}}]] December 7, 2018
 
 The release identifier [[http://www.behindthename.com/name/berenice][berenice]]
 is derived from the Greek word Βερενικη (Berenike, or Berenice) and means "bringing victory".
 #+html: </callout>
 
 #+html: <grid>
-#+html: <col lg="3" md="12">
+#+html: <col lg="6" md="12">
 #+html: <TEXT align="justify">
 This is the second official release of the CASM project.
 It introduces four big improvements.
@@ -49,7 +49,7 @@ Last but not least, we publish our own LSP client plug-in extension for the =mon
 
 #+html: </TEXT>
 #+html: </col>
-#+html: <col lg="9" md="12">
+#+html: <col lg="6" md="12">
 
 | {{fa>file-alt?lg}}     | *Language*    | We introduced a new language syntax [[./../syntax#InvariantDefinition][definition element]] to specify global invariant conditions in CASM specifications.      |
 |                        |               |                                                                                                                            |

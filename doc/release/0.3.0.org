@@ -29,7 +29,7 @@
 *** 0.3.0
 
 #+html: <callout title="Release ''berenice''">
-[[https://github.com/casm-lang/casm/releases/tag/0.3.0][{{fa>github?lg}]] April 2, 2019
+[[https://github.com/casm-lang/casm/releases/tag/0.3.0][{{fa>github?lg}}]] April 2, 2019
 
 The release identifier [[http://www.behindthename.com/name/chares][chares]]
 is derived from the Greek word Χαρης (Chares) and χαρις (Charis) and means "grace, kindness".
@@ -37,7 +37,7 @@ is derived from the Greek word Χαρης (Chares) and χαρις (Charis) and m
 
 
 #+html: <grid>
-#+html: <col lg="3" md="12">
+#+html: <col lg="6" md="12">
 #+html: <TEXT align="justify">
 This is the third official release of the CASM project.
 It introduces four three improvements.
@@ -49,7 +49,7 @@ Last but not least, we continued with our own =libtptp= implementation to prepar
 
 #+html: </TEXT>
 #+html: </col>
-#+html: <col lg="9" md="12">
+#+html: <col lg="6" md="12">
 
 | {{fa>terminal?lg}}  | *Application* | Introducing the CASM source format and beautifier command line application called =casmf= based on the new lossless syntax representation |
 |                     |               |                                                                                                                                           |
