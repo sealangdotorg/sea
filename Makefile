@@ -124,14 +124,18 @@ bundle-%:
 	@mkdir -p obj
 	@mkdir -p obj/bundle
 	@cp -rf obj/install obj/bundle/$(BUNDLE)
-ifneq ($(ENV_OSYS),Windows)
-	$(eval ARCHIVE  := $(ARCHIVE).tar.gz)
-	@(cd obj/bundle; tar cfvz $(ARCHIVE) $(BUNDLE))
-else
+ifeq ($(ENV_OSYS),Windows)
 	$(eval ARCHIVE  := $(ARCHIVE).zip)
 	@(cd obj/bundle; zip -r $(ARCHIVE) $(BUNDLE))
+else
+	$(eval ARCHIVE  := $(ARCHIVE).tar.gz)
+	@(cd obj/bundle; tar cfvz $(ARCHIVE) $(BUNDLE))
 endif
 	@echo "-- Archive '$(ARCHIVE)'"
 	$(eval CHECKSUM := $(ARCHIVE).sha2)
+ifeq ($(ENV_OSYS),Mac)
+	@(cd obj/bundle; shasum -a 256 $(ARCHIVE) > $(CHECKSUM))
+else
 	@(cd obj/bundle; sha256sum $(ARCHIVE) > $(CHECKSUM))
+endif
 	@echo "-- Checksum '$(CHECKSUM)'"
