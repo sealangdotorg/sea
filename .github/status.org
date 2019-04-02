@@ -1,0 +1,93 @@
+# 
+#   Copyright (C) 2014-2019 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+# 
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+# 
+#   This file is part of casm.
+# 
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+# 
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+# 
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+# 
+[[https://github.com/casm-lang/casm-lang.logo/raw/master/etc/headline.png]]
+
+#+options: toc:nil
+
+
+* Status
+
+- casm :: 
+  [[https://gitter.im/casm-lang/casm][https://badges.gitter.im/casm-lang/casm.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casm][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casm-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/casm][https://api.cirrus-ci.com/github/casm-lang/casm.svg]]
+  [[https://codecov.io/gh/casm-lang/casm][https://codecov.io/gh/casm-lang/casm/badge.svg]]
+  [[https://github.com/casm-lang/casm/pulls][https://img.shields.io/github/issues-pr/casm-lang/casm.svg]]
+  [[https://github.com/casm-lang/casm/issues][https://img.shields.io/github/issues/casm-lang/casm.svg]]
+
+- casmi :: 
+  [[https://gitter.im/casm-lang/casmi][https://badges.gitter.im/casm-lang/casmi.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casmi][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casmi-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/casmi][https://api.cirrus-ci.com/github/casm-lang/casmi.svg]]
+  [[https://codecov.io/gh/casm-lang/casmi][https://codecov.io/gh/casm-lang/casmi/badge.svg]]
+  [[https://github.com/casm-lang/casmi/pulls][https://img.shields.io/github/issues-pr/casm-lang/casmi.svg]]
+
+- casmd :: 
+  [[https://gitter.im/casm-lang/casmd][https://badges.gitter.im/casm-lang/casmd.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casmd][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casmd-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/casmd][https://api.cirrus-ci.com/github/casm-lang/casmd.svg]]
+  [[https://codecov.io/gh/casm-lang/casmd][https://codecov.io/gh/casm-lang/casmd/badge.svg]]
+  [[https://github.com/casm-lang/casmd/pulls][https://img.shields.io/github/issues-pr/casm-lang/casmd.svg]]
+
+- casmf :: 
+  [[https://gitter.im/casm-lang/casmf][https://badges.gitter.im/casm-lang/casmf.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/casmf][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/casmf-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/casmf][https://api.cirrus-ci.com/github/casm-lang/casmf.svg]]
+  [[https://codecov.io/gh/casm-lang/casmf][https://codecov.io/gh/casm-lang/casmf/badge.svg]]
+  [[https://github.com/casm-lang/casmf/pulls][https://img.shields.io/github/issues-pr/casm-lang/casmf.svg]]
+
+- libcasm-fe :: 
+  [[https://gitter.im/casm-lang/libcasm-fe][https://badges.gitter.im/casm-lang/libcasm-fe.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/libcasm-fe-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/libcasm-fe-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/libcasm-fe][https://api.cirrus-ci.com/github/casm-lang/libcasm-fe.svg]]
+  [[https://codecov.io/gh/casm-lang/libcasm-fe][https://codecov.io/gh/casm-lang/libcasm-fe/badge.svg]]
+  [[https://github.com/casm-lang/libcasm-fe/pulls][https://img.shields.io/github/issues-pr/casm-lang/libcasm-fe.svg]]
+
+- libcasm-tc :: 
+  [[https://gitter.im/casm-lang/libcasm-tc][https://badges.gitter.im/casm-lang/libcasm-tc.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/libcasm-tc-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/libcasm-tc-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/libcasm-tc][https://api.cirrus-ci.com/github/casm-lang/libcasm-tc.svg]]
+  [[https://codecov.io/gh/casm-lang/libcasm-tc][https://codecov.io/gh/casm-lang/libcasm-tc/badge.svg]]
+  [[https://github.com/casm-lang/libcasm-tc/pulls][https://img.shields.io/github/issues-pr/casm-lang/libcasm-tc.svg]]
+
+- libstdhl :: 
+  [[https://gitter.im/casm-lang/libstdhl][https://badges.gitter.im/casm-lang/libstdhl.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/libstdhl-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/libstdhl-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/libstdhl][https://api.cirrus-ci.com/github/casm-lang/libstdhl.svg]]
+  [[https://codecov.io/gh/casm-lang/libstdhl][https://codecov.io/gh/casm-lang/libstdhl/badge.svg]]
+  [[https://github.com/casm-lang/libstdhl/pulls][https://img.shields.io/github/issues-pr/casm-lang/libstdhl.svg]]
+
+- libpass :: 
+  [[https://gitter.im/casm-lang/libpass][https://badges.gitter.im/casm-lang/libpass.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/libpass-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/libpass-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/libpass][https://api.cirrus-ci.com/github/casm-lang/libpass.svg]]
+  [[https://codecov.io/gh/casm-lang/libpass][https://codecov.io/gh/casm-lang/libpass/badge.svg]]
+  [[https://github.com/casm-lang/libpass/pulls][https://img.shields.io/github/issues-pr/casm-lang/libpass.svg]]
+
+- libtptp :: 
+  [[https://gitter.im/casm-lang/libtptp][https://badges.gitter.im/casm-lang/libtptp.png]]
+  [[https://ci.casm-lang.org/teams/main/pipelines/nightly/jobs/libtptp-master][ @@html:<img src="https://ci.casm-lang.org/api/v1/teams/main/pipelines/nightly/jobs/libtptp-master/badge">@@ ]]
+  [[https://cirrus-ci.com/github/casm-lang/libtptp][https://api.cirrus-ci.com/github/casm-lang/libtptp.svg]]
+  [[https://codecov.io/gh/casm-lang/libtptp][https://codecov.io/gh/casm-lang/libtptp/badge.svg]]
+  [[https://github.com/casm-lang/libtptp/pulls][https://img.shields.io/github/issues-pr/casm-lang/libtptp.svg]]
