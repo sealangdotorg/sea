@@ -120,6 +120,20 @@ install(
 
 
 #
+# bundle
+#
+
+install(
+  DIRECTORY
+    app/casmd/obj/install/
+    app/casmf/obj/install/
+    app/casmi/obj/install/
+  DESTINATION
+    "."
+    )
+
+
+#
 # cmake
 #
 

@@ -110,3 +110,28 @@ ci-git-access:
 	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "git@github.com:"
 
 
+GIT_TAG=$(shell git describe --tags --always)
+
+bundle: bundle-$(GIT_TAG)
+
+bundle-%:
+	$(eval TAG := $(patsubst bundle-%,%,$@))
+	$(eval BUNDLE := casm-$(TAG))
+	$(eval OSYS := $(shell echo $(ENV_OSYS) | tr A-Z a-z))
+	$(eval ARCH := $(shell echo $(ENV_ARCH) | tr A-Z a-z))
+	$(eval ARCHIVE  := casm-$(OSYS)-$(ARCH))
+	@echo "-- Bundle '$(TAG)' for '$(ENV_OSYS)' '$(ENV_ARCH)'"
+	@mkdir -p obj
+	@mkdir -p obj/bundle
+	@cp -rf obj/install obj/bundle/$(BUNDLE)
+ifneq ($(ENV_OSYS),Windows)
+	$(eval ARCHIVE  := $(ARCHIVE).tar.gz)
+	@(cd obj/bundle; tar cfvz $(ARCHIVE) $(BUNDLE))
+else
+	$(eval ARCHIVE  := $(ARCHIVE).zip)
+	@(cd obj/bundle; zip -r $(ARCHIVE) $(BUNDLE))
+endif
+	@echo "-- Archive '$(ARCHIVE)'"
+	$(eval CHECKSUM := $(ARCHIVE).sha2)
+	@(cd obj/bundle; sha256sum $(ARCHIVE) > $(CHECKSUM))
+	@echo "-- Checksum '$(CHECKSUM)'"
