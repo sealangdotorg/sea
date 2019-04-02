@@ -117,7 +117,11 @@ bundle: bundle-$(GIT_TAG)
 bundle-%:
 	$(eval TAG := $(patsubst bundle-%,%,$@))
 	$(eval BUNDLE := casm-$(TAG))
+ifeq ($(ENV_OSYS),Mac)
+	$(eval OSYS := darwin)
+else
 	$(eval OSYS := $(shell echo $(ENV_OSYS) | tr A-Z a-z))
+endif
 	$(eval ARCH := $(shell echo $(ENV_ARCH) | tr A-Z a-z))
 	$(eval ARCHIVE  := casm-$(OSYS)-$(ARCH))
 	@echo "-- Bundle '$(TAG)' for '$(ENV_OSYS)' '$(ENV_ARCH)'"
