@@ -30,15 +30,17 @@
     {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
     {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
     {{step:repo-get-trig-pass:libpass@{{TAG}}}}
+    {{step:repo-get-trig-pass:libz3@{{TAG}}}}
     {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
   - task: fetch
-    file: config/.ci/task/fetch/4.yml
+    file: config/.ci/task/fetch/5.yml
     input_mapping:
       repo: {{REPO}}@{{TAG}}
       lib1: libgtest@{{TAG}}
       lib2: libhayai@{{TAG}}
       lib3: libstdhl@{{TAG}}
       lib4: libpass@{{TAG}}
+      lib5: libz3@{{TAG}}
     params:
-      LIBS: gtest hayai stdhl pass
+      LIBS: gtest hayai stdhl pass z3
   {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}
