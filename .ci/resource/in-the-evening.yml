@@ -25,6 +25,6 @@
 - name: {{NAME}}
   type: time
   source:
-    start: 0:15 AM
-    stop:  0:10 AM
+    start: 5:15 PM
+    stop:  5:10 PM
     location: Europe/Vienna
