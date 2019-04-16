@@ -1,0 +1,89 @@
+#
+#   Copyright (C) 2014-2019 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+#
+#   This file is part of casm.
+#
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#
+
+{{active}}
+{{public}}
+
+---
+resources:
+{{resource:after-midnight}}
+{{resource:in-the-morning}}
+{{resource:around-noon}}
+{{resource:in-the-evening}}
+
+jobs:
+- name: linux
+  plan:
+  - aggregate:
+    - get: after-midnight
+      trigger: true
+    - get: in-the-morning
+      trigger: true
+    - get: around-noon
+      trigger: true
+    - get: in-the-evening
+      trigger: true
+  - task: check
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: casmlang/container.linux
+      run:
+        path: uname
+
+- name: darwin
+  plan:
+  - aggregate:
+    - get: after-midnight
+      trigger: true
+    - get: in-the-morning
+      trigger: true
+    - get: around-noon
+      trigger: true
+    - get: in-the-evening
+      trigger: true
+  - task: check
+    config:
+      platform: darwin
+      run:
+        path: uname
+
+- name: windows
+  plan:
+  - aggregate:
+    - get: after-midnight
+      trigger: true
+    - get: in-the-morning
+      trigger: true
+    - get: around-noon
+      trigger: true
+    - get: in-the-evening
+      trigger: true
+  - task: check
+    config:
+      platform: windows
+      run:
+        path: uname
