@@ -34,13 +34,13 @@
 [[https://github.com/casm-lang/casm/pulls][https://img.shields.io/github/issues-pr/casm-lang/casm.svg]]
 [[https://github.com/casm-lang/casm/issues][https://img.shields.io/github/issues/casm-lang/casm.svg]]
 [[https://github.com/casm-lang/casm/tags][https://img.shields.io/github/tag/casm-lang/casm.svg]]
-[[https://github.com/casm-lang/casm/blob/master/LICENSE.txt][https://img.shields.io/badge/license-GPLv3%2BLE-blue.svg]]
+[[https://github.com/casm-lang/casm/blob/master/LICENSE.txt][https://img.shields.io/badge/license-GPLv3-blue.svg]]
 
 This is the main repository of the Corinthian Abstract State Machine (CASM) project.
 
 ** Structure
 
-It is organized as a multi-repository project.
+This project is organized as a multi repository project.
 Therefore this repository contains all =git= sub-modules references to 
 the sub-projects applications, libraries, documentations, plugins etc.
 The following table provides a project wide status overview:
