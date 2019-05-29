@@ -28,7 +28,7 @@ linux_task:
     memory: 2
     cpu: 1
   env:
-    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
+    GITHUB_TOKEN: ENCRYPTED[031314fed8994d5dd46a3268d1b5cf6a5231f6b6a848558c66bf34403ca774b8947cb35390bf3d1a83746ce95d6adb67]
   matrix:
     env:
       B: "debug"
@@ -56,7 +56,7 @@ darwin_task:
   osx_instance:
     image: mojave-xcode-10.1
   env:
-    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
+    GITHUB_TOKEN: ENCRYPTED[031314fed8994d5dd46a3268d1b5cf6a5231f6b6a848558c66bf34403ca774b8947cb35390bf3d1a83746ce95d6adb67]
   matrix:
     env:
       B: "debug"
@@ -82,7 +82,7 @@ windows_task:
     os_version: 2019
     cpu: 1
   env:
-    GITHUB_TOKEN: ENCRYPTED[19dcafbe03141df9e8abdf355a77d2ab557d539e755543613a206894c44db3f7bcd7ab78d911c51b014bce5c0d46e929]
+    GITHUB_TOKEN: ENCRYPTED[031314fed8994d5dd46a3268d1b5cf6a5231f6b6a848558c66bf34403ca774b8947cb35390bf3d1a83746ce95d6adb67]
   matrix:
     env:
       V: mingw64
