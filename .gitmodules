@@ -171,7 +171,7 @@
 
 #
 #
-# Various (Container)
+# Various (Container, Logo, Website etc.)
 #
 
 [submodule "var/container/linux"]
@@ -181,64 +181,6 @@
 [submodule "var/container/windows"]
 	path = var/container/windows
 	url = git@github.com:casm-lang/casm-lang.container.windows.git
-
-#
-#
-# Various (Documentation)
-#
-
-[submodule "var/doc/hahn2014bsc"]
-	path = var/doc/hahn2014bsc
-	url = git@github.com:casm-lang/casm-lang.doc.hahn2014bsc.git
-
-[submodule "var/doc/infuehr2013bsc"]
-	path = var/doc/infuehr2013bsc
-	url = git@github.com:casm-lang/casm-lang.doc.infuehr2013bsc.git
-
-[submodule "var/doc/lascsak2019bsc"]
-	path = var/doc/lascsak2019bsc
-	url = git@github.com:casm-lang/casm-lang.doc.lascsak2019bsc.git
-
-[submodule "var/doc/lezuo2014phd"]
-	path = var/doc/lezuo2014phd
-	url = git@github.com:casm-lang/casm-lang.doc.lezuo2014phd.git
-
-[submodule "var/doc/molnar2019bsc"]
-	path = var/doc/molnar2019bsc
-	url = git@github.com:casm-lang/casm-lang.doc.molnar2019bsc.git
-
-[submodule "var/doc/moosbrugger2019csp"]
-	path = var/doc/moosbrugger2019csp
-	url = git@github.com:casm-lang/casm-lang.doc.moosbrugger2019csp.git
-
-[submodule "var/doc/nguyen2017bsc"]
-	path = var/doc/nguyen2017bsc
-	url = git@github.com:casm-lang/casm-lang.doc.nguyen2017bsc.git
-
-[submodule "var/doc/paulweber2014msc"]
-	path = var/doc/paulweber2014msc
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2014msc.git
-
-[submodule "var/doc/paulweber2016abz"]
-	path = var/doc/paulweber2016abz
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2016abz.git
-
-[submodule "var/doc/paulweber2019phd"]
-	path = var/doc/paulweber2019phd
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2019phd.git
-
-[submodule "var/doc/pescosta2017bsc"]
-	path = var/doc/pescosta2017bsc
-	url = git@github.com:casm-lang/casm-lang.doc.pescosta2017bsc.git
-
-[submodule "var/doc/paulweber2018abz"]
-	path = var/doc/paulweber2018abz
-	url = git@github.com:casm-lang/casm-lang.doc.paulweber2018abz.git
-
-#
-#
-# Various (Logo, Website)
-#
 
 [submodule "var/logo"]
 	path = var/logo
