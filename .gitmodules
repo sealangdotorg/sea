@@ -171,7 +171,7 @@
 
 #
 #
-# Various (Container, Logo, Website etc.)
+# Various (Containers, Logo, Publications, Website etc.)
 #
 
 [submodule "var/container/linux"]
@@ -185,6 +185,10 @@
 [submodule "var/logo"]
 	path = var/logo
 	url = git@github.com:casm-lang/casm-lang.logo.git
+
+[submodule "var/publication"]
+	path = var/publication
+	url = git@github.com:casm-lang/publication.git
 
 [submodule "var/web"]
 	path = var/web
