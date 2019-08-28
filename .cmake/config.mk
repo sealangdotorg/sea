@@ -718,7 +718,16 @@ ci-info: info
 	@echo "   B = $(ENV_CI_BRANCH)"
 	@echo "   # = $(ENV_CI_COMMIT)"
 
-fetch-deps: ci-info
+ci-access:
+ifdef ACCESS_TOKEN
+	@echo "-- Git Access Configuration"
+	@git config --global \
+	url."https://$(ACCESS_TOKEN)@github.com/".insteadOf "https://github.com/"
+	@git config --global \
+	url."https://$(ACCESS_TOKEN)@github.com/".insteadOf "git@github.com:"
+endif
+
+fetch-deps: ci-info ci-access
 	@echo ""
 	@echo "-- Submodules"
 	@git submodule

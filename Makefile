@@ -101,16 +101,6 @@ status-fly:
 	@( clear; while true; do date; fly -t ci bs -c 25; fly -t ci ws; tput cup 0 0; sleep 1; done)
 
 
-fetch: git-access
-
-git-access:
-	@echo "-- Git Access Configuration"
-	@git config --global \
-	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "https://github.com/"
-	@git config --global \
-	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "git@github.com:"
-
-
 GIT_TAG=$(shell git describe --tags --always)
 
 bundle: bundle-$(GIT_TAG)
