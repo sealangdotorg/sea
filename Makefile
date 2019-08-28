@@ -101,9 +101,9 @@ status-fly:
 	@( clear; while true; do date; fly -t ci bs -c 25; fly -t ci ws; tput cup 0 0; sleep 1; done)
 
 
-ci-fetch: ci-git-access
+fetch: git-access
 
-ci-git-access:
+git-access:
 	@echo "-- Git Access Configuration"
 	@git config --global \
 	url."https://$(GITHUB_TOKEN)@github.com/".insteadOf "https://github.com/"
