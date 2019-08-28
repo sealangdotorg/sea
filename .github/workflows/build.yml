@@ -59,9 +59,9 @@ jobs:
     - name: Tests
       run:  |
         make C=clang debug-test
-    - name: Benchmark
-      run:  |
-        make C=clang debug-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     make C=clang debug-benchmark
 
   linux-gcc-coverage:
     strategy:
@@ -84,9 +84,9 @@ jobs:
     - name: Tests
       run:  |
         make C=gcc coverage-test
-    - name: Benchmark
-      run:  |
-        make C=gcc coverage-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     make C=gcc coverage-benchmark
     - name: Coverage
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -116,9 +116,9 @@ jobs:
     - name: Tests
       run:  |
         make C=clang debug-test
-    - name: Benchmark
-      run:  |
-        make C=clang debug-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     make C=clang debug-benchmark
 
   darwin-gcc-debug:
     strategy:
@@ -147,9 +147,9 @@ jobs:
     - name: Tests
       run:  |
         make C=gcc debug-test
-    - name: Benchmark
-      run:  |
-        make C=gcc debug-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     make C=gcc debug-benchmark
 
   windows-clang-debug:
     strategy:
@@ -178,10 +178,10 @@ jobs:
       run:  |
         refreshenv
         make C=clang debug-test
-    - name: Benchmark
-      run:  |
-        refreshenv
-        make C=clang debug-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     refreshenv
+    #     make C=clang debug-benchmark
 
   windows-gcc-debug:
     strategy:
@@ -204,6 +204,6 @@ jobs:
     - name: Tests
       run:  |
         make C=gcc debug-test
-    - name: Benchmark
-      run:  |
-        make C=gcc debug-benchmark
+    # - name: Benchmark
+    #   run:  |
+    #     make C=gcc debug-benchmark
