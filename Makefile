@@ -38,6 +38,7 @@ UPDATE_PATH += app/casmi
 UPDATE_FILE  = .clang-format
 UPDATE_FILE += .cmake/config.mk
 UPDATE_FILE += .cmake/LibPackage.cmake
+UPDATE_FILE += .github/workflows/build.yml
 
 include .cmake/config.mk
 
