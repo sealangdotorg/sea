@@ -73,6 +73,10 @@ ifneq (,$(findstring MSYS,$(ENV_PLAT)))
   ENV_OSYS := Windows
   $(eval ENV_PLAT="$(shell uname -vnsmo)")
 endif
+ifneq (,$(findstring MINGW,$(ENV_PLAT)))
+  ENV_OSYS := Windows
+  $(eval ENV_PLAT="$(shell uname -vnsmo)")
+endif
 ifneq (,$(findstring CYGWIN,$(ENV_PLAT)))
   ENV_OSYS := Windows
   $(eval ENV_PLAT="$(shell uname -vnsmo)")
@@ -343,6 +347,7 @@ SYNCS = $(TYPES:%=%-sync)
 TESTS = $(TYPES:%=%-test)
 BENCH = $(TYPES:%=%-benchmark)
 INSTA = $(TYPES:%=%-install)
+BUILD = $(TYPES:%=%-build)
 DEPS  = $(TYPES:%=%-deps)
 ANALY = $(TYPES:%=%-analyze)
 ALL   = $(TYPES:%=%-all)
@@ -350,6 +355,10 @@ ALL   = $(TYPES:%=%-all)
 
 ENV_CMAKE_FLAGS  = -G$(ENV_GEN)
 ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
+
+# generates ${CMAKE_BINARY_DIR}/compile_commands.json
+ENV_CMAKE_FLAGS += -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
 
 ifndef I
   I = $(BIN)
@@ -475,6 +484,10 @@ install-all: $(TYPES:%=%-install)
 $(INSTA):%-install: %
 	@cmake --build $(OBJ) --config $(patsubst %-install,%,$@) --target install -- $(ENV_BUILD_FLAGS)
 
+
+build: debug
+
+$(BUILD):%-build: %-sync
 
 
 deps: debug-deps
@@ -683,65 +696,51 @@ info-generators:
 # Continues Integration and Deployment
 #
 
-# https://cirrus-ci.org/guide/writing-tasks/#environment-variables
-ENV_CI_BRANCH         := $(CIRRUS_BRANCH)
-ENV_CI_BRANCH_BASE    := $(CIRRUS_BASE_BRANCH)
-ENV_CI_BRANCH_DEFAULT := $(CIRRUS_DEFAULT_BRANCH)
-ENV_CI_BUILD          := $(CIRRUS_BUILD_ID)
-ENV_CI_BUILD_PATH     := $(CIRRUS_WORKING_DIR)
-ENV_CI_BUILD_INDEX    := $(CI_NODE_INDEX)
-ENV_CI_BUILD_TOTAL    := $(CI_NODE_TOTAL)
-ENV_CI_COMMIT         := $(CIRRUS_CHANGE_IN_REPO)
-ENV_CI_COMMIT_BASE    := $(CIRRUS_BASE_SHA)
-ENV_CI_DEPTH          := $(CIRRUS_CLONE_DEPTH)
-ENV_CI_HTTP           := $(CIRRUS_HTTP_CACHE_HOST)
-ENV_CI_OS             := $(CIRRUS_OS)
-ENV_CI_PR             := $(CIRRUS_PR)
-ENV_CI_REPO           := $(CIRRUS_REPO_FULL_NAME)
-ENV_CI_REPO_NAME      := $(CIRRUS_REPO_NAME)
-ENV_CI_REPO_OWNER     := $(CIRRUS_REPO_OWNER)
-ENV_CI_REPO_URL       := $(CIRRUS_REPO_CLONE_URL)
-ENV_CI_SHELL          := $(CIRRUS_SHELL)
-ENV_CI_TAG            := $(CIRRUS_TAG)
-ENV_CI_TASK_NAME      := $(CIRRUS_TASK_NAME)
-ENV_CI_TASK_ID        := $(CIRRUS_TASK_ID)
+ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(I)
 
-ci-check:
-ifeq ($(CI),true)
-  ifneq ($(CIRRUS_CI),true)
-    $(error unsupported CI environment)
-  endif
-  ifndef C
-    $(error no compiler selected)
-  endif
-  ifndef B
-    $(error no build type selected)
-  endif
+ENV_CI_BUILD  := "n.a."
+ENV_CI_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+ENV_CI_COMMIT := $(shell git rev-parse HEAD)
+
+ifdef CIRRUS_CI
+  # https://cirrus-ci.org/guide/writing-tasks/#environment-variables
+  ENV_CI_BUILD := $(CIRRUS_BUILD_ID)
 endif
 
-ci-info: ci-check info
+ifdef GITHUB_WORKFLOW
+  # https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
+  ENV_CI_BUILD  := $(GITHUB_WORKFLOW)-$(GITHUB_ACTION)-$(GITHUB_EVENT_NAME)
+  ENV_CI_BRANCH := $(GITHUB_REF)
+endif
+
+ci-info: info
 	@echo "   I = $(ENV_CI_BUILD)"
 	@echo "   B = $(ENV_CI_BRANCH)"
 	@echo "   # = $(ENV_CI_COMMIT)"
-	@echo ""
 
-ci-fetch: ci-info
-	@git submodule update --init
+fetch-deps: ci-info
 	@echo ""
-ifeq (,$(findstring release/,$(ENV_CI_BRANCH)))
+	@echo "-- Submodules"
+	@git submodule
+	@echo ""
+	@git submodule update --init
+
+fetch: ci-fetch
+
+ci-fetch: fetch-deps
+	@echo ""
 	@git submodule foreach \
 	'git branch --remotes | grep $(ENV_CI_BRANCH) && git checkout $(ENV_CI_BRANCH) || git checkout master; echo ""'
-endif
-	@make --no-print-directory info-repo
+	@$(MAKE) --no-print-directory info-repo
 
 ci-deps: ci-check
-	@make --no-print-directory C=$(C) $(B)-deps
+	@$(MAKE) --no-print-directory C=$(C) $(B)-deps
 
 ci-build: ci-check
-	@make --no-print-directory C=$(C) $(B)
+	@$(MAKE) --no-print-directory C=$(C) $(B)-build
 
 ci-test: ci-check
-	@make --no-print-directory C=$(C) $(B)-test
+	@$(MAKE) --no-print-directory C=$(C) $(B)-test
 
 ci-benchmark: ci-check
-	@make --no-print-directory C=$(C) $(B)-benchmark
+	@$(MAKE) --no-print-directory C=$(C) $(B)-benchmark
