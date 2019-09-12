@@ -55,6 +55,9 @@ doxy:
 	@mkdir -p obj
 	@doxygen
 
+grammar:
+	@for i in `grep "#+html: {{page>.:grammar:" lib/casm-fe/src/various/Grammar.org | sed "s/#+html: {{page>.:grammar:/doc\/language\/grammar\//g" | sed "s/&noheader&nofooter}}/.org/g"`; do if [ ! -f $$i ]; then echo "Documentation of '$$i' is missing!"; fi; done
+
 GITHUB_PATH  = $(subst ., $(UPDATE_ROOT), $(UPDATE_PATH))
 GITHUB_DIR   = .github
 GITHUB_FILE  = CODE_OF_CONDUCT.md
