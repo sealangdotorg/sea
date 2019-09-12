@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Types
+
+Consists of one or more =Type= grammar rules separated by a comma character.

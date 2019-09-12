@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* LetRule
+
+A =let= rule defines a new scope where the defined =VariableBindings= are used 
+for the evaluation =in= the sub-rule =Rule=.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

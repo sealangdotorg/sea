@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Attributes
+
+Certain elements like definitions or variables in a CASM specification can have none, one, or multiple attributes associated to them.

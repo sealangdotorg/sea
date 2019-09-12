@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* BinaryLiteral
+
+The binary literal defines all possible defined values of the =Binary= type. It can be defined in binary notation (prefixed =0b=) or hexadecimal notation (prefixed =0x=).

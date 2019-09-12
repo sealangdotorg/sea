@@ -1,0 +1,6 @@
+#+options: toc:nil
+
+* CaseLabel
+
+A =case= label defines the matching =Term= and the =Rule= to be evaluated if the =case= expression matches.
+To specify a =default= case and =Rule= to be evaluated if no match is found, the keyword =default= or the underline (=_=) character can be used.

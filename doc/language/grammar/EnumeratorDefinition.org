@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* EnumeratorDefinition
+
+An enumerator definition are =Identifier= with optionally =Attributes= assigned to them.
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.1.0=. 
+#+html: </callout>

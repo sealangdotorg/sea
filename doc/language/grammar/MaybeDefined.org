@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* MaybeDefined
+
+This grammar rule is used in =FunctionDefinition= to optionally set a =defined= value of the resulting type domain of a =function= to a given =Term=.

@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Grammar
+
+This page describes the CASM syntax by describing the complete Extended Backus–Naur Form (EBNF) grammar rules.

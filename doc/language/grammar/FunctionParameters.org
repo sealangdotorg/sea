@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* FunctionParameters
+
+Function parameters are constructed through one or more =Type= separated by an asterix (=*=) character.

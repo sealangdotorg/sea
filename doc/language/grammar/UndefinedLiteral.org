@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* UndefinedLiteral
+
+The =undef= (undefined) literal is used for all possible types to represent an undefined value.

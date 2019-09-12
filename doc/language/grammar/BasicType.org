@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* BasicType
+
+A basic type symbol name is defined and identified by its =IdentifierPath=.

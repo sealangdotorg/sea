@@ -1,0 +1,11 @@
+#+options: toc:nil
+
+* LetExpression
+
+A =let= expression defines a new scope where the 
+defined =VariableBindings= are used for the 
+evaluation in the sub-expression =Term=.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Header
+
+In the header part the keyword =CASM= required to denote the start of a CASM specification. Optional attributes can be specified as well.

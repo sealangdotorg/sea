@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* SimpleOrClaspedTerm
+
+This grammar rule combines simple expressions like =Literal= as well as embraced =Term= expressions surrounded by parentheses. Furthermore the rule defines the unary plus and minus operator expression.

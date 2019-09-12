@@ -1,0 +1,13 @@
+#+options: toc:nil
+
+* ConditionalExpression
+
+The conditional rule provides a branching facility to evaluate
+a certain sub-expression =Term= if the guarding =Term= is true.
+Furthermore an =else= =Term= is specified to be evaluated if
+the condition is not fulfilled. The resulting types of both
+paths shall be of the same type.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

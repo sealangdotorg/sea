@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* RecordLiteral
+
+The record literal is used to construct record values and the inner record elements are addressed by their name through =Assignments=.

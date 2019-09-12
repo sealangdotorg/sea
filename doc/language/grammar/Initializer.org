@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Initializer
+
+An initializer is used to define function value initialization over a n-ary function location.  

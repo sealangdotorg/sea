@@ -1,0 +1,20 @@
+#+options: toc:nil
+
+* WhileRule
+
+The =while= rule is a CASM syntactical sugar for an =iterate= rule , conditional rule, and =skip= rule.
+
+#+html: <callout type="info" icon="fa fa-code">
+The following snipped defines the semantics of the =while= rule as:
+#+begin_src casm
+iterate
+    if not <Term> then
+        skip
+    else
+        <Rule>
+#+end_src
+#+html: </callout>
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

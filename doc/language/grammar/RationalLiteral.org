@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* RationalLiteral
+
+The rational literal defines all possible defined values of the =Rational= type to represent fraction values. This literal supports user-defined digit grouping though the apostrophe character for the nominator and denominator.

@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* IndirectCallExpression
+
+An indirect call expression can invoke =function= or =derived= return 
+value retrieval over an reference value.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

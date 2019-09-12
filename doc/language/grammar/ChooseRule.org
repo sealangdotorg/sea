@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* ChooseRule
+
+A =choose= rule allows to specify a selection of =AttributedVariables= to be chosen =in= a given =Term= one value per variable to evaluate a given rule.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

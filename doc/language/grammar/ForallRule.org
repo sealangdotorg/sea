@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* ForallRule
+
+A =forall= rule defines =AttriubtedVariables= which range =in= a given domain =Term= to evaluate (=do=) a specified =Rule= in parallel.
+Additionally a filter condition can be specified by =with=.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

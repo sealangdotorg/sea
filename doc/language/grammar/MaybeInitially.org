@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* MaybeInitially
+
+This grammar rule is used in =FunctionDefinition= to optionally set a =initially= value given as =Initializers=.

@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* RelationType
+
+A relation type is defined through a symbol name identified by its =IdentifierPath=, some optional n-ary =MaybeFunctionParameters=, and a return (result) =Type= domain separated by an arrow (=->=) token and surrounded by angle brackets.

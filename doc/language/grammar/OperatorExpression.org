@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* OperatorExpression
+
+The operator expression grammar rule defines all possible binary operator expressions ranging from arithmetic, comparing, and to logical ones.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

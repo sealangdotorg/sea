@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* ConditionalRule
+
+The conditional rule provides a branching facility to evaluate a certain sub-rule =if= the guarding =Term= is =true=.
+Additionally an =else= rule can be specified to be evaluated if the condition is not fulfilled.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

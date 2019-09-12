@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Type
+
+The =Type= grammar rule defines all possible CASM type constructs.

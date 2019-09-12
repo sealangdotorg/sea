@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Literal
+
+The literal grammar rule defines all possible literals in the CASM specification language.

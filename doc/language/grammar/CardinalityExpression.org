@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* CardinalityExpression
+
+The cardinality expression enables to retrieve the number of elements
+of a given set.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.2.0=. 
+#+html: </callout>

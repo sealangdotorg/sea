@@ -1,0 +1,15 @@
+#+options: toc:nil
+
+* DerivedDefinition
+
+A =derived= definition enables to specify derived functions 
+which are identified by its =Identifier= name. 
+If a derived has parameters, the function signature has to be fully typed. 
+By default a derived =Term= is side-effect free in the sense that it does
+not produce any updates to modify the ASM in any way.
+Additionally a derived function can be attributed by =pure= to indicate
+that the result of the defined =Term= can be statically computed at compile-time.
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.1.0=. 
+#+html: </callout>

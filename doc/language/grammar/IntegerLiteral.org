@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* IntegerLiteral
+
+The Integer literal defines all possible defined values of the =Integer= type. This literal supports user-defined digit grouping though the apostrophe character.

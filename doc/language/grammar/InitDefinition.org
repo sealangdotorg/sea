@@ -1,0 +1,15 @@
+#+options: toc:nil
+
+* InitDefinition
+
+An =init= definition is used to specify and control the initialization phase of the ASM agents during a run of an CASM specification. 
+The possible initialization variants are:
+
+- The first variant is used in an *single execution agent* environment  to set for an agent the starting top-level rule to the given rule specified through the =IdentifierPath=.
+
+- The second variant is used in a *multiple execution agent* environment to set for one or multiple agents the starting top-level rule over a agent relation type specified through =Initializers= which are surrounded by curly brackets.  
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.2.0=. 
+It was indirectly present in version =0.1.0= by now it has its own dedicated AST representation.  
+#+html: </callout>

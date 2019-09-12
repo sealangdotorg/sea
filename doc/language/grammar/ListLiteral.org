@@ -1,0 +1,8 @@
+#+options: toc:nil
+
+* ListLiteral
+
+The list literal defines a new defined list value.
+It can construct an empty list or a list with predefined =Terms=.
+The list element type is inferred from the provided =Terms=.
+In case of an empty list, the usage of the empty list has to provide a type context to infer the correct inner list element type.

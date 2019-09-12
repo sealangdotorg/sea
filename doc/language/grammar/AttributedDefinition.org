@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* AttributedDefinition
+
+An attributed definition consists of a definition with optionally =Attributes= assigned to it.

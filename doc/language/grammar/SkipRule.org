@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* SkipRule
+
+The =skip= rule defines that no operation or rule shall be performed 
+at this position in a CASM specification.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

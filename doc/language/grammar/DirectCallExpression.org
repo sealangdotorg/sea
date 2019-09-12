@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* DirectCallExpression
+
+In a direct call expressions an =IdentifierPath= can be called with zero,
+one, or multiple parameter =Terms= supprounded by parentheses.
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

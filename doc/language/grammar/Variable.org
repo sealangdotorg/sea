@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Variable
+
+A variable can either be a in typed or non-typed form. If just an =Identifier= is provided as variable name, a compiler analyze pass will infer the correct type of the variable.

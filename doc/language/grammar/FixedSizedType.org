@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* FixedSizedType
+
+This grammar rule allows to restrict certain types which is specified by the given =Term= e.g. to a pre-defined size, length, or range.

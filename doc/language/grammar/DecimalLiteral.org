@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* DecimalLiteral
+
+The decimal literal defines all possible defined values of the =Decimal= type.

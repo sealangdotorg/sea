@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* UniversalQuantifierExpression
+
+The universal quantifier expression checks =forall= =AttriubtedVariables= which 
+range =in= a given domain =Term= that a =Term= is satisfied (=holds=).
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

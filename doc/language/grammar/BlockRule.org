@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* BlockRule
+
+The block rule specifies that given =Rules= shall be evaluated with a parallel execution semantics.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

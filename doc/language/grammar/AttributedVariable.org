@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* AttributedVariable
+
+An attributed variable are variables which can have optionally =Attributes= associated to them.

@@ -1,0 +1,13 @@
+#+options: toc:nil
+
+* BasicAttribute
+
+A basic attributed is just represented by a simple =Identifier=.
+The possible names for basic attributes are checked in an compiler analyze pass.
+
+#+html: <callout type="info" icon="fa fa-code">
+The following example shows its usage by setting the =static= attribute for a function definition:
+#+begin_src casm
+[ static ] function C_of_CASM : -> String initially { "Corinthian" }
+#+end_src
+#+html: </callout>

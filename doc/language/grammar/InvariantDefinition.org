@@ -1,0 +1,11 @@
+#+options: toc:nil
+
+* InvariantDefinition
+
+An =invariant= definition allows to globally specify a condition (constrain) which has to be fulfilled during the whole ASM run.
+Therefore, the invariant identified by its =Identifier= name gets checked of the current ASM state during all ASM steps. 
+If an invariant does violate the defined condition (constrain) an exception is raised. 
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.2.0=. 
+#+html: </callout>

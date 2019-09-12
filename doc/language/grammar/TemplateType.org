@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* TemplateType
+
+A template type can be defined by one or more inner template =Types= surrounded by angle brackets and identified by its =IdentifierPath=.

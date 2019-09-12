@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* IterateRule
+
+A =iterate= rule specifies that a certain =Rule= gets iterated as long as it 
+does not produce any more updates.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

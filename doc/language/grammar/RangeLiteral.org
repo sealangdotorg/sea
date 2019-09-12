@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* RangeLiteral
+
+The range literal is used to construct value ranges of a certain type domain. The range type is inferred from the given start and end =Term=.

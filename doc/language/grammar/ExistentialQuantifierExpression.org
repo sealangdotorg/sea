@@ -1,0 +1,11 @@
+#+options: toc:nil
+
+* ExistentialQuantifierExpression
+
+The existential quantifier expression checks that there =exists=
+for given =AttributedVariables= which range =in= a given
+domain =Term= that a certain condition =Term= is satisfied (=with=).
+
+#+html: <callout type="info" icon="true">
+This expression is introduced in version =0.1.0=. 
+#+html: </callout>

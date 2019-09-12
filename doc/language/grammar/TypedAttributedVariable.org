@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* TypedAttributedVariable
+
+A typed attributed variable are typed variables which can have optionally =Attributes= associated to them.

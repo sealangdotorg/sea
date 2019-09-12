@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Parameters
+
+Parameters are constructed through one or more =TypedAttributedVariable= separated by a comma character.

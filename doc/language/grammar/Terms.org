@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Terms
+
+Consist of one or multiple =Term= grammar rules separated by comma characters.

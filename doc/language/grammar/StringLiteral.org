@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* StringLiteral
+
+The string literal defines all possible defined values of the =String= type.

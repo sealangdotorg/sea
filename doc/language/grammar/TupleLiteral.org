@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* TupleLiteral
+
+The tuple literal is used to construct tuple values of two or more =Term= elements.

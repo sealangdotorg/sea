@@ -1,0 +1,25 @@
+#+options: toc:nil
+
+* RuleDefinition
+
+A =rule= definition defines a named rule which is identified by its =Identifier= name and an assigned =Rule= to it. Every rule definition can have zero, one, or multiple typed =Parameters= and an optionally return =Type=.
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.1.0=. 
+#+html: </callout>
+
+#+html: <callout type="tip" icon="true">
+Every rule without a specified return type equals to a return type =Void=. 
+The following two examples of the rule =foo= and =bar= have the same type relation represenation:
+#+begin_src casm
+rule foo( x : Integer, y : String )         = skip
+rule bar( x : Integer, y : String ) -> Void = skip
+#+end_src
+#+html: </callout>
+
+# TODO: FIXME: @ppaulweber
+#+html: <callout type="danger" icon="true">
+The return =Type= (not =Void=) of a rule will be supported in version =0.4.0=. 
+For now every rule is defined as n-ary function relation type with result type =Void=.
+#+html: </callout>
+

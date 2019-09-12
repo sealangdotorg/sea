@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Rule
+
+The =Rule= grammar rule defines all possible CASM rules.

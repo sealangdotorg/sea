@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Identifier
+
+Represents a symbol (=function=, =derived= etc.) in a CASM specification.

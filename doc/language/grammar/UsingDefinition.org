@@ -1,0 +1,16 @@
+#+options: toc:nil
+
+* UsingDefinition
+
+A =using= definition enables to define type aliases which are identified by its =Identifier= and assigned to a certain =Type=.
+
+#+html: <callout type="info" icon="fa fa-code">
+The following example defines a type alias for =Integer= named =MyType=:
+#+begin_src casm
+using MyType = Integer
+#+end_src
+#+html: </callout>
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.1.0=. 
+#+html: </callout>

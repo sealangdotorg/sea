@@ -1,0 +1,63 @@
+#+options: toc:nil
+#+html: {{tag>language syntax}}
+
+* Language
+
+The CASM language is an Abstract State Machine (ASM) modeling and specification language. 
+Its [[./syntax][syntax]] is influenced in part by [[https://www.uni-ulm.de/in/pm/forschung/projekte/coreasm][CoreASM]]
+and other ASM languages, but includes language concepts which are well known in modern programming languages as well. 
+Different to existing ASM implementations is that CASM is a static strong inferred typed ASM language.
+Before we describe various language constructs lets have a look at the /Hello World/ specification to outline the basic structure of the CASM modeling language:
+
+#+html: <callout type="info" icon="fa fa-code">
+The /Hello World/ application specified in CASM:
+#+begin_src casm -n
+CASM
+init HelloWorld
+rule HelloWorld = 
+{
+    println( "Hello world!" )
+}
+#+end_src
+#+html: </callout>
+
+Every CASM specification starts with a [[./syntax#Header][header]] containing the keyword =CASM= (line 1). 
+The [[./syntax#Header][header]] part is followed by [[./syntax#Definitions][definitions]].
+In line 2 an [[./syntax#InitDefinition][init definition]] is specified to set the starting rule of the single execution agent to the rule named =HelloWorld=.
+The rule =HelloWorld= is defined in line 3 ranging to line 6 through a [[./syntax#RuleDefinition][rule definition]].
+Notice that CASM does not require symbol names to be declared before usage.
+Inside the =HelloWorld= rule a [[./syntax#BlockRule][block rule]] creates a parallel execution semantics scope (line 4, 6).
+Last but not least the actual statement to print out the =Hello world!= string defined by a [[./syntax#CallRule][call rule]] to a built-in function named =println=.
+
+CASM does not require any newlines, tabulators, or statement separators like in other specification or programming languages.
+
+
+TBA
+
+** Functions
+
+TBA
+
+# #+html: <callout type="info" icon="fa fa-code">
+# The following example defines a binary function named =phoneBook= with a 
+# given type relation $x : String * String \rightarrow String$ to store 
+# telephone number strings identified by a last and first name string:
+# #+begin_src casm
+# function phoneBook : String * String -> String
+# #+end_src
+# #+html: </callout>
+
+
+** Rules
+
+TBA
+
+** Initialization
+
+TBA
+
+** Comments
+
+TBA
+
+

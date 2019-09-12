@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* CaseRule
+
+A =case= rule allows to define multiple cases through =CaseLabels= which are evaluated if the given =Term= matches the specified =CaseLabel=.
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

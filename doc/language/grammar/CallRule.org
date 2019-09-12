@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* CallRule
+
+A call rule allows to invoke other named rules (=RuleDefinition=).
+
+#+html: <callout type="info" icon="true">
+This rule is introduced in version =0.1.0=. 
+#+html: </callout>

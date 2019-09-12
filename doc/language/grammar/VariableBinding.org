@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* VariableBinding
+
+A variable binding assigns (binds) an =AttributedVariable= to a given =Term=.

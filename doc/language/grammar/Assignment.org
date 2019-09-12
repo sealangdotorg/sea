@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Assignment
+
+An assignment binds a =Term= to a given symbol name identified by its =Identifier=.

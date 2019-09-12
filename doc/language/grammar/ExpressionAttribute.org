@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* ExpressionAttribute
+
+In contrast to a =BasicAttribute= the expression attribute allows to define a full expression =Term= which is identified by its =Identifier=.

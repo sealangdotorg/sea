@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* Enumerators
+
+Consist of one or more =EnumeratorDefinition= which are separated by a comma character.
