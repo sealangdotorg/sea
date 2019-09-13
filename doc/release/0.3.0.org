@@ -28,7 +28,7 @@
 
 *** 0.3.0
 
-#+html: <callout title="Release ''berenice''">
+#+html: <callout title="Release ''chares''">
 [[https://github.com/casm-lang/casm/releases/tag/0.3.0][{{fa>github?lg}}]] April 2, 2019
 
 The release identifier [[http://www.behindthename.com/name/chares][chares]]
