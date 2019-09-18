@@ -1,0 +1,60 @@
+# 
+#   Copyright (C) 2014-2019 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+# 
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+# 
+#   This file is part of casm.
+# 
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+# 
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+# 
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+# 
+#
+
+#+options: toc:nil
+#+html: {{tag>release}}
+
+*** 0.4.0
+
+#+html: <callout title="Release ''diodoros''">
+[[https://github.com/casm-lang/casm/releases/tag/0.3.0][{{fa>github?lg}}]] September 18, 2019
+
+The release identifier [[http://www.behindthename.com/name/diodorus][diodoros]]
+is derived from the Greek name Διοδωρος (Diodoros) and means "gift of Zeus".
+#+html: </callout>
+
+#+html: <grid>
+#+html: <col lg="6" md="12">
+#+html: <TEXT align="justify">
+This is the fourth official release of the CASM project.
+It introduces three improvements.
+It introduces three improvements and this time all improvements are language related.
+First, we have a module and import system for our language. Through a new =import= syntax it is possible to load external specifications and modules into the current specification.
+Second, the CASM language allows UTF-8 symbols in comments, string literals, and certain characters for identifier names. 
+Last but not least, we changed the =init= definition to be optional in CASM specifications to support =import= only specifications as well.
+
+#+html: </TEXT>
+#+html: </col>
+#+html: <col lg="6" md="12">
+
+| {{fa>file-alt?lg}} | *Language* | We introduced a new language syntax [[./../syntax#ImportDefinition][definition element]] to specify the =import= of specifications and modules. |
+|                    |            |                                                                                                                                                |
+| {{fa>file-alt?lg}} | *Language* | The CASM language front-end lexer does support UTF-8 characters now.                                                                           |
+|                    |            |                                                                                                                                                |
+| {{fa>file-alt?lg}} | *Language* | Specifications can have optional =init= definition.                                                                                            |
+|                    |            |                                                                                                                                                |
+
+#+html: </col>
+#+html: </grid>
