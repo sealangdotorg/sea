@@ -2,8 +2,10 @@
 
 * ImportDefinition
 
-# A =import= definition TODO
-TBA
+Through the =import= definition it is possible to load external specifications and modules into the specification.
+The provided identifier path is used to search inside the specification base path for the requested specification.
+If the imported specification does belong to an external module, the import has to be defined externally via a CASM project YAML file.
+By default, if no import renaming (=as= identifier) is specified, the last identifier in the given import path is used.
 
 #+html: <callout type="info" icon="true">
 This definition is introduced in version =0.4.0=. 
