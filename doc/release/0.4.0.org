@@ -29,7 +29,7 @@
 *** 0.4.0
 
 #+html: <callout title="Release ''diodoros''">
-[[https://github.com/casm-lang/casm/releases/tag/0.3.0][{{fa>github?lg}}]] September 18, 2019
+[[https://github.com/casm-lang/casm/releases/tag/0.4.0][{{fa>github?lg}}]] September 18, 2019
 
 The release identifier [[http://www.behindthename.com/name/diodorus][diodoros]]
 is derived from the Greek name Διοδωρος (Diodoros) and means "gift of Zeus".
