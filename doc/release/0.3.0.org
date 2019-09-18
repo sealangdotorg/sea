@@ -35,12 +35,11 @@ The release identifier [[http://www.behindthename.com/name/chares][chares]]
 is derived from the Greek word Χαρης (Chares) and χαρις (Charis) and means "grace, kindness".
 #+html: </callout>
 
-
 #+html: <grid>
 #+html: <col lg="6" md="12">
 #+html: <TEXT align="justify">
 This is the third official release of the CASM project.
-It introduces four three improvements.
+It introduces three improvements.
 First, we improved our AST language implementation to provide a lossless syntax tree representation.
 Build on this implementation feature we are able to construct a source formatting beautifier application called =casmf=.
 This application function in the near future as the official CASM formatting application.
