@@ -40,8 +40,8 @@ package_git_submodule( libgtest   master REQUIRED build lib/gtest   )
 package_git_submodule( libhayai   master REQUIRED build lib/hayai   )
 package_git_submodule( libpass    master REQUIRED obj   lib/pass    )
 package_git_submodule( libcasm-ir master REQUIRED obj   lib/casm-ir )
-package_git_submodule( libcasm-rt master REQUIRED obj   lib/casm-rt )
 package_git_submodule( libcasm-fe master REQUIRED obj   lib/casm-fe )
+#package_git_submodule( libcasm-rt master REQUIRED obj   lib/casm-rt )
 #package_git_submodule( libcasm-be master REQUIRED obj   lib/casm-be )
 package_git_submodule( libcasm-tc master REQUIRED obj   lib/casm-tc )
 #package_git_submodule( libcjel-ir master REQUIRED obj   lib/cjel-ir )
@@ -58,8 +58,7 @@ package_git_deps(
   libhayai>libstdhl
   libstdhl>libpass
   libpass>libcasm-ir
-  libcasm-ir>libcasm-rt
-  libcasm-rt>libcasm-fe
+  libcasm-ir>libcasm-fe
   libcasm-fe>libcasm-tc
   libcasm-tc>casmd
   libcasm-tc>casmf
