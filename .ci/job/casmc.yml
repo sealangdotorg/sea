@@ -45,9 +45,6 @@
     - get: libcasm-ir
       passed: [ libcasm-ir- ]
       trigger: true
-    - get: libcasm-rt
-      passed: [ libcasm-rt- ]
-      trigger: true
     - get: libcasm-fe
       passed: [ libcasm-fe- ]
       trigger: true
@@ -55,7 +52,7 @@
       passed: [ libcasm-tc- ]
       trigger: true
   - task: fetch
-    file: config/.ci/task/fetch/8.yml
+    file: config/.ci/task/fetch/7.yml
     input_mapping:
       repo: {{NAME}}
       lib1: libgtest
@@ -63,10 +60,9 @@
       lib3: libstdhl
       lib4: libpass
       lib5: libcasm-ir
-      lib6: libcasm-rt
-      lib7: libcasm-fe
-      lib8: libcasm-tc
+      lib6: libcasm-fe
+      lib7: libcasm-tc
     params:
-      LIBS: gtest hayai stdhl pass casm-ir casm-rt casm-fe casm-tc
+      LIBS: gtest hayai stdhl pass casm-ir casm-fe casm-tc
       DEPS: in/repo/lib
     {{fetch_deps_build_test}}

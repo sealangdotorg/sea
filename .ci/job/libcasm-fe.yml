@@ -28,21 +28,23 @@
     {{step:repo-get-config}}
     {{step:repo-get-trig-pass:libgtest@{{TAG}}}}
     {{step:repo-get-trig-pass:libhayai@{{TAG}}}}
+    {{step:repo-get-trig-pass:libz3@{{TAG}}}}
     {{step:repo-get-trig-pass:libstdhl@{{TAG}}}}
     {{step:repo-get-trig-pass:libpass@{{TAG}}}}
+    {{step:repo-get-trig-pass:libtptp@{{TAG}}}}
     {{step:repo-get-trig-pass:libcasm-ir@{{TAG}}}}
-    {{step:repo-get-trig-pass:libcasm-rt@{{TAG}}}}
     {{step:repo-get-trig:{{REPO}}@{{TAG}}}}
   - task: fetch
-    file: config/.ci/task/fetch/6.yml
+    file: config/.ci/task/fetch/7.yml
     input_mapping:
       repo: {{REPO}}@{{TAG}}
       lib1: libgtest@{{TAG}}
       lib2: libhayai@{{TAG}}
-      lib3: libstdhl@{{TAG}}
-      lib4: libpass@{{TAG}}
-      lib5: libcasm-ir@{{TAG}}
-      lib6: libcasm-rt@{{TAG}}
+      lib3: libz3@{{TAG}}
+      lib4: libstdhl@{{TAG}}
+      lib5: libpass@{{TAG}}
+      lib6: libtptp@{{TAG}}
+      lib7: libcasm-ir@{{TAG}}
     params:
-      LIBS: gtest hayai stdhl pass casm-ir casm-rt
+      LIBS: gtest hayai z3 stdhl pass tptp casm-ir
   {{step:notify_deps_build_test:{{REPO}}@{{TAG}}}}
