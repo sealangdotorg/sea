@@ -393,20 +393,6 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
   set( PREFIX_LIBRARY ${PREFIX_NAME}_LIBRARY )
   set( PREFIX_INCLUDE ${PREFIX_NAME}_INCLUDE_DIR )
 
-  find_package(
-    ${PREFIX}
-    QUIET
-    )
-
-  set( PREFIX_FOUND FALSE )
-  if( EXISTS "${${PREFIX_LIBRARY}}" AND
-      EXISTS "${${PREFIX_INCLUDE}}" AND
-      ${${PREFIX_LIBRARY}} AND
-      ${${PREFIX_INCLUDE}}
-      )
-    set( PREFIX_FOUND TRUE )
-  endif()
-
   foreach( PATH ${ARGN} )
     string( STRIP ${PATH} PREFIX_PATH )
     set( ${PREFIX}_REPO_DIR ${PROJECT_SOURCE_DIR}/${PREFIX_PATH} )
@@ -423,7 +409,7 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
 
     if( EXISTS ${${PREFIX}_REPO_DIR} )
       if( NOT EXISTS ${${PREFIX}_REPO_DIR}/.git )
-	message( FATAL_ERROR "package '${PREFIX}' is not a 'git' repository" )
+	continue()
       endif()
 
       execute_process(
@@ -593,13 +579,27 @@ function( package_git_submodule PREFIX VERSION MODE TMP ) # ${ARGN} search paths
     endif()
   endforeach()
 
-  if( ${${PREFIX_NAME}_FOUND} )
-    message( "-- Found ${PREFIX} [installed]" )
+  find_package(
+    ${PREFIX}
+    QUIET
+    )
+
+  if( "${${PREFIX_LIBRARY}}" STREQUAL "${PREFIX_LIBRARY}-NOTFOUND" OR
+      "${${PREFIX_INCLUDE}}" STREQUAL "${PREFIX_INCLUDE}-NOTFOUND"
+      )
+    set( ${PREFIX_NAME}_FOUND FALSE )
+    message( FATAL_ERROR "-- *NOT* Found ${PREFIX}" )
+  else()
+    set( ${PREFIX_NAME}_FOUND TRUE )
+    message( "-- Found ${PREFIX} [installed] @ '${${PREFIX_INCLUDE}}' & '${${PREFIX_LIBRARY}}'" )
     add_custom_target( ${PREFIX}
       COMMENT "Package ${PREFIX}"
       )
-  else()
-    message( FATAL_ERROR "-- *NOT* Found ${PREFIX}" )
+
+    set( ${PROJECT}_DEPS
+      ${${PROJECT}_DEPS} ${PREFIX}
+      PARENT_SCOPE
+      )
   endif()
 
   set( ${PREFIX_NAME}_FOUND
