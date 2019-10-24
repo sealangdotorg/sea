@@ -27,6 +27,7 @@ TARGET = casm
 UPDATE_ROOT  = lib/stdhl
 UPDATE_PATH  = .
 UPDATE_PATH += lib/pass
+UPDATE_PATH += lib/tptp
 UPDATE_PATH += lib/casm-ir
 UPDATE_PATH += lib/casm-rt
 UPDATE_PATH += lib/casm-fe
