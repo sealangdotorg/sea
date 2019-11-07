@@ -250,6 +250,17 @@ ifeq ($(G),ninja-e4)
   $(eval ENV_GEN="Eclipse CDT4 - Ninja")
 endif
 
+# Visual Studio 2019 (Version 16)
+ifeq ($(G),vs19)
+  $(eval ENV_GEN="Visual Studio 16 2019")
+endif
+ifeq ($(G),vs19w64)
+  $(eval ENV_GEN="Visual Studio 16 2019 Win64")
+endif
+ifeq ($(G),vs19arm)
+  $(eval ENV_GEN="Visual Studio 16 2019 ARM")
+endif
+
 # Visual Studio 2017 (Version 15)
 ifeq ($(G),vs17)
   $(eval ENV_GEN="Visual Studio 15 2017")
@@ -321,6 +332,25 @@ ifeq ($(ENV_GEN),)
 endif
 
 
+ifdef ENV_INSTALL
+  I=$(ENV_INSTALL)
+endif
+
+ifndef I
+  I=$(BIN)
+endif
+
+ifeq ($(I),)
+  $(eval ENV_INSTALL=$(BIN))
+else
+  $(eval ENV_INSTALL=$(I))
+endif
+
+ifeq ($(ENV_INSTALL),)
+  $(error empty environment install path detected! $(I), $(ENV_INSTALL), $(BIN))
+endif
+
+
 default: debug
 
 help:
@@ -344,26 +374,18 @@ clean-all:
 TYPES = debug sanitize coverage release
 
 SYNCS = $(TYPES:%=%-sync)
+FETCH = $(TYPES:%=%-fetch)
+DEPS  = $(TYPES:%=%-deps)
+BUILD = $(TYPES:%=%-build)
 TESTS = $(TYPES:%=%-test)
 BENCH = $(TYPES:%=%-benchmark)
-INSTA = $(TYPES:%=%-install)
-BUILD = $(TYPES:%=%-build)
-DEPS  = $(TYPES:%=%-deps)
 ANALY = $(TYPES:%=%-analyze)
+INSTA = $(TYPES:%=%-install)
 ALL   = $(TYPES:%=%-all)
 
 
 ENV_CMAKE_FLAGS  = -G$(ENV_GEN)
 ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
-
-# generates ${CMAKE_BINARY_DIR}/compile_commands.json
-ENV_CMAKE_FLAGS += -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-
-
-ifndef I
-  I = $(BIN)
-endif
-ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(I)
 
 ifeq (,$(findstring Visual,$(ENV_GEN)))
   ENV_CMAKE_FLAGS += -DCMAKE_C_COMPILER=$(ENV_CC)
@@ -416,6 +438,13 @@ ENV_BUILD_FLAGS  =
 ifneq (,$(findstring Makefile,$(ENV_GEN)))
   ENV_BUILD_FLAGS += --no-print-directory $(MFLAGS)
 endif
+
+
+# generates ${CMAKE_BINARY_DIR}/compile_commands.json
+ENV_CMAKE_FLAGS += -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+# defines install location
+ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(ENV_INSTALL)
 
 
 sync: debug-sync
@@ -487,7 +516,7 @@ $(INSTA):%-install: %
 
 build: debug
 
-$(BUILD):%-build: %-sync
+$(BUILD):%-build: %
 
 
 deps: debug-deps
@@ -621,6 +650,7 @@ info-build: info
 	$(eval F=$(subst -D,\n       -D,$(ENV_CMAKE_FLAGS)))
 	@printf '   F = $(F)\n'
 
+
 info-repo:
 	@printf "%s %-20s %-10s %-25s %s\n" \
 		"--" \
@@ -634,6 +664,20 @@ info-repo:
 		`git rev-parse --short HEAD` \
 		`git describe --tags --always --dirty` \
 		`git branch | grep "* " | sed "s/* //g" | sed "s/ /-/g"`' | sed '/Entering/d'
+
+info-tools:
+	@echo "-- Make"
+	@make --version
+	@echo ""
+	@echo "-- CMake"
+	@cmake --version
+	@echo ""
+	@echo "-- C Compiler"
+	@$(ENV_CC) --version
+	@echo ""
+	@echo "-- C++ Compiler"
+	@$(ENV_CXX) --version
+	@echo ""
 
 info-variables:
 	$(foreach v, $(.VARIABLES), $(info $(v) = $($(v))))
@@ -696,8 +740,6 @@ info-generators:
 # Continues Integration and Deployment
 #
 
-ENV_CMAKE_FLAGS += -DCMAKE_INSTALL_PREFIX=$(I)
-
 ENV_CI_BUILD  := "n.a."
 ENV_CI_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ENV_CI_COMMIT := $(shell git rev-parse HEAD)
@@ -710,46 +752,60 @@ endif
 ifdef GITHUB_WORKFLOW
   # https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
   ENV_CI_BUILD  := $(GITHUB_WORKFLOW)-$(GITHUB_ACTION)-$(GITHUB_EVENT_NAME)
-  ENV_CI_BRANCH := $(GITHUB_REF)
+  ENV_CI_BRANCH := $(shell echo $(GITHUB_REF) | sed "s/ref\/heads\///g" | sed "s/\//-/g")
 endif
 
-ci-info: info
+info-ci: info
 	@echo "   I = $(ENV_CI_BUILD)"
 	@echo "   B = $(ENV_CI_BRANCH)"
 	@echo "   # = $(ENV_CI_COMMIT)"
 
-ci-access:
+info-fetch: info-ci
 ifdef ACCESS_TOKEN
+	@echo ""
 	@echo "-- Git Access Configuration"
-	@git config --global \
+	@git config --add --global \
 	url."https://$(ACCESS_TOKEN)@github.com/".insteadOf "https://github.com/"
-	@git config --global \
+	@git config --add --global \
 	url."https://$(ACCESS_TOKEN)@github.com/".insteadOf "git@github.com:"
 endif
-
-fetch-deps: ci-info ci-access
 	@echo ""
 	@echo "-- Submodules"
 	@git submodule
 	@echo ""
-	@git submodule update --init
 
-fetch: ci-fetch
+fetch: debug-fetch
 
-ci-fetch: fetch-deps
-	@echo ""
+$(FETCH):%-fetch: info-fetch
+	$(if $(filter $(patsubst %-fetch,%,$@),release), \
+	  $(eval SUBMODULES=.) \
+	, \
+	  $(eval SUBMODULES=$(shell grep submodule .gitmodules | grep "submodule" | grep -ve "# external" | sed "s/\[submodule \"//g" | sed "s/\"\].*//g")) \
+	)
+	$(if $(SUBMODULES), @git submodule update --init $(SUBMODULES) )
+	$(if $(SUBMODULES), @echo )
 	@git submodule foreach \
 	'git branch --remotes | grep $(ENV_CI_BRANCH) && git checkout $(ENV_CI_BRANCH) || git checkout master; echo ""'
 	@$(MAKE) --no-print-directory info-repo
 
-ci-deps: ci-check
-	@$(MAKE) --no-print-directory C=$(C) $(B)-deps
 
-ci-build: ci-check
-	@$(MAKE) --no-print-directory C=$(C) $(B)-build
+ci-tools:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) info-tools
 
-ci-test: ci-check
-	@$(MAKE) --no-print-directory C=$(C) $(B)-test
+ci-fetch:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-fetch
 
-ci-benchmark: ci-check
-	@$(MAKE) --no-print-directory C=$(C) $(B)-benchmark
+ci-deps:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-deps
+
+ci-build:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-build
+
+ci-test:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-test
+
+ci-benchmark:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-benchmark
+
+ci-install:
+	@$(MAKE) --no-print-directory I=$(I) C=$(C) $(B)-install
