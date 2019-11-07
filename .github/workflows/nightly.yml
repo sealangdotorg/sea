@@ -1,0 +1,145 @@
+#
+#   Copyright (C) 2014-2019 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+#
+#   This file is part of casm.
+#
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#
+
+# https://help.github.com/en/articles/virtual-environments-for-github-actions#supported-virtual-environments
+
+name: nightly
+
+on:
+  schedule:
+    - cron:  '23 1 * * *'
+
+jobs:
+  linux-x86_64:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        tool:
+        - build: release
+          chain: gcc
+    env:
+      B: ${{ matrix.tool.build }}
+      C: ${{ matrix.tool.chain }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup
+      run: |
+        make info
+        make ci-tools
+    - name: Fetching
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        make ci-fetch
+    - name: Dependencies
+      run: |
+        make ci-deps
+    - name: Building
+      run: |
+        make ci-build
+    - name: Tests
+      run: |
+        make ci-test
+    - name: Benchmark
+      run: |
+        make ci-benchmark
+    - name: Coverage
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      if: matrix.tool.build == 'coverage' && matrix.tool.chain == 'gcc'
+      run: |
+        wget https://codecov.io/bash
+        chmod 755 bash
+        ./bash
+
+  darwin-x86_64:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        tool:
+        - build: release
+          chain: gcc
+    env:
+      B: ${{ matrix.tool.build }}
+      C: ${{ matrix.tool.chain }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup
+      run: |
+        make info
+        brew install gcc@9
+        ln -s /usr/local/bin/gcc-9 /usr/local/bin/gcc
+        ln -s /usr/local/bin/g++-9 /usr/local/bin/g++
+        make ci-tools
+    - name: Fetching
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        make ci-fetch
+    - name: Dependencies
+      run: |
+        make ci-deps
+    - name: Building
+      run: |
+        make ci-build
+    - name: Tests
+      run: |
+        make ci-test
+    - name: Benchmark
+      run: |
+        make ci-benchmark
+
+  windows-x86_64:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        tool:
+        - build: release
+          chain: gcc
+    env:
+      B: ${{ matrix.tool.build }}
+      C: ${{ matrix.tool.chain }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup
+      run: |
+        make info
+        make ci-tools
+    - name: Fetching
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      run: |
+        make ci-fetch
+    - name: Dependencies
+      run: |
+        make ci-deps
+    - name: Building
+      run: |
+        make ci-build
+    - name: Tests
+      run: |
+        make ci-test
+    - name: Benchmark
+      run: |
+        make ci-benchmark
