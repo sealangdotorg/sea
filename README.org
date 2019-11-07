@@ -31,8 +31,8 @@
 [[https://gitter.im/casm-lang/casm][https://img.shields.io/badge/gitter-chat-darkcyan.svg?logo=gitter]]
 [[https://github.com/casm-lang/casm/actions?query=workflow%3Abuild][https://github.com/casm-lang/casm/workflows/build/badge.svg]]
 [[https://github.com/casm-lang/casm/actions?query=workflow%3Anightly][https://github.com/casm-lang/casm/workflows/nightly/badge.svg]]
-[[https://github.com/casm-lang/casm/pulls][https://img.shields.io/github/issues-pr/casm-lang/casm.svg]]
-[[https://github.com/casm-lang/casm/issues][https://img.shields.io/github/issues/casm-lang/casm.svg]]
+[[https://github.com/casm-lang/casm/pulls][https://img.shields.io/github/issues-pr/casm-lang/casm.svg?logo=github]]
+[[https://github.com/casm-lang/casm/issues][https://img.shields.io/github/issues/casm-lang/casm.svg?logo=github]]
 [[https://github.com/casm-lang/casm/blob/master/LICENSE.txt][https://img.shields.io/badge/license-GPLv3-blue.svg?logo=gnu]]
 
 This is the main repository of the Corinthian Abstract State Machine (CASM) project.
