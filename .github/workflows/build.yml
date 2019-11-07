@@ -62,9 +62,9 @@ jobs:
     - name: Tests
       run: |
         make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
+    # - name: Benchmark
+    #   run: |
+    #     make ci-benchmark
     - name: Coverage
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -108,9 +108,9 @@ jobs:
     - name: Tests
       run: |
         make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
+    # - name: Benchmark
+    #   run: |
+    #     make ci-benchmark
 
   windows-x86_64:
     runs-on: windows-2019
@@ -146,6 +146,6 @@ jobs:
     - name: Tests
       run: |
         make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
+    # - name: Benchmark
+    #   run: |
+    #     make ci-benchmark
