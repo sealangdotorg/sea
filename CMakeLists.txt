@@ -87,7 +87,7 @@ add_custom_target( ${PROJECT}
 add_custom_target( ${PROJECT}-check
   COMMAND
     ${CMAKE_COMMAND} -E copy
-    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-test
+    ${CMAKE_SOURCE_DIR}/var/${PROJECT}-test
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-check
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
@@ -101,7 +101,7 @@ add_custom_target( ${PROJECT}-check
 add_custom_target( ${PROJECT}-run
   COMMAND
     ${CMAKE_COMMAND} -E copy
-    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-benchmark
+    ${CMAKE_SOURCE_DIR}/var/${PROJECT}-benchmark
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-run
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
