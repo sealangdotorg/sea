@@ -40,6 +40,7 @@ UPDATE_FILE  = .clang-format
 UPDATE_FILE += .cmake/config.mk
 UPDATE_FILE += .cmake/LibPackage.cmake
 UPDATE_FILE += .github/workflows/build.yml
+UPDATE_FILE += .github/workflows/nightly.yml
 
 include .cmake/config.mk
 
