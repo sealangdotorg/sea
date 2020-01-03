@@ -41,6 +41,7 @@ UPDATE_FILE += .cmake/config.mk
 UPDATE_FILE += .cmake/LibPackage.cmake
 UPDATE_FILE += .github/workflows/build.yml
 UPDATE_FILE += .github/workflows/nightly.yml
+UPDATE_FILE += .ycm_extra_conf.py
 
 include .cmake/config.mk
 
