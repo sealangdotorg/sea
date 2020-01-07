@@ -752,7 +752,7 @@ endif
 ifdef GITHUB_WORKFLOW
   # https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables
   ENV_CI_BUILD  := $(GITHUB_WORKFLOW)-$(GITHUB_ACTION)-$(GITHUB_EVENT_NAME)
-  ENV_CI_BRANCH := $(shell echo $(GITHUB_REF) | sed "s/ref\/heads\///g" | sed "s/\//-/g")
+  ENV_CI_BRANCH := $(shell echo $(GITHUB_REF) | sed "s/refs\/heads\///g")
 endif
 
 info-ci: info
