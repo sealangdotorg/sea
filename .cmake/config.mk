@@ -387,29 +387,46 @@ ALL   = $(TYPES:%=%-all)
 ENV_CMAKE_FLAGS  = -G$(ENV_GEN)
 ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
 
+ENV_CMAKE_CXX_FLAGS =
+ifeq (,$(findstring Visual,$(ENV_GEN)))
+  ifeq ($(ENV_OSYS),Windows)
+    ENV_CMAKE_CXX_FLAGS += -Wa,-mbig-obj
+  endif
+endif
+
 ifeq (,$(findstring Visual,$(ENV_GEN)))
   ENV_CMAKE_FLAGS += -DCMAKE_C_COMPILER=$(ENV_CC)
   ENV_CMAKE_FLAGS += -DCMAKE_CXX_COMPILER=$(ENV_CXX)
 
-  ifeq ("$(TYPE)","sanitize")
-    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="\
-      -O1 -g -Wall -Wextra\
-      -fno-omit-frame-pointer -fno-optimize-sibling-calls\
-      -fsanitize=undefined -fsanitize=address\
-    "
+  ifeq ("$(TYPE)","debug")
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="-O0 -g\
+      $(ENV_CMAKE_CXX_FLAGS)"
   endif
+
+  ifeq ("$(TYPE)","release")
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="-O3 -DNDEBUG\
+      $(ENV_CMAKE_CXX_FLAGS)"
+  endif
+
+  ifeq ("$(TYPE)","sanitize")
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="-O1 -g -Wall -Wextra\
+      -fno-omit-frame-pointer\
+      -fno-optimize-sibling-calls\
+      -fsanitize=undefined\
+      -fsanitize=address\
+      $(ENV_CMAKE_CXX_FLAGS)"
+  endif
+
   ifeq ("$(TYPE)","coverage")
-    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="\
-      -O0 -g -Wall -Wextra\
-      -fprofile-arcs -ftest-coverage\
-    "
+    ENV_CMAKE_FLAGS += -DCMAKE_CXX_FLAGS="-O0 -g -Wall -Wextra\
+      -fprofile-arcs\
+      -ftest-coverage\
+      $(ENV_CMAKE_CXX_FLAGS)"
   endif
 
   ifeq ($(ENV_OSYS),Windows)
     ifeq ($(ENV_CC),clang)
-      ENV_CMAKE_FLAGS += -DCMAKE_EXE_LINKER_FLAGS="\
-        -Wl,--allow-multiple-definition\
-      "
+      ENV_CMAKE_FLAGS += -DCMAKE_EXE_LINKER_FLAGS="-Wl,--allow-multiple-definition"
     endif
   endif
 else
