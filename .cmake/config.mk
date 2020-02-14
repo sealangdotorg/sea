@@ -523,6 +523,13 @@ ifeq ($(ENV_CC),emcc)
 	cd ./$(OBJ) && ln -fs $(TARGET)-run.js $(TARGET)-run
 	$(eval ENV_FLAGS=$(ENV_FLAGS) node)
 endif
+	$(if $(filter $(patsubst %-benchmark,%,$@),release), \
+	  @$(MAKE) --no-print-directory run-benchmark ENV_FLAGS=$(ENV_FLAGS) ENV_ARGS=$(ENV_ARGS) \
+	, \
+	  @echo "-- Run benchmark via 'make run-benchmark'" \
+	)
+
+run-benchmark:
 	@echo "-- Running benchmark"
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
 
