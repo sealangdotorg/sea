@@ -105,38 +105,3 @@ fly-%: $(ATTIC)
 
 status-fly:
 	@( clear; while true; do date; fly -t ci bs -c 25; fly -t ci ws; tput cup 0 0; sleep 1; done)
-
-
-GIT_TAG=$(shell git describe --tags --always)
-
-bundle: bundle-$(GIT_TAG)
-
-bundle-%:
-	$(eval TAG := $(patsubst bundle-%,%,$@))
-	$(eval BUNDLE := casm-$(TAG))
-ifeq ($(ENV_OSYS),Mac)
-	$(eval OSYS := darwin)
-else
-	$(eval OSYS := $(shell echo $(ENV_OSYS) | tr A-Z a-z))
-endif
-	$(eval ARCH := $(shell echo $(ENV_ARCH) | tr A-Z a-z))
-	$(eval ARCHIVE  := casm-$(OSYS)-$(ARCH))
-	@echo "-- Bundle '$(TAG)' for '$(ENV_OSYS)' '$(ENV_ARCH)'"
-	@mkdir -p obj
-	@mkdir -p obj/bundle
-	@cp -rf obj/install obj/bundle/$(BUNDLE)
-ifeq ($(ENV_OSYS),Windows)
-	$(eval ARCHIVE  := $(ARCHIVE).zip)
-	@(cd obj/bundle; zip -r $(ARCHIVE) $(BUNDLE))
-else
-	$(eval ARCHIVE  := $(ARCHIVE).tar.gz)
-	@(cd obj/bundle; tar cfvz $(ARCHIVE) $(BUNDLE))
-endif
-	@echo "-- Archive '$(ARCHIVE)'"
-	$(eval CHECKSUM := $(ARCHIVE).sha2)
-ifeq ($(ENV_OSYS),Mac)
-	@(cd obj/bundle; shasum -a 256 $(ARCHIVE) > $(CHECKSUM))
-else
-	@(cd obj/bundle; sha256sum $(ARCHIVE) > $(CHECKSUM))
-endif
-	@echo "-- Checksum '$(CHECKSUM)'"
