@@ -135,6 +135,10 @@ ifeq ($(ENV_CXX),)
   $(error environment C++ compiler '$(X)' not defined!)
 endif
 
+ifndef LTO
+  LTO=0
+endif
+
 
 ifdef ENV_GEN
   G=$(ENV_GEN)
@@ -391,6 +395,12 @@ ENV_CMAKE_CXX_FLAGS =
 ifeq (,$(findstring Visual,$(ENV_GEN)))
   ifeq ($(ENV_OSYS),Windows)
     ENV_CMAKE_CXX_FLAGS += -Wa,-mbig-obj
+  else
+    ifeq ("$(TYPE)","release")
+      ifeq ($(LTO),1)
+        ENV_CMAKE_CXX_FLAGS += -flto
+      endif
+    endif
   endif
 endif
 
@@ -425,7 +435,9 @@ ifeq (,$(findstring Visual,$(ENV_GEN)))
   endif
 
   ifeq ("$(TYPE)","release")
+      ENV_CMAKE_FLAGS += -DCMAKE_EXE_LINKER_FLAGS="-s"
       ENV_CMAKE_FLAGS += -DCMAKE_SHARED_LINKER_FLAGS="-s"
+      ENV_CMAKE_FLAGS += -DCMAKE_STATIC_LINKER_FLAGS="-s"
   endif
 
   ifeq ($(ENV_OSYS),Windows)
