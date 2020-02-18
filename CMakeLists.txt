@@ -69,7 +69,7 @@ package_git_deps(
   libcasm-tc>casmi
   )
 
-
+#
 #
 # project
 #
@@ -79,7 +79,7 @@ add_custom_target( ${PROJECT}
     ${PROJECT}-deps
 )
 
-
+#
 #
 # test
 #
@@ -93,7 +93,7 @@ add_custom_target( ${PROJECT}-check
     ${PROJECT_SOURCE_DIR}
 )
 
-
+#
 #
 # benchmark
 #
@@ -107,7 +107,7 @@ add_custom_target( ${PROJECT}-run
     ${PROJECT_SOURCE_DIR}
 )
 
-
+#
 #
 # install
 #
@@ -121,7 +121,7 @@ install(
   INCLUDES DESTINATION include
 )
 
-
+#
 #
 # bundle
 #
@@ -135,7 +135,7 @@ install(
     "."
     )
 
-
+#
 #
 # cmake
 #
@@ -147,7 +147,7 @@ install(
 #     "share/cmake/Module/${PROJECT}"
 #   )
 
-
+#
 #
 # build features and checks
 #
