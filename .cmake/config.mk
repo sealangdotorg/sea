@@ -354,6 +354,12 @@ ifeq ($(ENV_INSTALL),)
   $(error empty environment install path detected! $(I), $(ENV_INSTALL), $(BIN))
 endif
 
+ifeq ($(ENV_OSYS),Windows)
+  ENV_SET := set
+else
+  ENV_SET := export
+endif
+
 
 default: debug
 
@@ -516,7 +522,6 @@ ifeq ($(ENV_CC),emcc)
 	`cat CMakeFiles/$(TARGET)-check.dir/link.txt | \
 	sed "s/$(TARGET)-check/$(TARGET)-check.js -s MAIN_MODULE=1/g"`
 	cd ./$(OBJ) && ln -fs $(TARGET)-check.js $(TARGET)-check
-	$(eval ENV_FLAGS=$(ENV_FLAGS) node)
 endif
 	@echo "-- Running unit test"
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
@@ -533,7 +538,6 @@ ifeq ($(ENV_CC),emcc)
 	`cat CMakeFiles/$(TARGET)-run.dir/link.txt | \
 	sed "s/$(TARGET)-run/$(TARGET)-run.js -s MAIN_MODULE=1/g"`
 	cd ./$(OBJ) && ln -fs $(TARGET)-run.js $(TARGET)-run
-	$(eval ENV_FLAGS=$(ENV_FLAGS) node)
 endif
 	$(if $(filter $(patsubst %-benchmark,%,$@),release), \
 	  @$(MAKE) --no-print-directory run-benchmark ENV_FLAGS=$(ENV_FLAGS) ENV_ARGS=$(ENV_ARGS) \
