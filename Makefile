@@ -41,6 +41,10 @@ UPDATE_FILE += .github/workflows/nightly.yml
 UPDATE_FILE += .ycm_extra_conf.py
 
 CONFIG  = lib/stdhl
+ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
+  $(shell git submodule update --init $(CONFIG) && git -C $(CONFIG) checkout master)
+endif
+
 INCLUDE = $(CONFIG)/.cmake/config.mk
 include $(INCLUDE)
 
