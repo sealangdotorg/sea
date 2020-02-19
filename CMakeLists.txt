@@ -55,9 +55,9 @@ package_git_submodule( casmi      master REQUIRED obj   app/casmi   )
 package_git_deps(
   libgtest>libstdhl
   libhayai>libstdhl
-  libz3>libstdhl
   libstdhl>libpass
   libpass>libtptp
+  libz3>libtptp
   libtptp>libcasm-ir
   libcasm-ir>libcasm-fe
   libcasm-fe>libcasm-tc
