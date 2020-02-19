@@ -24,7 +24,6 @@
 
 TARGET = casm
 
-UPDATE_ROOT  = lib/stdhl
 UPDATE_PATH  = .
 UPDATE_PATH += lib/pass
 UPDATE_PATH += lib/tptp
@@ -37,13 +36,13 @@ UPDATE_PATH += app/casmf
 UPDATE_PATH += app/casmi
 
 UPDATE_FILE  = .clang-format
-UPDATE_FILE += .cmake/config.mk
-UPDATE_FILE += .cmake/LibPackage.cmake
 UPDATE_FILE += .github/workflows/build.yml
 UPDATE_FILE += .github/workflows/nightly.yml
 UPDATE_FILE += .ycm_extra_conf.py
 
-include .cmake/config.mk
+CONFIG  = lib/stdhl
+INCLUDE = $(CONFIG)/.cmake/config.mk
+include $(INCLUDE)
 
 
 clean-deps:
@@ -58,10 +57,12 @@ doxy:
 	@mkdir -p obj
 	@doxygen
 
+
 grammar:
 	@for i in `grep "#+html: {{page>.:grammar:" lib/casm-fe/src/various/Grammar.org | sed "s/#+html: {{page>.:grammar:/doc\/language\/grammar\//g" | sed "s/&noheader&nofooter}}/.org/g"`; do if [ ! -f $$i ]; then echo "Documentation of '$$i' is missing!"; fi; done
 
-GITHUB_PATH  = $(subst ., $(UPDATE_ROOT), $(UPDATE_PATH))
+
+GITHUB_PATH  = $(subst ., $(CONFIG), $(UPDATE_PATH))
 GITHUB_DIR   = .github
 GITHUB_FILE  = CODE_OF_CONDUCT.md
 GITHUB_FILE += CODE_OF_CONDUCT.org
@@ -89,6 +90,7 @@ PIPELINES  = forks
 PIPELINES += development
 PIPELINES += nightly
 PIPELINES += release
+
 
 fly: $(PIPELINES:%=fly-%)
 

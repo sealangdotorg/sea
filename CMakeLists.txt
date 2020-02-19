@@ -29,10 +29,7 @@ cmake_minimum_required( VERSION ${CMAKE_VERSION} )
 project( ${PROJECT} )
 set( CMAKE_VERSION 3.2 )
 set( CMAKE_MODULE_PATH ${${PROJECT}_SOURCE_DIR}/.cmake )
-
-include( CPack )
-include( FeatureSummary )
-include( LibPackage )
+include( ${CMAKE_CONFIG_PATH}/LibPackage.cmake )
 
 package_git( ${PROJECT} )
 package_git_submodule( libstdhl   master REQUIRED obj   lib/stdhl   )
@@ -68,6 +65,9 @@ package_git_deps(
   libcasm-tc>casmf
   libcasm-tc>casmi
   )
+
+include( CPack )
+include( FeatureSummary )
 
 #
 #
