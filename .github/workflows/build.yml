@@ -41,11 +41,13 @@ jobs:
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
+      G: ninja
     steps:
     - uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
+        sudo apt-get install ninja-build
         sudo apt-get install -y libz3-dev
         make ci-tools
     - name: Fetching
@@ -84,11 +86,13 @@ jobs:
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
+      G: ninja
     steps:
     - uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
+        brew install ninja
         brew install gcc@9
         ln -s /usr/local/bin/gcc-9 /usr/local/bin/gcc
         ln -s /usr/local/bin/g++-9 /usr/local/bin/g++
@@ -122,11 +126,13 @@ jobs:
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
+      G: ninja
     steps:
     - uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
+        choco install ninja
         Invoke-WebRequest https://github.com/Z3Prover/z3/releases/download/z3-4.8.6/z3-4.8.6-x64-win.zip -O C:\z3-4.8.6-x64-win.zip
         Expand-Archive    C:\z3-4.8.6-x64-win.zip     -DestinationPath C:\
         Copy-Item -Path   C:\z3-4.8.6-x64-win\bin     -Destination     C:\ProgramData\chocolatey -Recurse -Force
