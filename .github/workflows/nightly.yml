@@ -143,10 +143,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Setup
       run: |
-        choco install wget
+        make info
         choco install ninja
         choco install zip
-        make info
         make ci-tools
     - name: Fetching
       env:
