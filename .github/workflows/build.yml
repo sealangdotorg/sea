@@ -131,8 +131,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Setup
       run: |
-        make info
+        choco install wget
         choco install ninja
+        make info
         Invoke-WebRequest https://github.com/Z3Prover/z3/releases/download/z3-4.8.6/z3-4.8.6-x64-win.zip -O C:\z3-4.8.6-x64-win.zip
         Expand-Archive    C:\z3-4.8.6-x64-win.zip     -DestinationPath C:\
         Copy-Item -Path   C:\z3-4.8.6-x64-win\bin     -Destination     C:\ProgramData\chocolatey -Recurse -Force
