@@ -23,4 +23,5 @@
 #
 
 /.attic
+/.cmake
 /obj

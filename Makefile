@@ -42,12 +42,11 @@ UPDATE_FILE += .ycm_extra_conf.py
 
 CONFIG  = lib/stdhl
 ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
-  CONFIG = obj
-  ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
-    $(shell mkdir -p $(CONFIG))
-    $(shell mkdir -p $(CONFIG)/.cmake)
-    $(shell wget -qO $(CONFIG)/.cmake/config.mk https://raw.githubusercontent.com/casm-lang/libstdhl/master/.cmake/config.mk)
-    $(shell wget -qO $(CONFIG)/.cmake/LibPackage.cmake https://raw.githubusercontent.com/casm-lang/libstdhl/master/.cmake/LibPackage.cmake)
+  CONFIG = .
+  ifeq ($(wildcard .cmake/.*),)
+    $(shell mkdir -p .cmake)
+    $(shell wget -qO .cmake/config.mk https://raw.githubusercontent.com/casm-lang/libstdhl/master/.cmake/config.mk)
+    $(shell wget -qO .cmake/LibPackage.cmake https://raw.githubusercontent.com/casm-lang/libstdhl/master/.cmake/LibPackage.cmake)
   endif
 endif
 
