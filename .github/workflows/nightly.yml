@@ -28,7 +28,7 @@ name: nightly
 
 on:
   schedule:
-    - cron:  '23 1 * * *'
+    - cron: '12 0 * * *'
 
 jobs:
   linux-x86_64:
@@ -43,7 +43,8 @@ jobs:
       C: ${{ matrix.tool.chain }}
       G: ninja
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
@@ -90,7 +91,8 @@ jobs:
       C: ${{ matrix.tool.chain }}
       G: ninja
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
@@ -140,7 +142,8 @@ jobs:
       C: ${{ matrix.tool.chain }}
       G: ninja
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Setup
       run: |
         make info
