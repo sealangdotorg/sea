@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* AttributedLocalFunctionDefinition
+
+An attributed local function definition which can have optionally =Attributes=.

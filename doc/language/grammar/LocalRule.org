@@ -1,0 +1,10 @@
+#+options: toc:nil
+
+* LocalRule
+
+The =local= rule defines a function definition in the current rule scope.
+Therefore, it represents a local state inside a given rule.
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.5.0=. 
+#+html: </callout>

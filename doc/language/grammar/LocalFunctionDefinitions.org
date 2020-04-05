@@ -1,0 +1,5 @@
+#+options: toc:nil
+
+* LocalFunctionDefinitions
+
+LocalFunctionDefinitions consist of one or more attributed =LocalFunctionDefintions=.
