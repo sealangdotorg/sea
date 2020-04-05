@@ -1,0 +1,9 @@
+#+options: toc:nil
+
+* LocalFunctionDefinition
+
+The same as a traditional =FunctionDefinition= without a =function= keyword.
+
+#+html: <callout type="info" icon="true">
+This definition is introduced in version =0.5.0=. 
+#+html: </callout>

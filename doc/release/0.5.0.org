@@ -1,0 +1,57 @@
+# 
+#   Copyright (C) 2014-2020 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+# 
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+# 
+#   This file is part of casm.
+# 
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+# 
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+# 
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+# 
+#
+
+#+options: toc:nil
+#+html: {{tag>release}}
+
+*** 0.5.0
+
+#+html: <callout title="Release ''epiktetos''">
+[[https://github.com/casm-lang/casm/releases/tag/0.5.0][{{fa>github?lg}}]] April 5, 2020
+
+The release identifier [[http://www.behindthename.com/name/epiktetos][epiktetos]]
+is derived from the Greek name Επικτητος (Epiktetos) and means "newly acquired".
+#+html: </callout>
+
+#+html: <grid>
+#+html: <col lg="6" md="12">
+#+html: <TEXT align="justify">
+This is the fives official release of the CASM project.
+It introduces two improvements and all are language related.
+The last release introduced a module import concept and we have added a =using= path namespace concept to make symbols visible and shorted their symbol name path.
+Besides the =using= path syntax, we support the =local= rule definition now.
+This rule allows a specifier to defined (nested) local state functions inside given rule scopes.
+
+#+html: </TEXT>
+#+html: </col>
+#+html: <col lg="6" md="12">
+
+| {{fa>file-alt?lg}} | *Language* | We introduced a new language syntax [[./../syntax#UsingPathDefinition][definition element]] to make module symbols visible under shorter name. |
+|                    |            |                                                                                                           |
+| {{fa>file-alt?lg}} | *Language* | Provided support for the [[./../syntax#LocalRule][local rule]] to defined nested local states.                                       |
+|                    |            |                                                                                                           |
+
+#+html: </col>
+#+html: </grid>
