@@ -64,6 +64,10 @@ doxy:
 
 grammar:
 	@for i in `grep "#+html: {{page>.:grammar:" lib/casm-fe/src/various/Grammar.org | sed "s/#+html: {{page>.:grammar:/doc\/language\/grammar\//g" | sed "s/&noheader&nofooter}}/.org/g"`; do if [ ! -f $$i ]; then echo "Documentation of '$$i' is missing!"; fi; done
+	@echo "Grammar Rules"
+	@grep "#+html: {{page>.:grammar:" doc/language/syntax.org | wc -l
+	@echo "Grammar Descriptions"
+	@ls doc/language/grammar/ | wc -l
 
 
 GITHUB_PATH  = $(subst ., $(CONFIG), $(UPDATE_PATH))
