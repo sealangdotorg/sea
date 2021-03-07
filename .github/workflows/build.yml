@@ -137,11 +137,12 @@ jobs:
       run: |
         make info
         choco install ninja
-        Invoke-WebRequest https://github.com/Z3Prover/z3/releases/download/z3-4.8.6/z3-4.8.6-x64-win.zip -O C:\z3-4.8.6-x64-win.zip
-        Expand-Archive    C:\z3-4.8.6-x64-win.zip     -DestinationPath C:\
-        Copy-Item -Path   C:\z3-4.8.6-x64-win\bin     -Destination     C:\ProgramData\chocolatey -Recurse -Force
-        Copy-Item -Path   C:\z3-4.8.6-x64-win\include -Destination     C:\ProgramData\chocolatey -Recurse -Force
         make ci-tools
+    - name: Install
+      uses: pavpanchekha/setup-z3@1.2.2
+      with:
+        version: 4.8.8
+        architecture: x64
     - name: Fetching
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
