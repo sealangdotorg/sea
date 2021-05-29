@@ -27,7 +27,7 @@
 # Applications
 #
 
-[submodule "app/casmc"]
+[submodule "app/casmc"] # private
 	path = app/casmc
 	url = git@github.com:casm-lang/casmc.git
 
@@ -90,7 +90,7 @@
 	path = lib/casm-ir
 	url = git@github.com:casm-lang/libcasm-ir.git
 
-[submodule "lib/casm-rt"]
+[submodule "lib/casm-rt"] # private
 	path = lib/casm-rt
 	url = git@github.com:casm-lang/libcasm-rt.git
 
@@ -98,7 +98,7 @@
 	path = lib/casm-fe
 	url = git@github.com:casm-lang/libcasm-fe.git
 
-[submodule "lib/casm-be"]
+[submodule "lib/casm-be"] # private
 	path = lib/casm-be
 	url = git@github.com:casm-lang/libcasm-be.git
 
@@ -111,15 +111,15 @@
 # Libraries (CJEL)
 #
 
-[submodule "lib/cjel-ir"]
+[submodule "lib/cjel-ir"] # private
 	path = lib/cjel-ir
 	url = git@github.com:casm-lang/libcjel-ir.git
 
-[submodule "lib/cjel-rt"]
+[submodule "lib/cjel-rt"] # private
 	path = lib/cjel-rt
 	url = git@github.com:casm-lang/libcjel-rt.git
 
-[submodule "lib/cjel-be"]
+[submodule "lib/cjel-be"] # private
 	path = lib/cjel-be
 	url = git@github.com:casm-lang/libcjel-be.git
 
