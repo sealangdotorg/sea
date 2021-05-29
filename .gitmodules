@@ -29,7 +29,7 @@
 
 [submodule "app/casmc"]
 	path = app/casmc
-	url = git@github.com:ppaulweber/casmc.git
+	url = git@github.com:casm-lang/casmc.git
 
 [submodule "app/casmf"]
 	path = app/casmf
@@ -60,7 +60,7 @@
 	path = lib/hayai
 	url = git@github.com:casm-lang/libhayai.git
 
-[submodule "lib/z3"]
+[submodule "lib/z3"] # external
 	path = lib/z3
 	url = git@github.com:casm-lang/libz3.git
 
@@ -113,15 +113,15 @@
 
 [submodule "lib/cjel-ir"]
 	path = lib/cjel-ir
-	url = git@github.com:ppaulweber/libcjel-ir.git
+	url = git@github.com:casm-lang/libcjel-ir.git
 
 [submodule "lib/cjel-rt"]
 	path = lib/cjel-rt
-	url = git@github.com:ppaulweber/libcjel-rt.git
+	url = git@github.com:casm-lang/libcjel-rt.git
 
 [submodule "lib/cjel-be"]
 	path = lib/cjel-be
-	url = git@github.com:ppaulweber/libcjel-be.git
+	url = git@github.com:casm-lang/libcjel-be.git
 
 #
 #
