@@ -400,7 +400,12 @@ ENV_CMAKE_FLAGS += -DCMAKE_BUILD_TYPE=$(TYPE)
 ENV_CMAKE_CXX_FLAGS =
 ifeq (,$(findstring Visual,$(ENV_GEN)))
   ifeq ($(ENV_OSYS),Windows)
-    ENV_CMAKE_CXX_FLAGS += -Wa,-mbig-obj
+    ifeq ($(ENV_CC),gcc)
+      ENV_CMAKE_CXX_FLAGS += -Wa,-mbig-obj
+    endif
+    ifeq ($(ENV_CC),clang)
+      ENV_CMAKE_CXX_FLAGS += -buildmode=exe
+    endif
   else
     ifeq ("$(TYPE)","release")
       ifeq ($(LTO),1)
