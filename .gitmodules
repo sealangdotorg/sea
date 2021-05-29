@@ -27,7 +27,7 @@
 # Applications
 #
 
-[submodule "app/casmc"] # external
+[submodule "app/casmc"]
 	path = app/casmc
 	url = git@github.com:ppaulweber/casmc.git
 
@@ -112,15 +112,15 @@
 #
 
 [submodule "lib/cjel-ir"]
-	path = lib/cjel-ir # external
+	path = lib/cjel-ir
 	url = git@github.com:ppaulweber/libcjel-ir.git
 
 [submodule "lib/cjel-rt"]
-	path = lib/cjel-rt # external
+	path = lib/cjel-rt
 	url = git@github.com:ppaulweber/libcjel-rt.git
 
 [submodule "lib/cjel-be"]
-	path = lib/cjel-be # external
+	path = lib/cjel-be
 	url = git@github.com:ppaulweber/libcjel-be.git
 
 #
