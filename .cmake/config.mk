@@ -722,12 +722,6 @@ info-tools:
 	@echo "-- CMake"
 	@cmake --version
 	@echo ""
-	@echo "-- C Compiler"
-	@$(ENV_CC) --version
-	@echo ""
-	@echo "-- C++ Compiler"
-	@$(ENV_CXX) --version
-	@echo ""
 
 info-variables:
 	$(foreach v, $(.VARIABLES), $(info $(v) = $($(v))))
