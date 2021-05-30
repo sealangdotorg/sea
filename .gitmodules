@@ -27,7 +27,7 @@
 # Applications
 #
 
-[submodule "app/casmc"] # private
+[submodule "app/casmc"] # internal
 	path = app/casmc
 	url = git@github.com:casm-lang/casmc.git
 
@@ -90,7 +90,7 @@
 	path = lib/casm-ir
 	url = git@github.com:casm-lang/libcasm-ir.git
 
-[submodule "lib/casm-rt"] # private
+[submodule "lib/casm-rt"] # internal
 	path = lib/casm-rt
 	url = git@github.com:casm-lang/libcasm-rt.git
 
@@ -98,7 +98,7 @@
 	path = lib/casm-fe
 	url = git@github.com:casm-lang/libcasm-fe.git
 
-[submodule "lib/casm-be"] # private
+[submodule "lib/casm-be"] # internal
 	path = lib/casm-be
 	url = git@github.com:casm-lang/libcasm-be.git
 
@@ -111,15 +111,15 @@
 # Libraries (CJEL)
 #
 
-[submodule "lib/cjel-ir"] # private
+[submodule "lib/cjel-ir"] # internal
 	path = lib/cjel-ir
 	url = git@github.com:casm-lang/libcjel-ir.git
 
-[submodule "lib/cjel-rt"] # private
+[submodule "lib/cjel-rt"] # internal
 	path = lib/cjel-rt
 	url = git@github.com:casm-lang/libcjel-rt.git
 
-[submodule "lib/cjel-be"] # private
+[submodule "lib/cjel-be"] # internal
 	path = lib/cjel-be
 	url = git@github.com:casm-lang/libcjel-be.git
 
@@ -128,23 +128,23 @@
 # Extension (Plug-ins)
 #
 
-[submodule "ext/emacs"]
+[submodule "ext/emacs"] # internal
 	path = ext/emacs
 	url = git@github.com:casm-lang/casm-lang.plugin.emacs.git
 
-[submodule "ext/kate"]
+[submodule "ext/kate"] # internal
 	path = ext/kate
 	url = git@github.com:casm-lang/casm-lang.plugin.kate.git
 
-[submodule "ext/monaco"]
+[submodule "ext/monaco"] # internal
 	path = ext/monaco
 	url = git@github.com:casm-lang/casm-lang.plugin.monaco.git
 
-[submodule "ext/tmbundle"]
+[submodule "ext/tmbundle"] # internal
 	path = ext/tmbundle
 	url = git@github.com:casm-lang/casm-lang.plugin.tmbundle.git
 
-[submodule "ext/vscode"]
+[submodule "ext/vscode"] # internal
 	path = ext/vscode
 	url = git@github.com:casm-lang/casm-lang.plugin.vscode.git
 
@@ -153,19 +153,19 @@
 # Packages
 #
 
-[submodule "pkg/archlinux"]
+[submodule "pkg/archlinux"] # internal
 	path = pkg/archlinux
 	url = git@github.com:casm-lang/casm-lang.pkg.archlinux.git
 
-[submodule "pkg/appimage"]
+[submodule "pkg/appimage"] # internal
 	path = pkg/appimage
 	url = git@github.com:casm-lang/casm-lang.pkg.appimage.git
 
-[submodule "pkg/flatpak"]
+[submodule "pkg/flatpak"] # internal
 	path = pkg/flatpak
 	url = git@github.com:casm-lang/casm-lang.pkg.flatpak.git
 
-[submodule "pkg/docker"]
+[submodule "pkg/docker"] # internal
 	path = pkg/docker
 	url = git@github.com:casm-lang/casm-lang.pkg.docker.git
 
@@ -174,22 +174,22 @@
 # Various (Containers, Logo, Publications, Website etc.)
 #
 
-[submodule "var/container/linux"]
+[submodule "var/container/linux"] # internal
 	path = var/container/linux
 	url = git@github.com:casm-lang/casm-lang.container.linux.git
 
-[submodule "var/container/windows"]
+[submodule "var/container/windows"] # internal
 	path = var/container/windows
 	url = git@github.com:casm-lang/casm-lang.container.windows.git
 
-[submodule "var/logo"]
+[submodule "var/logo"] # internal
 	path = var/logo
 	url = git@github.com:casm-lang/casm-lang.logo.git
 
-[submodule "var/publication"]
+[submodule "var/publication"] # internal
 	path = var/publication
 	url = git@github.com:casm-lang/publication.git
 
-[submodule "var/web"]
+[submodule "var/web"] # internal
 	path = var/web
 	url = git@github.com:casm-lang/casm-lang.github.io.git
