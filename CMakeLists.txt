@@ -84,6 +84,16 @@ add_custom_target( ${PROJECT}
 # test
 #
 
+IF( WIN32 )
+add_custom_target( ${PROJECT}-check
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-test.bat
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-check.bat
+  WORKING_DIRECTORY
+    ${PROJECT_SOURCE_DIR}
+)
+ELSE()
 add_custom_target( ${PROJECT}-check
   COMMAND
     ${CMAKE_COMMAND} -E copy
@@ -92,12 +102,23 @@ add_custom_target( ${PROJECT}-check
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
 )
+ENDIF()
 
 #
 #
 # benchmark
 #
 
+IF( WIN32 )
+add_custom_target( ${PROJECT}-run
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    ${CMAKE_SOURCE_DIR}/src/${PROJECT}-benchmark.bat
+    ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT}-run.bat
+  WORKING_DIRECTORY
+    ${PROJECT_SOURCE_DIR}
+)
+ELSE()
 add_custom_target( ${PROJECT}-run
   COMMAND
     ${CMAKE_COMMAND} -E copy
@@ -106,6 +127,7 @@ add_custom_target( ${PROJECT}-run
   WORKING_DIRECTORY
     ${PROJECT_SOURCE_DIR}
 )
+ENDIF()
 
 #
 #
