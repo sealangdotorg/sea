@@ -824,7 +824,7 @@ fetch: debug-fetch
 
 $(FETCH):%-fetch: info-fetch
 	$(if $(filter $(patsubst %-fetch,%,$@),release), \
-	  $(eval SUBMODULES=$(shell grep submodule .gitmodules | grep "submodule" | grep -ve "# private" | sed "s/\[submodule \"//g" | sed "s/\"\].*//g")) \
+	  $(eval SUBMODULES=$(shell grep submodule .gitmodules | grep "submodule" | grep -ve "# internal" | sed "s/\[submodule \"//g" | sed "s/\"\].*//g")) \
 	, \
 	  $(eval SUBMODULES=$(shell grep submodule .gitmodules | grep "submodule" | grep -ve "# external" | sed "s/\[submodule \"//g" | sed "s/\"\].*//g")) \
 	)
