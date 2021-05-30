@@ -530,8 +530,11 @@ ifeq ($(ENV_CC),emcc)
 	cd ./$(OBJ) && ln -fs $(TARGET)-check.js $(TARGET)-check
 endif
 	@echo "-- Running unit test"
+ifeq ($(ENV_OSYS),Windows)
+	@$(ENV_FLAGS) $(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
+else
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-check --gtest_output=xml:obj/report.xml $(ENV_ARGS)
-
+endif
 
 benchmark: debug-benchmark
 
@@ -553,7 +556,11 @@ endif
 
 run-benchmark:
 	@echo "-- Running benchmark"
+ifeq ($(ENV_OSYS),Windows)
+	@$(ENV_FLAGS) $(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
+else
 	@$(ENV_FLAGS) ./$(OBJ)/$(TARGET)-run -o console -o json:obj/report.json $(ENV_ARGS)
+endif
 
 
 install: debug-install
