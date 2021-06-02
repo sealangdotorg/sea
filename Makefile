@@ -42,7 +42,11 @@ UPDATE_FILE += .ycm_extra_conf.py
 
 CONFIG  = lib/stdhl
 ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
-  CONFIG = .
+  CONFIG = lib/stdhl
+  ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
+    $(git config --add --local url."https://github.com/casm-lang/libstdhl".insteadOf "git@github.com:casm-lang/libstdhl")
+    $(shell git submodule update --init $(CONFIG) && git -C $(CONFIG) checkout master)
+  endif
 endif
 
 INCLUDE = $(CONFIG)/.cmake/config.mk
