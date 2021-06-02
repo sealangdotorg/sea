@@ -44,7 +44,6 @@ CONFIG  = lib/stdhl
 ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
   CONFIG = lib/stdhl
   ifeq ($(wildcard $(CONFIG)/.cmake/.*),)
-    $(git config --add --global url."https://github.com/casm-lang/libstdhl".insteadOf "git@github.com:casm-lang/libstdhl")
     $(shell git submodule update --init $(CONFIG) && git -C $(CONFIG) checkout master)
   endif
 endif
