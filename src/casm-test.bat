@@ -22,6 +22,8 @@ rem You should have received a copy of the GNU General Public License
 rem along with casm. If not, see <http://www.gnu.org/licenses/>.
 rem
 
+cls
+
 make --no-print-directory -C app/casmf test
 
 make --no-print-directory -C app/casmi test
