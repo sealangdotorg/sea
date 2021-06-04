@@ -38,7 +38,7 @@ jobs:
       matrix:
         tool:
         - build: release
-          chain: gcc-11
+          chain: gcc-10
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
