@@ -73,7 +73,7 @@ jobs:
     - name: Coverage
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      if: matrix.tool.build == 'coverage' && matrix.tool.chain == 'gcc'
+      if: matrix.tool.build == 'coverage'
       run: |
         wget https://codecov.io/bash
         chmod 755 bash
