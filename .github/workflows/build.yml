@@ -22,22 +22,23 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# https://help.github.com/en/articles/virtual-environments-for-github-actions#supported-virtual-environments
+# https://help.github.com/en/articles/virtual-environments-for-github-actions
 
 name: build
 
 on: [push]
 
 jobs:
+  # https://github.com/actions/virtual-environments/blob/main/images/linux
   linux-x86_64:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         tool:
         - build: debug
-          chain: clang
+          chain: clang-11
         - build: coverage
-          chain: gcc
+          chain: gcc-10
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
@@ -72,19 +73,20 @@ jobs:
     - name: Coverage
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      if: matrix.tool.build == 'coverage' && matrix.tool.chain == 'gcc'
+      if: matrix.tool.build == 'coverage'
       run: |
         wget https://codecov.io/bash
         chmod 755 bash
         ./bash
 
+  # https://github.com/actions/virtual-environments/blob/main/images/macos
   darwin-x86_64:
-    runs-on: macos-latest
+    runs-on: macos-10.15
     strategy:
       matrix:
         tool:
         - build: debug
-          chain: gcc
+          chain: gcc-11
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
@@ -96,9 +98,6 @@ jobs:
       run: |
         make info
         brew install ninja
-        brew install gcc@9
-        ln -s /usr/local/bin/gcc-9 /usr/local/bin/gcc
-        ln -s /usr/local/bin/g++-9 /usr/local/bin/g++
         brew install z3
         make ci-tools
     - name: Fetching
@@ -119,16 +118,17 @@ jobs:
       run: |
         make ci-benchmark
 
+  # https://github.com/actions/virtual-environments/blob/main/images/win
   windows-x86_64:
     runs-on: windows-2019
     strategy:
       matrix:
         tool:
         - build: debug
-          chain: gcc
+          chain: clang-12
     env:
       B: ${{ matrix.tool.build }}
-      C: ${{ matrix.tool.chain }}
+      C: clang # ${{ matrix.tool.chain }}
       G: ninja
     steps:
     - name: Checkout
@@ -136,13 +136,14 @@ jobs:
     - name: Setup
       run: |
         make info
+        echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         choco install ninja
         make ci-tools
     - name: Install
-      uses: pavpanchekha/setup-z3@1.2.2
+      uses: ppaulweber/github-action-setup-z3@bug/url_fix
       with:
-        version: 4.8.8
-        architecture: x64
+        version: 4.8.10
+        architecture: x64-win
     - name: Fetching
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
