@@ -42,6 +42,7 @@ This is the sixth official release of the CASM project.
 We are happy to present our new symbolic/concolic execution functionality.
 Basis for the CASM symbolic execution is a complete from scratch implemented C++ library called =libtptp= which provides a TPTP parser, code emitter, and evaluation transformation towards Z3.
 By annotating CASM functions with the attribute =symbolic= allows the CASM symbolic execution to derive first order formula based TPTP traces of the desired annotated functions.
+Furthermore, we support the complete building by (open-)source of the three main applications =casmd=, =casmf=, and =casmi= and the corresponding libraries like =libcasm-fe= or =libcasm-ir=.
 
 #+html: </TEXT>
 #+html: </col>
@@ -54,6 +55,8 @@ By annotating CASM functions with the attribute =symbolic= allows the CASM symbo
 | {{fa>terminal?lg}}     | *Application* | Enabled the concolic execution support in the CASM language server daemon application =casmd= for LSP-based editor integration to invoke concolic executions.           |
 |                        |               |                                                                                                                                                                         |
 | {{fa>puzzle-piece?lg}} | *Plug-in*     | Integrated a new LSP command in the =monaco= editor extension to invoke CASM concolic executions and render the generated TPTP trace.                                   |
+|                        |               |                                                                                                                                                                         |
+| {{fa>microchip?lg}}    | *Environment* | Full open-source based compilations of libraries and applications.                                                                                                      |
 |                        |               |                                                                                                                                                                         |
 
 #+html: </col>
