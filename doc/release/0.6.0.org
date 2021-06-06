@@ -1,0 +1,60 @@
+# 
+#   Copyright (C) 2014-2021 CASM Organization <https://casm-lang.org>
+#   All rights reserved.
+# 
+#   Developed by: Philipp Paulweber
+#                 Emmanuel Pescosta
+#                 <https://github.com/casm-lang/casm>
+# 
+#   This file is part of casm.
+# 
+#   casm is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+# 
+#   casm is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU General Public License for more details.
+# 
+#   You should have received a copy of the GNU General Public License
+#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+# 
+#
+
+#+options: toc:nil
+#+html: {{tag>release}}
+
+*** 0.6.0
+
+#+html: <callout title="Release ''faidros''">
+[[https://github.com/casm-lang/casm/releases/tag/0.6.0][{{fa>github?lg}}]] June 6, 2021
+
+The release identifier [[http://www.behindthename.com/name/phaedrus][faidros]]
+is derived from the Greek name Φαιδρος (Phaidros) and means "bright".
+#+html: </callout>
+
+#+html: <grid>
+#+html: <col lg="6" md="12">
+#+html: <TEXT align="justify">
+This is the sixth official release of the CASM project.
+We are happy to present our new symbolic/concolic execution functionality.
+Basis for the CASM symbolic execution is a complete from scratch implemented C++ library called =libtptp= which provides a TPTP parser, code emitter, and evaluation transformation towards Z3.
+By annotating CASM functions with the attribute =symbolic= allows the CASM symbolic execution to derive first order formula based TPTP traces of the desired annotated functions.
+
+#+html: </TEXT>
+#+html: </col>
+#+html: <col lg="6" md="12">
+
+| {{fa>file-alt?lg}}     | *Language*    | We enabled the =symbolic= attribute for [[./../syntax#FunctionDefinition][function definition]] language elements to annotate functions that shall be symbolically evaluated during the concolic execution. |
+|                        |               |                                                                                                                                                                         |
+| {{fa>terminal?lg}}     | *Application* | Provided a new command line option (=-s=) to the CASM interpreter application =casmi= to evaluate CASM specifications with the new concolic execution.                  |
+|                        |               |                                                                                                                                                                         |
+| {{fa>terminal?lg}}     | *Application* | Enabled the concolic execution support in the CASM language server daemon application =casmd= for LSP-based editor integration to invoke concolic executions.           |
+|                        |               |                                                                                                                                                                         |
+| {{fa>puzzle-piece?lg}} | *Plug-in*     | Integrated a new LSP command in the =monaco= editor extension to invoke CASM concolic executions and render the generated TPTP trace.                                   |
+|                        |               |                                                                                                                                                                         |
+
+#+html: </col>
+#+html: </grid>
