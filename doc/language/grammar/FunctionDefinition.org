@@ -8,3 +8,9 @@ Furthermore, due to the fact that ASM functions are by default =undef= (undefine
 #+html: <callout type="info" icon="true">
 This definition is introduced in version =0.1.0=. 
 #+html: </callout>
+
+In order to evaluate a CASM function as symbolic in the symbolic/concolic execution and include it in the TPTP trace, the function has to set the attribute =symbolic=
+
+#+html: <callout type="info" icon="true">
+The attribute =symbolic= is introduced in version =0.6.0=. 
+#+html: </callout>
