@@ -22,7 +22,7 @@
 #   along with casm. If not, see <http://www.gnu.org/licenses/>.
 #
 
-# https://help.github.com/en/articles/virtual-environments-for-github-actions#supported-virtual-environments
+# https://help.github.com/en/articles/virtual-environments-for-github-actions
 
 name: release
 
@@ -32,13 +32,14 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
+  # https://github.com/actions/virtual-environments/blob/main/images/linux
   linux-x86_64:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         tool:
         - build: release
-          chain: gcc
+          chain: gcc-10
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
@@ -81,13 +82,14 @@ jobs:
         name: linux
         path: obj/bundle
 
+  # https://github.com/actions/virtual-environments/blob/main/images/macos
   darwin-x86_64:
-    runs-on: macos-latest
+    runs-on: macos-10.15
     strategy:
       matrix:
         tool:
         - build: release
-          chain: gcc
+          chain: gcc-11
     env:
       B: ${{ matrix.tool.build }}
       C: ${{ matrix.tool.chain }}
@@ -99,9 +101,6 @@ jobs:
       run: |
         make info
         brew install ninja
-        brew install gcc@9
-        ln -s /usr/local/bin/gcc-9 /usr/local/bin/gcc
-        ln -s /usr/local/bin/g++-9 /usr/local/bin/g++
         make ci-tools
     - name: Fetching
       env:
@@ -132,16 +131,17 @@ jobs:
         name: darwin
         path: obj/bundle
 
+  # https://github.com/actions/virtual-environments/blob/main/images/win
   windows-x86_64:
     runs-on: windows-2019
     strategy:
       matrix:
         tool:
         - build: release
-          chain: gcc
+          chain: clang-12
     env:
       B: ${{ matrix.tool.build }}
-      C: ${{ matrix.tool.chain }}
+      C: clang # ${{ matrix.tool.chain }}
       G: ninja
     steps:
     - name: Checkout
@@ -149,6 +149,7 @@ jobs:
     - name: Setup
       run: |
         make info
+        echo "c:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         choco install ninja
         choco install zip
         make ci-tools
@@ -186,7 +187,7 @@ jobs:
       - linux-x86_64
       - darwin-x86_64
       - windows-x86_64
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v1
