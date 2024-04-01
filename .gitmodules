@@ -192,3 +192,6 @@
 [submodule "var/web"] # internal
 	path = var/web
 	url = https://github.com/casm-lang/casm-lang.github.io.git
+[submodule "lib/zola.adidoks"]
+	path = lib/zola.adidoks
+	url = https://github.com/aaranxu/adidoks
