@@ -1,25 +1,28 @@
 #
-#   Copyright (C) 2014-2024 CASM Organization <https://casm-lang.org>
+#   Copyright (C) 2014-2024 The SEA Language <https://sealang.org>
 #   All rights reserved.
 #
 #   Developed by: Philipp Paulweber et al.
-#   <https://github.com/casm-lang/casm/graphs/contributors>
+#   <https://github.com/sealangdotorg/sea/graphs/contributors>
 #
-#   This file is part of casm.
+#   This file is part of sea.
 #
-#   casm is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
+#   sea is free software: you can redistribute it and/or modify it
+#   under the terms of the Mozilla Public License Version 2.0 (MPL-2.0).
 #
-#   casm is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#   GNU General Public License for more details.
+#   sea is distributed in the hope that it will be useful, but WITHOUT
+#   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+#   or FITNESS FOR A PARTICULAR PURPOSE.
+#   See the MPL-2.0 License for more details.
 #
-#   You should have received a copy of the GNU General Public License
-#   along with casm. If not, see <http://www.gnu.org/licenses/>.
+#   You should have received a copy of the MPL-2.0 License along with sea.
+#   If not, see <https://www.mozilla.org/en-US/MPL/2.0/>.
 #
+#   Please note that the attached MPL-2.0 license provides two additional
+#   exceptions in order to use the generated source code produced by sea
+#   compiler as well as the linking and integrating of sea interpreter
+#   runtime with the users license choice as long as the sea source code
+#   is unchanged and unaffected in any way.
 
 #
 #
