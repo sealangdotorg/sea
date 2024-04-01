@@ -1,0 +1,49 @@
+#
+#   Copyright (C) 2014-2024 The SEA Language <https://sealang.org>
+#   All rights reserved.
+#
+#   Developed by: Philipp Paulweber et al.
+#   <https://github.com/sealangdotorg/sea/graphs/contributors>
+#
+#   This file is part of sea.
+#
+#   sea is free software: you can redistribute it and/or modify it
+#   under the terms of the Mozilla Public License Version 2.0 (MPL-2.0).
+#
+#   sea is distributed in the hope that it will be useful, but WITHOUT
+#   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+#   or FITNESS FOR A PARTICULAR PURPOSE.
+#   See the MPL-2.0 License for more details.
+#
+#   You should have received a copy of the MPL-2.0 License along with sea.
+#   If not, see <https://www.mozilla.org/en-US/MPL/2.0/>.
+#
+#   Please note that the attached MPL-2.0 license provides two additional
+#   exceptions in order to use the generated source code produced by sea
+#   compiler as well as the linking and integrating of sea interpreter
+#   runtime with the users license choice as long as the sea source code
+#   is unchanged and unaffected in any way.
+
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "sealang"
+version = "0.0.0"
+edition = "2021"
+authors = [ "Philipp Paulweber et al."]
+description = "The SEA Language"
+homepage = "https://sealang.org/"
+repository = "https://github.com/sealangdotorg/sea/"
+license-file = "LICENSE.MPL-2.0"
+# keywords = [""]
+# categories = [""] # https://crates.io/category_slugs
+include = [
+    "src/**.rs",
+    "Cargo.toml",
+]
+
+[[bin]]
+name = "sea"
+path = "src/main.rs"
+test = false
+bench = false
