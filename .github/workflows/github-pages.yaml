@@ -28,7 +28,7 @@ jobs:
       - name: Setup Project
         run: |
           git fetch --prune --unshallow --tags
-          git submodule update --init lib/golang
+          git submodule update --init lib/zola.adidoks
 
       - name: Build GitHub Pages
         run: docker run -v ${{ github.workspace }}:/app ghcr.io/sapati/zola:v0.17.1-hu -r .github/pages build
