@@ -23,6 +23,7 @@
 #   compiler as well as the linking and integrating of sea interpreter
 #   runtime with the users license choice as long as the sea source code
 #   is unchanged and unaffected in any way.
+#
 
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -34,7 +35,7 @@ authors = [ "Philipp Paulweber et al."]
 description = "The SEA Language"
 homepage = "https://sealang.org/"
 repository = "https://github.com/sealangdotorg/sea/"
-license-file = "LICENSE.MPL-2.0"
+license-file = "LICENSE"
 # keywords = [""]
 # categories = [""] # https://crates.io/category_slugs
 include = [
@@ -45,5 +46,6 @@ include = [
 [[bin]]
 name = "sea"
 path = "src/main.rs"
+doc = false
 test = false
 bench = false
