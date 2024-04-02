@@ -1,6 +1,6 @@
 ---
 template:    docs/page.html
-weight:      420
+weight:      410
 date:        2024-04-01T00:00:00+00:00
 updated:     2024-04-01T00:00:00+00:00
 title:       How to Contribute
@@ -11,23 +11,6 @@ description: Contribute to the sea project, improve documentation, or submit you
 # How to Contribute
 
 Contribute to the `sea` project, improve documentation, or submit your use case.
-Before you start any form of contribution, please make sure to read the [Code of Conduct](../code-of-conduct/).
+Before you start any form of contribution, please make sure to read the [Code of Conduct](../code-of-conduct/) and that you agree to the terms of the used [License](../license/).
 
-## Contribute to the language
-
-The SEA language source code lives in the [`sea` GitHub repository](https://github.com/sealangdotorg/sea).
-
-⚠️  Work-in-Progress ⚠️
-
-### Create an issue
-
-For any kind of problem you can facing with the `sea` project you can raise a [`sea` GitHub issue](https://github.com/sealangdotorg/sea/issues/new).
-
-⚠️  Work-in-Progress ⚠️
-
-## Improve documentation
-
-The documentation of the project and the language lives in [`./doc/`](https://github.com/sealangdotorg/sea/tree/master/doc)
-folder of the [`sea` GitHub repository](https://github.com/sealangdotorg/sea).
-
-⚠️  Work-in-Progress ⚠️
+{{ load_md(id="../../CONTRIBUTING.md") }}
