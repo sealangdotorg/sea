@@ -1,9 +1,0 @@
-
-# - name: blob
-#   type: rsync-resource
-#   source:
-#     base_dir:    /opt/sync/blob
-#     server:      {{sync-addr}}
-#     port:        {{sync-port}}
-#     user:        {{sync-user}}
-#     private_key: {{sync-auth}}
