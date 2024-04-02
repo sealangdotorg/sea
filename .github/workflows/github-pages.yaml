@@ -31,7 +31,7 @@ jobs:
           git submodule update --init lib/zola.adidoks
 
       - name: Build GitHub Pages
-        run: docker run -v ${{ github.workspace }}:/tmp -w /tmp ghcr.io/sapati/zola:v0.17.1-hu -r .github/pages build
+        run: docker run -v ${{ github.workspace }}:/tmp -w /tmp ghcr.io/getzola/zola:v0.18.0 -r .github/pages build
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
