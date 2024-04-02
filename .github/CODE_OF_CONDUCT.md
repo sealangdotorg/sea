@@ -1,12 +1,3 @@
----
-template:    docs/page.html
-weight:      410
-date:        2024-04-01T00:00:00+00:00
-updated:     2024-04-01T00:00:00+00:00
-title:       Code of Conduct
-description: Contributor Covenant Code of Conduct.
-
----
 
 # Code of Conduct
 
