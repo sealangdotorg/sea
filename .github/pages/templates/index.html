@@ -27,13 +27,13 @@
   <div class="content">
     <section class="section container-fluid mt-n3 pb-3">
       <div class="row justify-content-center">
-        <div class="col-xl-4 col-lg-3 d-none d-lg-block text-center">
+        <div class="col-xl-3 col-lg-3 d-none d-lg-block text-center">
 	  <a href="/">
 	    <img src="{{ config.extra.logo }}" style="width:150%; margin-left:-25%; margin-top:25%;" />
 	  </a>
 	</div>
         <!-- div class="col-lg-9 col-xl-8 text-center" -->
-        <div class="col-xl-6 col-lg-9 text-center">
+        <div class="col-xl-9 col-lg-9 text-center">
           <h1 class="mt-0">{{ section.title | default(value="Modern Documentation Theme") }}</h1>
           <p class="lead">{{ section.extra.lead | default(value="Please start setting config.toml and adding your content.") | safe }}</p>
           <a class="btn btn-primary btn-lg px-4 mb-2" href="{{ get_url(path=section.extra.url | default(value="/")) | safe }}" role="button">{{ section.extra.url_button | default(value="Get started") }}</a>

@@ -1,4 +1,5 @@
 User-agent: *
+Disallow:
 Allow: /
 
 Sitemap: {{config.base_url}}/sitemap.xml
