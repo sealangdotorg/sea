@@ -28,7 +28,7 @@
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "sealang"
+name = "sea-rs"
 version = "0.0.0"
 edition = "2021"
 authors = [ "Philipp Paulweber et al."]
@@ -42,10 +42,18 @@ include = [
     "src/**.rs",
     "Cargo.toml",
 ]
+build = "src/build.rs"
 
 [[bin]]
-name = "sea"
-path = "src/main.rs"
-doc = false
-test = false
+name  = "sea"
+path  = "src/main.rs"
+doc   = false
+test  = false
 bench = false
+
+[dependencies]
+clap       = { version = "4.5.4", features = ["derive"] } # https://docs.rs/clap/latest/clap
+shadow-rs  = { version = "0.27.1" } # https://docs.rs/shadow-rs/latest/shadow_rs/
+
+[build-dependencies]
+shadow-rs  = { version = "0.27.1" }
