@@ -1,2 +1,4 @@
-- describe in a high-level view the changes the PR provide
-- reference the corresponding issue number
+This PR introduces the following changes:
+
+* TBA
+* see: #TODO

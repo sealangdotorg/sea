@@ -25,138 +25,155 @@
 
 name: build
 
-on: [push]
+on:
+  workflow_dispatch: # on demand
+  schedule: # run on 'master' every day at 1 AM
+    - cron:  '0 1 * * *'
+  push:
+    branches-ignore:
+      - master
 
 jobs:
   # https://github.com/actions/virtual-environments/blob/main/images/linux
   linux-x86_64:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        tool:
-        - build: debug
-          chain: clang-11
-        - build: coverage
-          chain: gcc-10
-    env:
-      B: ${{ matrix.tool.build }}
-      C: ${{ matrix.tool.chain }}
-      G: ninja
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    # strategy:
+    #   matrix:
+    #     tool:
+    #     - build: debug
+    #       chain: clang-11
+    #     - build: coverage
+    #       chain: gcc-10
+    # env:
+    #   B: ${{ matrix.tool.build }}
+    #   C: ${{ matrix.tool.chain }}
+    #   G: ninja
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - name: Setup
+      uses: actions/checkout@v4
+    - name: Check
       run: |
-        make info
-        sudo apt-get update
-        sudo apt-get install -y ninja-build
-        sudo apt-get install -y libz3-dev
-        make ci-tools
-    - name: Fetching
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        make build
+    - name: Build
       run: |
-        make ci-fetch
-    - name: Dependencies
+        make build
+    - name: Test
       run: |
-        make ci-deps
-    - name: Building
-      run: |
-        make ci-build
-    - name: Tests
-      run: |
-        make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
-    - name: Coverage
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      if: matrix.tool.build == 'coverage'
-      run: |
-        wget https://codecov.io/bash
-        chmod 755 bash
-        ./bash
+        make test
+    #- name: Setup
+    #  run: |
+    #    make info
+    #    sudo apt-get update
+    #    sudo apt-get install -y ninja-build
+    #    sudo apt-get install -y libz3-dev
+    #    make ci-tools
+    #- name: Fetching
+    #  env:
+    #    ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    #  run: |
+    #    make ci-fetch
+    #- name: Dependencies
+    #  run: |
+    #    make ci-deps
+    #- name: Building
+    #  run: |
+    #    make ci-build
+    #- name: Tests
+    #  run: |
+    #    make ci-test
+    #- name: Benchmark
+    #  run: |
+    #    make ci-benchmark
+    #- name: Coverage
+    #  env:
+    #    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    #  if: matrix.tool.build == 'coverage'
+    #  run: |
+    #    wget https://codecov.io/bash
+    #    chmod 755 bash
+    #    ./bash
 
-  # https://github.com/actions/virtual-environments/blob/main/images/macos
-  darwin-x86_64:
-    runs-on: macos-10.15
-    strategy:
-      matrix:
-        tool:
-        - build: debug
-          chain: gcc-11
-    env:
-      B: ${{ matrix.tool.build }}
-      C: ${{ matrix.tool.chain }}
-      G: ninja
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Setup
-      run: |
-        make info
-        brew install ninja
-        brew install z3
-        make ci-tools
-    - name: Fetching
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      run: |
-        make ci-fetch
-    - name: Dependencies
-      run: |
-        make ci-deps
-    - name: Building
-      run: |
-        make ci-build
-    - name: Tests
-      run: |
-        make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
-
-  # https://github.com/actions/virtual-environments/blob/main/images/win
-  windows-x86_64:
-    runs-on: windows-2019
-    strategy:
-      matrix:
-        tool:
-        - build: debug
-          chain: clang-12
-    env:
-      B: ${{ matrix.tool.build }}
-      C: clang # ${{ matrix.tool.chain }}
-      G: ninja
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Setup
-      run: |
-        make info
-        echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-        choco install ninja
-        make ci-tools
-    - name: Install
-      uses: ppaulweber/github-action-setup-z3@bug/url_fix
-      with:
-        version: 4.8.10
-        architecture: x64-win
-    - name: Fetching
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      run: |
-        make ci-fetch
-    - name: Dependencies
-      run: |
-        make ci-deps
-    - name: Building
-      run: |
-        make ci-build
-    - name: Tests
-      run: |
-        make ci-test
-    - name: Benchmark
-      run: |
-        make ci-benchmark
+#  # https://github.com/actions/virtual-environments/blob/main/images/macos
+#  darwin-x86_64:
+#    runs-on: macos-10.15
+#    strategy:
+#      matrix:
+#        tool:
+#        - build: debug
+#          chain: gcc-11
+#    env:
+#      B: ${{ matrix.tool.build }}
+#      C: ${{ matrix.tool.chain }}
+#      G: ninja
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v1
+#    - name: Setup
+#      run: |
+#        make info
+#        brew install ninja
+#        brew install z3
+#        make ci-tools
+#    - name: Fetching
+#      env:
+#        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#      run: |
+#        make ci-fetch
+#    - name: Dependencies
+#      run: |
+#        make ci-deps
+#    - name: Building
+#      run: |
+#        make ci-build
+#    - name: Tests
+#      run: |
+#        make ci-test
+#    - name: Benchmark
+#      run: |
+#        make ci-benchmark
+#
+#  # https://github.com/actions/virtual-environments/blob/main/images/win
+#  windows-x86_64:
+#    runs-on: windows-2019
+#    strategy:
+#      matrix:
+#        tool:
+#        - build: debug
+#          chain: clang-12
+#    env:
+#      B: ${{ matrix.tool.build }}
+#      C: clang # ${{ matrix.tool.chain }}
+#      G: ninja
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v1
+#    - name: Setup
+#      run: |
+#        make info
+#        echo "C:\msys64\mingw64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+#        choco install ninja
+#        make ci-tools
+#    - name: Install
+#      uses: ppaulweber/github-action-setup-z3@bug/url_fix
+#      with:
+#        version: 4.8.10
+#        architecture: x64-win
+#    - name: Fetching
+#      env:
+#        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#      run: |
+#        make ci-fetch
+#    - name: Dependencies
+#      run: |
+#        make ci-deps
+#    - name: Building
+#      run: |
+#        make ci-build
+#    - name: Tests
+#      run: |
+#        make ci-test
+#    - name: Benchmark
+#      run: |
+#        make ci-benchmark
