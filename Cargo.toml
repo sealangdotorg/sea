@@ -41,6 +41,7 @@ license = "MPL-2.0 WITH sea-exception-1.0"
 include = [
     "src/**.rs",
     "Cargo.toml",
+    "LICENSE",
 ]
 build = "src/build.rs"
 
