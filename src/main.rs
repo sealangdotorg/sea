@@ -1,10 +1,9 @@
 //
 
-
 use clap::Parser;
 use clap::Subcommand;
 
-use sea_rs::build;
+use sea::build;
 
 const NAME: &str = "sea";
 
