@@ -28,14 +28,14 @@
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name = "sea-rs"
+name = "sea"
 version = "0.0.0"
-edition = "2021"
+edition = "2024"
 authors = [ "Philipp Paulweber et al."]
 description = "The SEA Language"
 homepage = "https://sealang.org/"
 repository = "https://github.com/sealangdotorg/sea/"
-license-file = "LICENSE"
+license = "MPL-2.0 WITH sea-exception-1.0"
 # keywords = [""]
 # categories = [""] # https://crates.io/category_slugs
 include = [
@@ -53,7 +53,7 @@ bench = false
 
 [dependencies]
 clap       = { version = "4.5.4", features = ["derive"] } # https://docs.rs/clap/latest/clap
-shadow-rs  = { version = "0.27.1" } # https://docs.rs/shadow-rs/latest/shadow_rs/
+shadow-rs  = { version = "1.0.1" } # https://docs.rs/shadow-rs/latest/shadow_rs/
 
 [build-dependencies]
-shadow-rs  = { version = "0.27.1" }
+shadow-rs  = { version = "1.0.1" }
