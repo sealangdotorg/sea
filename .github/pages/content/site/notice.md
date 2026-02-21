@@ -25,13 +25,13 @@ Responsibility for the content of external links lies with the owners and respon
 
 ## Copyright and License
 
-All contents, texts, graphics, layouts, code or software Copyright © 2014-2024 The SEA Language.
+All contents, texts, graphics, layouts, code or software Copyright © 2014-2026 The SEA Language.
 All Rights reserved.
 Any usage of material or information available on this website, including the reproduction, sales, alteration and publication is prohibited unless specifically approved by the The SEA Language.
 
 The rust-based source code of The SEA Language is licensed under the [MPL-2.0](https://www.mozilla.org/en-US/MPL/2.0/) which is provided in an adopted form at [GitHub](https://github.com/sealangdotorg/sea/blob/master/LICENSE).
 
-The legacy C++-based source code of The SEA Language (formally called CASM language) is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) which is provided in an adopted form at [GitHub](https://github.com/sealangdotorg/sea/blob/9428abcce54543ed53e61a52aaa3d792e12ddb5f/LICENSE.txt).
+The legacy C++-based source code of The SEA Language which was originally called the CASM language is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) which is provided in an adopted form at [GitHub](https://github.com/sealangdotorg/sea/blob/9428abcce54543ed53e61a52aaa3d792e12ddb5f/LICENSE.txt).
 
 The website is generated using the static page generator <a href="https://www.getzola.org/">Zola</a> and the theme is based on the <a href="https://github.com/aaranxu/adidoks">AdiDoks</a> layout.
 
