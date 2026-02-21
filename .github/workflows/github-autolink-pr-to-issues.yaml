@@ -1,0 +1,81 @@
+name: Autolink PR with Issue
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validation
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = context.payload.pull_request.head.ref;
+            const prTitle = context.payload.pull_request.title;
+
+            // 1. Regex Definitions
+            const branchRegex = /^(task|feature|bug)\/GH-(\d+)_.+$/;
+            const titleRegex = /^GH-(\d+): .+$/;
+
+            const branchMatch = branchName.match(branchRegex);
+            const titleMatch = prTitle.match(titleRegex);
+
+            // 2. Validate Branch Name
+            if (!branchMatch) {
+              core.setFailed(
+                `❌ Invalid Branch Name: "${branchName}"\n` +
+                `Format: {type}/GH-{number}_{description}\n` +
+                `Example: feature/GH-123_refactor-unit-tests` +
+                `Allowed types: task, feature, bug\n`
+              );
+              return;
+            }
+
+            // 3. Validate PR Title
+            if (!titleMatch) {
+              core.setFailed(
+                `❌ Invalid PR Title: "${prTitle}"\n` +
+                `Format: GH-{number}: {description}`
+                `Example: GH-123: Implement Login UI`
+              );
+              return;
+            }
+
+            const branchIssueNum = branchMatch[2];
+            const titleIssueNum = titleMatch[1];
+
+            // 4. Ensure Issue Numbers match
+            if (branchIssueNum !== titleIssueNum) {
+              core.setFailed(
+                `❌ Issue Number Mismatch!\n` +
+                `Branch uses GH-${branchIssueNum} but Title uses GH-${titleIssueNum}.`
+              );
+              return;
+            }
+
+            // 5. Verify the Issue exists on GitHub
+            try {
+              const { data: issue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: branchIssueNum,
+              });
+
+              console.log(`✅ Success: Issue #${branchIssueNum} verified.`);
+
+              // Post a single confirmation comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: `🤖 **Validation Passed**\n- **Linked Issue:** #${branchIssueNum}\n- **Branch & Title:** Synced ✅`
+              });
+
+            } catch (error) {
+              if (error.status === 404) {
+                core.setFailed(`❌ Validation Failed: Issue #${branchIssueNum} does not exist.`);
+              } else {
+                core.setFailed(`GitHub API Error: ${error.message}`);
+              }
+            }
