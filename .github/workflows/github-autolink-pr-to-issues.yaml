@@ -1,10 +1,17 @@
 name: Autolink PR with Issue
+
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 
+permissions:
+  pull-requests: write
+  issues: read
+  contents: read
+  statuses: write
+
 jobs:
-  validate-pr:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Validation
