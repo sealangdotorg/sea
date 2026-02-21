@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Get the current branch name
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# The Regex: {type}/GH-{number}_{description}
+# Allowed types: task, feature, bug
+REGEX="^(task|feature|bug)/GH-[0-9]+_.+$"
+
+if [[ ! $BRANCH_NAME =~ $REGEX ]]; then
+  echo "--------------------------------------------------------"
+  echo "❌ Error: Invalid branch name '$BRANCH_NAME'"
+  echo "Format: {type}/GH-{number}_{description}"
+  echo "Example: feature/GH-123_refactor-unit-tests"
+  echo "Allowed types: task, feature, bug"
+  echo "--------------------------------------------------------"
+  exit 1
+fi
+
+exit 0

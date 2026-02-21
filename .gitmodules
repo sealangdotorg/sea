@@ -30,19 +30,19 @@
 #
 
 [submodule "app/casmc"] # internal
-	path = app/casmc
+	path = .github/legacy/casmc
 	url = https://github.com/casm-lang/casmc.git
 
 [submodule "app/casmf"]
-	path = app/casmf
+	path = .github/legacy/casmf
 	url = https://github.com/casm-lang/casmf.git
 
 [submodule "app/casmd"]
-	path = app/casmd
+	path = .github/legacy/casmd
 	url = https://github.com/casm-lang/casmd.git
 
 [submodule "app/casmi"]
-	path = app/casmi
+	path = .github/legacy/casmi
 	url = https://github.com/casm-lang/casmi.git
 
 #
@@ -51,19 +51,19 @@
 #
 
 [submodule "lib/asmjit"]
-	path = lib/asmjit
+	path = .github/legacy/asmjit
 	url = https://github.com/casm-lang/libasmjit.git
 
 [submodule "lib/gtest"]
-	path = lib/gtest
+	path = .github/legacy/gtest
 	url = https://github.com/casm-lang/libgtest.git
 
 [submodule "lib/hayai"]
-	path = lib/hayai
+	path = .github/legacy/hayai
 	url = https://github.com/casm-lang/libhayai.git
 
 [submodule "lib/z3"] # external
-	path = lib/z3
+	path = .github/legacy/z3
 	url = https://github.com/casm-lang/libz3.git
 
 #
@@ -72,15 +72,15 @@
 #
 
 [submodule "lib/stdhl"]
-	path = lib/stdhl
+	path = .github/legacy/stdhl
 	url = https://github.com/casm-lang/libstdhl.git
 
 [submodule "lib/pass"]
-	path = lib/pass
+	path = .github/legacy/pass
 	url = https://github.com/casm-lang/libpass.git
 
 [submodule "lib/tptp"]
-	path = lib/tptp
+	path = .github/legacy/tptp
 	url = https://github.com/casm-lang/libtptp.git
 
 #
@@ -89,23 +89,23 @@
 #
 
 [submodule "lib/casm-ir"]
-	path = lib/casm-ir
+	path = .github/legacy/casm-ir
 	url = https://github.com/casm-lang/libcasm-ir.git
 
 [submodule "lib/casm-rt"] # internal
-	path = lib/casm-rt
+	path = .github/legacy/casm-rt
 	url = https://github.com/casm-lang/libcasm-rt.git
 
 [submodule "lib/casm-fe"]
-	path = lib/casm-fe
+	path = .github/legacy/casm-fe
 	url = https://github.com/casm-lang/libcasm-fe.git
 
 [submodule "lib/casm-be"] # internal
-	path = lib/casm-be
+	path = .github/legacy/casm-be
 	url = https://github.com/casm-lang/libcasm-be.git
 
 [submodule "lib/casm-tc"]
-	path = lib/casm-tc
+	path = .github/legacy/casm-tc
 	url = https://github.com/casm-lang/libcasm-tc.git
 
 #
@@ -114,15 +114,15 @@
 #
 
 [submodule "lib/cjel-ir"] # internal
-	path = lib/cjel-ir
+	path = .github/legacy/cjel-ir
 	url = https://github.com/casm-lang/libcjel-ir.git
 
 [submodule "lib/cjel-rt"] # internal
-	path = lib/cjel-rt
+	path = .github/legacy/cjel-rt
 	url = https://github.com/casm-lang/libcjel-rt.git
 
 [submodule "lib/cjel-be"] # internal
-	path = lib/cjel-be
+	path = .github/legacy/cjel-be
 	url = https://github.com/casm-lang/libcjel-be.git
 
 #
@@ -131,23 +131,23 @@
 #
 
 [submodule "ext/emacs"] # internal
-	path = ext/emacs
+	path = .github/legacy/emacs
 	url = https://github.com/casm-lang/casm-lang.plugin.emacs.git
 
 [submodule "ext/kate"] # internal
-	path = ext/kate
+	path = .github/legacy/kate
 	url = https://github.com/casm-lang/casm-lang.plugin.kate.git
 
 [submodule "ext/monaco"] # internal
-	path = ext/monaco
+	path = .github/legacy/monaco
 	url = https://github.com/casm-lang/casm-lang.plugin.monaco.git
 
 [submodule "ext/tmbundle"] # internal
-	path = ext/tmbundle
+	path = .github/legacy/tmbundle
 	url = https://github.com/casm-lang/casm-lang.plugin.tmbundle.git
 
 [submodule "ext/vscode"] # internal
-	path = ext/vscode
+	path = .github/legacy/vscode
 	url = https://github.com/casm-lang/casm-lang.plugin.vscode.git
 
 #
@@ -177,23 +177,23 @@
 #
 
 [submodule "var/container/linux"] # internal
-	path = var/container/linux
+	path = .github/legacy/container/linux
 	url = https://github.com/casm-lang/casm-lang.container.linux.git
 
 [submodule "var/container/windows"] # internal
-	path = var/container/windows
+	path = .github/legacy/container/windows
 	url = https://github.com/casm-lang/casm-lang.container.windows.git
 
 [submodule "var/logo"] # internal
-	path = var/logo
+	path = .github/legacy/logo
 	url = https://github.com/casm-lang/casm-lang.logo.git
 
 [submodule "var/publication"] # internal
-	path = var/publication
+	path = .github/legacy/publication
 	url = https://github.com/casm-lang/publication.git
 
 [submodule "var/web"] # internal
-	path = var/web
+	path = .github/legacy/web
 	url = https://github.com/casm-lang/casm-lang.github.io.git
 [submodule "lib/zola.adidoks"]
 	path = lib/zola.adidoks

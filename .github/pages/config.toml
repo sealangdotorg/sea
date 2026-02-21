@@ -97,7 +97,7 @@ weight = 20
 
 # Footer contents
 [extra.footer]
-info = 'Copyright © 2024 <a href="https://github.com/sealangdotorg">The SEA Language</a>'
+info = 'Copyright © 2026 <a href="https://github.com/sealangdotorg">The SEA Language</a>'
 
 [[extra.footer.nav]]
 name = "Code of Conduct"
