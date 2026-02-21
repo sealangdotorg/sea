@@ -23,6 +23,7 @@
 
 CARGO := cargo
 
+default: check-hooks
 default: build
 
 help:
@@ -42,6 +43,29 @@ run:
 
 clean:
 	${CARGO} $@
+
+github-pages-build:
+	docker run -v `pwd`:/tmp -p 1111:1111 -w /tmp ghcr.io/getzola/zola:v0.18.0 -r .github/pages build
+
+github-pages-debug:
+	docker run -v `pwd`:/tmp -p 1111:1111 -w /tmp ghcr.io/getzola/zola:v0.18.0 -r .github/pages serve -i 0.0.0.0
+
+
+
+HOOKS_PATH := .github/hooks
+
+check-hooks:
+ifeq (${VERBOSE},1)
+	@echo "⚙️  Configuring local git hooks..."
+endif
+	@git config core.hooksPath $(HOOKS_PATH)
+	@chmod +x $(HOOKS_PATH)/*
+ifeq (${VERBOSE},1)
+	@echo "   ✅ Git hooks path set to '$(HOOKS_PATH)'"
+endif
+.PHONY: check-hooks
+
+
 
 # 
 # TARGET = casm
